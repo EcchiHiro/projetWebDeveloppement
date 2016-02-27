@@ -72,6 +72,7 @@ public function AdminTopPage() {
                     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
                 <![endif]-->
                 <script src="js/main.js"></script>
+
             </head>
 
 
@@ -107,6 +108,7 @@ public function AdminPiedPage() {
 
             <!-- Custom Theme JavaScript -->
             <script src="./bootStrap/dist/js/sb-admin-2.js"></script>
+
             <script>
                 $(document).ready(function() {
                     $('#listeOeuvres').DataTable({
@@ -115,6 +117,7 @@ public function AdminPiedPage() {
                 });
             </script>
             <script>
+                // Confirmation de suppression d'une oeuvre
                 $('#confirm-delete').on('show.bs.modal', function(e) {
                     $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
 
@@ -443,7 +446,7 @@ public function adminLogin() {
      * @author Stéphane LECLERC 
      */
     
-    public function adminAjoutOeuvre($listeArrondissement, $categories, $artistes,  $listeAdresses, $listeAMateriaux) {
+    public function adminAjoutOeuvre($listeArrondissement, $categories, $artistes ) {
         ?>
 
 
@@ -468,157 +471,109 @@ public function adminLogin() {
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-8">
+                        <form action="index.php?page=adminAjout" method="post" name="form2" style="display:none" id="form2" class="margin-bottom-40">
+                           <div class="ensembleInputFormulaire tencol">
+                               <h1>Artiste</h1>
+                               <label class="threecol">Nom Artiste</label>
+                               <input type="text" name="nomArtiste" class="form-control" id="nomArtiste">
+                               <div id="msj4" class="erreurs" style="display:none">Il faut remplir ce champ</div>
+                           </div>
 
-                        <form action="index.php?page=adminAjout" method="post" name="form2" style="display:none" id="form2" class="col-lg-12">
-                        <form action="index.php?page=adminAjout" method="post" name="form2" style="display:none" id="form2" class="col-lg-12">
-                        <div class="ensembleInputFormulaire tencol">
-                            <h1>Artiste</h1>
-                            <label class="threecol">Nom Artiste</label>
-                            <input type="text" name="nomArtiste" class="form-control" id="nomArtiste">
-                            <div id="msj4" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                        </div>
-
-                        <label>Prenom Artistee</label>
-                        <input type="text" name="PrenomArtiste" class="form-control" id="PrenomArtiste">
-                        <div id="msj5" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                        <label>Collectif</label>
-                        <input type="text" name="collectif" class="form-control" id="collectif"><br><br>
-                        <div id="msj6" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                        <input type="button" onclick="validationForm2()" value="Ajouter Artiste" id="bntArtistes">
+                            <label>Prenom Artistee</label>
+                                <input type="text" name="PrenomArtiste" class="form-control" id="PrenomArtiste">
+                                <div id="msj5" class="erreurs" style="display:none">Il faut remplir ce champ</div>
+                            <label>Collectif</label>
+                                <input type="text" name="collectif" class="form-control" id="collectif"><br><br>
+                                <div id="msj6" class="erreurs" style="display:none">Il faut remplir ce champ</div>
+                            <input type="button" onclick="validationForm2()" value="Ajouter Artiste" id="bntArtistes">
                         </form>
 
+                        <form action="index.php?page=adminAjout" method="post" name="form4" class="margin-bottom-40" enctype="multipart/form-data">
+                           <h3>Informations de l'oeuvre</h3>
+                            <label>Titre</label>
+                                <input type="text" name="titre"class="form-control" id="titre">
+                                <div id="msj9" class="erreurs" style="display:none">Il faut remplir ce champ</div>
+                            <label>Coordonnées latitude</label>
+                                <input type="number" name="latitude" placeholder="EX:45.466405" class="form-control" id="latitude">
+                                <div id="msj16" class="erreurs" style="display:none">Il faut remplir ce champ</div>
+                            <label>Coordonnées longitude</label>
+                                <input type="number" name="longitud" placeholder="EX:-73.631648" class="form-control" id="longitud">
+                                <div id="msj17" class="erreurs" style="display:none">Il faut remplir ce champ</div><br> <br>
+                                
+                            <div class="select">
+                                <label>Catégorie</label>
+                                <select name="categorieOeuvre"class="form-control">
+                                    <option value="">Choisir une categorie</option>
+                                    <?php
 
-                        <form action="index.php?page=adminAjout" method="post" name="form3" style="display:none" id="form3" class="margin-bottom-40">
-                        <h1>Materiaux</h1>
-                        <label>Materiaux</label>
-                        <input type="text" name="materiaux" class="form-control" id="materiaux">
-                        <div id="msj7" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                        <label>Materiaux(anglais)</label>
-                        <input type="text" name="materiauxEN" class="form-control" id="materiauxEN"><br><br>
-                        <div id="msj8" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                        <input type="button" onclick="validationForm3()" value="Ajouter Materiaux" id="bntMaterieaux">
-                    </form>
+                                        foreach ($categories as $cat){
+                                            echo "<option value='";
+                                            $cat->getIdCat();
+                                            echo "'>";
+                                            $cat->getNomSousCat();
+                                            echo "</option>";
+                                        }
 
-                        <form action="index.php?page=adminAjout" method="post" name="form4" id="form4" class="col-lg-6" enctype="multipart/form-data">
-                        <label>Titre</label>
-                        <input type="text" name="titre"class="form-control" id="titre">
-                        <div id="msj9" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                        <label>Variante du Titre</label>
-                        <input type="text" name="varianteTitre" class="form-control"id="varianteTitre">
-                        <div id="msj10" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                        <label>Collection</label>
-                        <input type="text" name="collection" class="form-control" id="collection">
-                        <div id="msj11" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                        <label>CollectionEN</label>
-                        <input type="text" name="collectionEN" class="form-control" id="collectionEN">
-                        <div id="msj12" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                        <label>Technique</label>
-                        <input type="text" name="technique" class="form-control"id="technique">
-                        <div id="msj13" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                        <label>TechniqueEN</label>
-                        <input type="text" name="techniqueEN" class="form-control" id="techniqueEN">
-                        <div id="msj14" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                        <label>Dimensions</label>
-                        <input type="text" name="dimensions" class="form-control" id="dimensions">
-                        <div id="msj15" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                        <label>Coordonnées latitude</label>
-                        <input type="number" name="latitude" placeholder="EX:45.466405" class="form-control" id="latitude">
-                        <div id="msj16" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                        <label>Coordonnées longitude</label>
-                        <input type="number" name="longitud" placeholder="EX:-73.631648" class="form-control" id="longitud">
-                        <div id="msj17" class="erreurs" style="display:none">Il faut remplir ce champ</div><br> <br>
-                        <h3 class="addresseFormulaire">Adresse</h3>
-                        <label>Numero civique</label>
-                        <input type="number" name="numRue" class="form-control" id="nbRue">
-                        <div id="msj1" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                        <label>Nom de la rue</label>
-                        <input type="text" name="rue" class="form-control" id="nomRue" value="">
-                        <div id="msj2" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                        <label>Ville</label>
-                        <input type="text" name="ville" class="form-control" id="ville"><br><br>
-                        <div id="msj3" class="erreurs" style="display:none">Il faut remplir ce champ</div>
+                                    ?>
+                                </select>
+                            </div>
+                                
 
-                        <div class="select">
-                            <label>Arrondissement</label>
-                            <select name="arrondissement" class="form-control">
-                                <option value="" selected="selected" >Choisir un arrondissement</option>
-                                <?php
+                          <div class="select">
+                                <label>Artiste</label>
+                                <select name="artisteOeuvre" class="form-control">
+                                    <option value="">Choisir un artiste</option>
+                                     <?php
 
-                foreach ($listeArrondissement as $arr){
-                    echo "<option value='";
-                    $arr->getArrondissement();
-                    echo "'>";
-                    $arr->getArrondissement();
-                    echo "</option>";
-                }
+                                            foreach ($artistes as $artiste){
+                                                echo "<option value='";
+                                                echo $artiste->idArtiste;
+                                                echo "'>";
+                                                echo $artiste->nomArtiste." ".$artiste->prenomArtiste;
+                                                echo "</option>";
+                                            }
 
-                                ?>
-                            </select>
-                        </div>
+                                        ?>
+                                </select><br>
+                                <input type="button" onclick="montreArtiste()" class="btnFormArtiste" value="Ajouter un Artiste">
+                            </div>
+                            
+                            
+                            <h3>Photographies de l'oeuvre</h3>
+                            <input name="upload[]" type="file" multiple="multiple" /><br>
+     
+                                 
+                                 <h3 class="addresseFormulaire">Adresse</h3>
+                                <label>Numero civique</label>
+                                    <input type="number" name="nbRue" class="form-control" id="nbRue">
+                                    <div id="msj1" class="erreurs" style="display:none">Il faut remplir ce champ</div>
+                                <label>Nom de la rue</label>
+                                    <input type="text" name="nomRue" class="form-control" id="nomRue">
+                                    <div id="msj2" class="erreurs" style="display:none">Il faut remplir ce champ</div>
+                                <label>Ville</label>
+                                    <input type="text" name="ville" class="form-control" id="ville"><br><br>
+                                    <div id="msj3" class="erreurs" style="display:none">Il faut remplir ce champ</div>
+                               <div class="select">
+                                 <label>Arrondissement</label>
+                                <select name="arrondissement" class="form-control">
+                                    <option value="" selected="selected" >Choisir un arrondissement</option>
+                                    <?php
 
-                        <div class="select">
-                            <label>Artiste</label>
-                            <select name="artisteOeuvre" class="form-control">
-                                <option value="">Choisir un artiste</option>
-                                <?php
+                                        foreach ($listeArrondissement as $arr){
+                                            echo "<option value='";
+                                            $arr->getArrondissement();
+                                            echo "'>";
+                                            $arr->getArrondissement();
+                                            echo "</option>";
+                                        }
 
-                foreach ($artistes as $artiste){
-                    echo "<option value='";
-                    echo $artiste->idArtiste;
-                    echo "'>";
-                    echo $artiste->nomArtiste." ".$artiste->prenomArtiste;
-                    echo "</option>";
-                }
+                                    ?>
+                                </select>
+                            </div>
 
-                                ?>
-                            </select><br>
-                            <input type="button" onclick="montreArtiste()" class="btnFormArtiste" value="Ajouter un Artiste">
-                        </div>
-
-
-
-
-                        <div class="select">
-                            <label>Catégorie</label>
-                            <select name="categorieOeuvre"class="form-control">
-                                <option value="">Choisir une categorie</option>
-                                <?php
-
-                foreach ($categories as $cat){
-                    echo "<option value='";
-                    $cat->getIdCat();
-                    echo "'>";
-                    $cat->getNomSousCat();
-                    echo "</option>";
-                }
-
-                                ?>
-                            </select>
-                        </div>
-
-                        <div class="select">
-                            <label>Materiaux</label>
-                            <select multiple="multiple" name="materiauxOeuvre[]" class="form-control">
-                                <option value="" selected="selected" >Choisir un materiaux</option>
-                                <?php
-
-                foreach ($listeAMateriaux as $materiaux){
-                    echo "<option value='";
-                    $materiaux->getIdMat();
-                    echo "'>";
-                    $materiaux->getNomMateriaux();
-                    echo "</option>";
-                }
-
-                                ?>
-                            </select><br>
-                            <input type="button" onclick="montreMateriaux()" class="btnMateriaux" value="Ajouter un matériaux">
-                        </div><br>
-
-                        <input name="upload[]" type="file" multiple="multiple" /><br>
-
-                            <input type="button" onclick="validationForm4()" value="AjouterOeuvre" name="AjouterOeuvre" class="btn btn-lg btn-success" id="bntOeuvre">
+                            
+                            <input type="button" onclick="validationForm4()" value="Ajouter Oeuvre"  class="btn-u btn-u-blue" id="bntOeuvre">
 
                     </form>
         </div>
@@ -772,16 +727,6 @@ public function adminModifieOeuvre($infoOeuvre,$tableauInfoOeuvreMateriel,$categ
                                                 ?>
                                             </select>
                                             </div>  
-                                         <h3>Traduction Anglais</h3>
-                                         <div class="form-group">
-                                            <label>Collection Anglais</label>
-                                            <input class="form-control" placeholder="Enter text" name="collectionEN" value="<?php echo $infoOeuvre["CollectionEN"];?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Technique Anglais</label>
-                                            <input class="form-control" placeholder="Enter text" name="techniqueEN" value="<?php echo $infoOeuvre["TechniqueEN"];?>">
-                                        </div>                                                                                  
-
 
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
@@ -1384,7 +1329,6 @@ public function adminAjoutImagePresentationOeuvre($listeOeuvre) {
         ?>
 
 
-
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -1427,11 +1371,18 @@ public function adminAjoutImagePresentationOeuvre($listeOeuvre) {
                                         
                                         <label class="control-label">Selectionnez une image</label>
                                         
-                                        <input name="upload" type="file" /><br>
-
+                                        <input name="upload" type="file" accept="image/*" onchange="loadFile(event)"/><br>
+                                        <img id="output"/>
                                         <input type="submit" class="btn btn-lg btn-success"  value="Ajout photographie">
+
                                     </form>
                                 </div>
+                                <script>
+                                  var loadFile = function(event) {
+                                    var output = document.getElementById('output');
+                                    output.src = URL.createObjectURL(event.target.files[0]);
+                                  };
+                                </script>
                                 <!-- /.col-lg-6 (nested) -->
                             </div>
                             <!-- /.row (nested) -->

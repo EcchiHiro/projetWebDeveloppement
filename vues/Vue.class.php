@@ -871,11 +871,14 @@ public function afficheInfoOeuvre($oeuvreInfo, $artisteResultat, $listeMat, $cat
                         echo '<p>Dimensions : '. $oeuvreInfo['Dimensions']. '</p>';
                         echo '<p>Arrondissement : '. $oeuvreInfo['Arrondissement']. '</p>';
                         echo '<p>Matériaux : ';
+                        if ($listeMat != null) {
 
-                        foreach ($listeMat as $mat)
-                        {
-                            echo  $mat->getNomMateriaux() . ' ';
-                        }
+                                foreach ($listeMat as $mat)
+                                {
+                                    echo  $mat->getNomMateriaux() . ' ';
+                                }
+                            
+                            }
                         echo '</p>';
 
                         echo '<p>Catégorie : '. $categorie['NomSousCat']. '</p>';

@@ -9,11 +9,6 @@
         $_GET['page'] = '';
     }
 
-    if(empty($message))
-    {
-        $message = '';
-    }
-
 
 
 ?>

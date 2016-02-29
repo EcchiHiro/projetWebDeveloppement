@@ -61,9 +61,11 @@ public function AdminTopPage() {
                 <!-- Custom Fonts -->
                 <link href="./bootStrap/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
                 
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+
                 
-                <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-                <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
                 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
                 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -72,6 +74,8 @@ public function AdminTopPage() {
                     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
                 <![endif]-->
                 <script src="js/main.js"></script>
+                
+                
 
             </head>
 
@@ -90,7 +94,7 @@ public function AdminPiedPage() {
         ?>
 
             <!-- jQuery -->
-            <script src="./bootStrap/bower_components/jquery/dist/jquery.min.js"></script>
+<!--            <script src="./bootStrap/bower_components/jquery/dist/jquery.min.js"></script>-->
   
             <!-- Bootstrap Core JavaScript -->
             <script src="./bootStrap/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -108,6 +112,8 @@ public function AdminPiedPage() {
 
             <!-- Custom Theme JavaScript -->
             <script src="./bootStrap/dist/js/sb-admin-2.js"></script>
+            
+            <script src="js/component.js"></script>
 
             <script>
                 $(document).ready(function() {
@@ -1193,7 +1199,7 @@ public function adminAjoutImageArtiste($listeArtistes) {
                                         <div class="form-group">
                                             <label>Artiste sans photographies présents dans la base de donnés</label>
                                             <select class="form-control" name="ajoutPhoto">
-                                                <option value="" selected >Choisir une artiste</option>
+                                                <option value="" selected >Choisir un artiste</option>
                                                 <?php
 
                                                 foreach ($listeArtistes as $artiste)
@@ -1246,7 +1252,13 @@ public function adminAjoutImageArtiste($listeArtistes) {
 public function adminAjoutImageCat($categories) {
         ?>
 
+<script type="text/javascript">
 
+    $(function() {
+      $( "#crop_div" ).draggable({ containment: "parent" });
+    });
+   
+  </script>
 
         <div id="page-wrapper">
             <div class="row">
@@ -1260,7 +1272,7 @@ public function adminAjoutImageCat($categories) {
                 <div class="col-lg-12">
                     
                     <div class="alert alert-info">
-                        L'image que vous choisiez pour un artiste doit faire maximum 250*250 pixels.
+                        Choissiez un fichier, puis selectionnez la zone de l'image que vous voulez rogner pour l'envoyer.
                     </div>
 
                     <div class="panel panel-green">
@@ -1270,7 +1282,7 @@ public function adminAjoutImageCat($categories) {
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form action="" method="post" name="form4" enctype="multipart/form-data">
+                                    <form action="" method="post" name="form4" enctype="multipart/form-data" onsubmit="return crop();">
 
                                         <div class="form-group">
                                             <label>Catégories sans photographies présents dans la base de donnés</label>
@@ -1291,12 +1303,32 @@ public function adminAjoutImageCat($categories) {
                                             </select>
                                         </div>
                                         
-                                        <label class="control-label">Selectionnez une image</label>
+                                     <label class="control-label">Selectionnez une image</label>
                                         
-                                        <input name="upload" type="file" /><br>
+                                        <input name="upload" type="file" accept="image/*" onchange="loadFile(event)"/><br>
+                                        
+                                     <div id="crop_wrapper" style="display:none">
+                                          <img id="output"/>
+                                          <div id="crop_div"></div>
+                                     </div>
+
+                                      <input type="hidden" value="" id="top" name="top">
+                                      <input type="hidden" value="" id="left" name="left">
+                                      <input type="hidden" value="" id="right" name="right">
+                                      <input type="hidden" value="" id="bottom" name="bottom">                                        
 
                                         <input type="submit" class="btn btn-lg btn-success"  value="Ajout photographie">
+                                        
+
                                     </form>
+                                </div>
+                                <script>
+                                  var loadFile = function(event) {
+                                    var output = document.getElementById('output');
+                                    output.src = URL.createObjectURL(event.target.files[0]);
+                                    document.getElementById('crop_wrapper').style.display="block";
+                                  };
+                                </script>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
                             </div>
@@ -1328,7 +1360,14 @@ public function adminAjoutImageCat($categories) {
 public function adminAjoutImagePresentationOeuvre($listeOeuvre) {
         ?>
 
+<script type="text/javascript">
 
+    $(function() {
+      $( "#crop_div" ).draggable({ containment: "parent" });
+    });
+   
+  </script>
+       
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -1340,7 +1379,10 @@ public function adminAjoutImagePresentationOeuvre($listeOeuvre) {
             <div class="row">
                 <div class="col-lg-12">
                     
-
+                    
+                    <div class="alert alert-info">
+                        Choissiez un fichier, puis selectionnez la zone de l'image que vous voulez rogner pour l'envoyer.
+                    </div>
                     <div class="panel panel-green">
                         <div class="panel-heading">
                             Formulaire d'ajout d'image de présentation d'oeuvre
@@ -1348,7 +1390,7 @@ public function adminAjoutImagePresentationOeuvre($listeOeuvre) {
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form action="" method="post" name="form4" enctype="multipart/form-data">
+                                    <form action="" method="post" name="form4" enctype="multipart/form-data" onsubmit="return crop();">
 
                                         <div class="form-group">
                                             <label>Oeuvres sans images de présentation dans la base de donnée</label>
@@ -1372,8 +1414,19 @@ public function adminAjoutImagePresentationOeuvre($listeOeuvre) {
                                         <label class="control-label">Selectionnez une image</label>
                                         
                                         <input name="upload" type="file" accept="image/*" onchange="loadFile(event)"/><br>
-                                        <img id="output"/>
+                                        
+                                     <div id="crop_wrapper" style="display:none">
+                                          <img id="output"/>
+                                          <div id="crop_div"></div>
+                                     </div>
+
+                                      <input type="hidden" value="" id="top" name="top">
+                                      <input type="hidden" value="" id="left" name="left">
+                                      <input type="hidden" value="" id="right" name="right">
+                                      <input type="hidden" value="" id="bottom" name="bottom">                                        
+
                                         <input type="submit" class="btn btn-lg btn-success"  value="Ajout photographie">
+                                        
 
                                     </form>
                                 </div>
@@ -1381,6 +1434,7 @@ public function adminAjoutImagePresentationOeuvre($listeOeuvre) {
                                   var loadFile = function(event) {
                                     var output = document.getElementById('output');
                                     output.src = URL.createObjectURL(event.target.files[0]);
+                                    document.getElementById('crop_wrapper').style.display="block";
                                   };
                                 </script>
                                 <!-- /.col-lg-6 (nested) -->

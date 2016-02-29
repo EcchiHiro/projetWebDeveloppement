@@ -45,3 +45,26 @@
 #sectionSelectMateriaux { display: none; }
 #sectionSelectArrondissement { display: none; }
 
+#crop_wrapper
+{
+	position:relative;
+	margin-left:150px;
+	margin-top:50px;
+	margin-bottom:50px;
+	width:600px;
+	height:400px;
+}
+#crop_wrapper img
+{
+	width:600px;
+	height:400px;
+}
+#crop_div
+{
+	width:420px;
+	height:270px;
+	border:1px dashed white;
+	position:absolute;
+	top:0px;
+	box-sizing:border-box;
+}

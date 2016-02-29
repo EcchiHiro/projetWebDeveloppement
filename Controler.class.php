@@ -1157,41 +1157,41 @@ class Controler
             if(isset($_POST['ajoutPhoto']))
             {
                 
-                $idCat = intval($_POST['ajoutPhoto']);
-
+                  $idCat = intval($_POST['ajoutPhoto']);                
+                    
+                  $y1=$_POST['top'];
+                  $x1=$_POST['left'];
+                  $w=$_POST['right'];
+                  $h=$_POST['bottom'];
+                  $image = $_FILES['upload']['tmp_name'];
                 
 
-                $tmpFilePath = $_FILES['upload']['tmp_name'];
-  
+                  list( $width,$height ) = getimagesize( $image );
+                  $newwidth = 600;
+                  $newheight = 400;
 
-                        if ($tmpFilePath != "")
-                        {
+                  $thumb = imagecreatetruecolor( $newwidth, $newheight );
+                  $source = imagecreatefromjpeg($image);
 
-                            $newFilePath = 'images/categories/' . $_FILES['upload']['name'];
-
-                            if(!move_uploaded_file($tmpFilePath, $newFilePath)) 
-                            {
-
-                                    echo "Erreur";
-
-                            }
-
-                            else
-
-                            {
-                                        $cat->ajoutImageCat($idCat, $newFilePath);
+                  imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+                  imagejpeg($thumb,$image,100); 
 
 
-                                        echo '<script language="Javascript">
-                                        <!--
-                                        document.location.replace("index.php?page=admin");
-                                        // -->
-                                        </script>';
-                            }
-                        }
-                    
-                    
+                  $im = imagecreatefromjpeg($image);
+                  $dest = imagecreatetruecolor($w,$h);
 
+                  imagecopyresampled($dest,$im,0,0,$x1,$y1,$w,$h,$w,$h);
+                  imagejpeg($dest,"images/categories/". $_FILES['upload']['name'], 100);
+                  $newFilePath = "images/categories/". $_FILES['upload']['name'];
+                
+                  $cat->ajoutImageCat($idCat, $newFilePath);
+
+
+                     echo '<script language="Javascript">
+                     <!--
+                     document.location.replace("index.php?page=admin");
+                     // -->
+                     </script>';
         
         }
 
@@ -1218,46 +1218,50 @@ class Controler
 
             
             if(isset($_POST['ajoutPhoto']))
-            {
+                {
                 
-                $idOeuvre = intval($_POST['ajoutPhoto']);
+                  $idOeuvre = intval($_POST['ajoutPhoto']);
+                
+                  $y1=$_POST['top'];
+                  $x1=$_POST['left'];
+                  $w=$_POST['right'];
+                  $h=$_POST['bottom'];
+                  $image = $_FILES['upload']['tmp_name'];
+                
 
-                $tmpFilePath = $_FILES['upload']['tmp_name'];
-  
+                  list( $width,$height ) = getimagesize( $image );
+                  $newwidth = 600;
+                  $newheight = 400;
 
-                        if ($tmpFilePath != "")
-                        {
+                  $thumb = imagecreatetruecolor( $newwidth, $newheight );
+                  $source = imagecreatefromjpeg($image);
 
-                            $newFilePath = 'images/oeuvres/' . $_FILES['upload']['name'];
-
-                            if(!move_uploaded_file($tmpFilePath, $newFilePath)) 
-                            {
-
-                                    echo "Erreur";
-
-                            }
-
-                            else
-
-                            {
-                                        $oeuvre->ajoutImagePresentation($idOeuvre, $newFilePath);
+                  imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+                  imagejpeg($thumb,$image,100); 
 
 
-                                        echo '<script language="Javascript">
-                                        <!--
-                                        document.location.replace("index.php?page=admin");
-                                        // -->
-                                        </script>';
-                            }
-                        }
-                    
-                    
+                  $im = imagecreatefromjpeg($image);
+                  $dest = imagecreatetruecolor($w,$h);
 
-        
-        }
+                  imagecopyresampled($dest,$im,0,0,$x1,$y1,$w,$h,$w,$h);
+                  imagejpeg($dest,"images/oeuvres/P_". $_FILES['upload']['name'], 100);
+                  $newFilePath = "images/oeuvres/P_". $_FILES['upload']['name'];
+                
+                  $oeuvre->ajoutImagePresentation($idOeuvre, $newFilePath);
+
+
+                     echo '<script language="Javascript">
+                     <!--
+                     document.location.replace("index.php?page=admin");
+                     // -->
+                     </script>';
+                
+                }
 
 
     }
+    
+    
     
 
 

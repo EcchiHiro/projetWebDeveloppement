@@ -772,10 +772,20 @@ function crop()
     }
 
 
+function affichageEtape2() 
+{
+    document.getElementById('Etape2Admin').style.display="block";
+}
 
 
+function loadFile(event) 
+{
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    document.getElementById('crop_wrapper').style.display="block";
+}
 
-
+   
 
 
 

@@ -920,6 +920,7 @@ class photoOeuvre extends Oeuvre
          * @param INT $idArtiste
          * @param INT $idCat
          * @param string $photoPresentation
+         * @param string $description
          * @param INTO $idPhotographie
          * @param string $photo
          * @author Alexandre BOUET           

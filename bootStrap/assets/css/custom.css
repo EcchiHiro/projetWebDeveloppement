@@ -68,3 +68,8 @@
 	top:0px;
 	box-sizing:border-box;
 }
+
+#Etape2Admin 
+{
+    display:none;
+}

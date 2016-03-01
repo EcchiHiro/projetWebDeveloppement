@@ -1296,6 +1296,14 @@ class Controler
 
     }
     
+    private function adminAjoutDescriptionArtiste()
+    {
+        $oVue = new VueAdmin();
+        $oVue->AdminTopPage();
+        $oVue->adminNavSide();
+        $oVue->AdminPiedPage();
+    }
+    
 
 
 }//Fin controller

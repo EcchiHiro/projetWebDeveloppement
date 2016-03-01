@@ -32,7 +32,8 @@
             break;        
         case 'choixOeuvresNonValides':
             afficheInfoOeuvreNonValide();
-            break;
+            break;        
+
     }
 
     /**
@@ -156,7 +157,9 @@
         $oVue->chargeInfoOeuvre($infoOeuvre);
 
 
-    }    
+    }        
+
+ 
 
 
 

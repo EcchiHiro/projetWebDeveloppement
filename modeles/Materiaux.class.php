@@ -172,7 +172,10 @@
                 $listeMat[] = $unMat;
             }
             
+            if (!empty($listeMat))
+            {
                 return $listeMat;
+            }
         }
 
         /**
@@ -257,7 +260,12 @@
                       $unMateriauxOeuvre=new Materiaux($ligne["IdMat"],$ligne["NomMateriaux"],$ligne["NomMateriauxEN"]);
 
                    }
-              return $unMateriauxOeuvre;
+          
+            if (!empty($unMateriauxOeuvre))
+            {
+                return $unMateriauxOeuvre;
+            }
+            
 
       }
      

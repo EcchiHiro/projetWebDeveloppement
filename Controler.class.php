@@ -532,128 +532,78 @@ class Controler
 
         //  Liste des Artistes
         $listeArtistes=$artistes->afficheListeArtiste();
-      
 
-        $adresses=new Adresse("", "", "", "");
-
-        //  Liste des Artistes
-        $listeAdresses=$adresses->afficherListeAdresses();
-
-        $materiaux=new Materiaux("", "", "");
-
-        //  Liste des Artistes
-        $listeAMateriaux=$materiaux->afficheListeMateriaux();
-        
+    
             $oVue->AdminTopPage();
             $oVue->adminNavSide();
-            $oVue->adminAjoutOeuvre($listeArrondissement, $categories, $listeArtistes, $listeAdresses, $listeAMateriaux);
+            $oVue->adminAjoutOeuvre($listeArrondissement, $categories, $listeArtistes);
             $oVue->AdminPiedPage();
         
+      
+
         if(isset($_POST['nomArtiste']))
-        {
+            {
 
-            $unArtiste=new Artiste("",$_POST['nomArtiste'], $_POST['PrenomArtiste'], $_POST['collectif'], "");
+                $unArtiste=new Artiste("",$_POST['nomArtiste'], $_POST['PrenomArtiste'], $_POST['collectif'], "");
 
-            $unArtiste->enregistreArtiste();
+                $unArtiste->enregistreArtiste();
 
-            if (isset($unArtiste))
+                if (isset($unArtiste))
 
-                echo 'Artiste inséré';
+                    echo 'Artiste inséré';
 
-            else {
+                else {
 
-                echo "Erreur lors de l'insertion";
-            }
-        }
-
-        if(isset($_POST['materiaux']))
-        {
-            $materiauxParties = preg_split("/[;,]+/", $_POST['materiaux']);            
-
-            $materiauxPartieEN = preg_split("/[;,]+/", $_POST['materiauxEN']);
-
-            if(count($materiauxParties) == count($materiauxPartieEN)){
-
-                for($i=0; $i<count($materiauxParties); $i++){
-
-                    $unMateriaux=new Materiaux("",$materiauxParties[$i], $materiauxPartieEN[$i]);
-                    $unMateriaux->enregistreMateriaux();
+                    echo "Erreur lors de l'insertion";
                 }
-            }else{
-                echo "Vous devez traduire tous les materiaux";
-            }           
-
-            if (isset($unMateriaux))
-
-                echo 'Materiaux inséré';
-
-            else {
-
-                echo "Erreur lors de l'insertion";
             }
-            
-        }
-        
-        
-        
+
+
+
         if(isset($_POST['titre']))
         {
-            
-//            if(isset($_POST['titre']))
-           
-            $unAdresse=new Adresse("",$_POST['numRue'], $_POST['rue'], $_POST['ville']);
-            
+
+            $unAdresse=new Adresse("",$_POST['nbRue'], $_POST['nomRue'], $_POST['ville']);
 
             $unAdresse->enregistreAdresse();
 
             $dernierIdAdresse=$unAdresse->recupererDernierId();
 
-            $materiaux=$_POST["materiauxOeuvre"];
 
-            $uneOeuvre = new Oeuvre("",$_POST["titre"], $_POST["varianteTitre"], $_POST["collection"], $_POST["collectionEN"], $_POST["technique"], $_POST["techniqueEN"], $_POST["dimensions"],$_POST["arrondissement"], $_POST["latitude"], $_POST["longitud"], "", $dernierIdAdresse, $_POST["artisteOeuvre"], $_POST["categorieOeuvre"], "");
-           
-       
-            
+          $uneOeuvre = new Oeuvre("",$_POST["titre"], "","", "", "","","", $_POST["arrondissement"], $_POST["latitude"], $_POST["longitud"], "", $dernierIdAdresse, $_POST["artisteOeuvre"], $_POST["categorieOeuvre"], "");
+
             $uneOeuvre->enregistreOuvresAdmin();
-
+          
             $dernierIdOeuvre=$uneOeuvre->recupererDernierId();
+      
 
-            if ($materiaux){
-
-                foreach ($materiaux as $materiel){
-
-                    echo $dernierIdOeuvre;
-
-                    $idMateriel=$materiel;
-                    $uneOeuvre->enregistreEst_composee($dernierIdOeuvre, $idMateriel);
-                }
-
-            }
             for($i=0; $i<count($_FILES['upload']['name']); $i++) {
+              
+              $tmpFilePath = $_FILES['upload']['tmp_name'][$i];
 
-                $tmpFilePath = $_FILES['upload']['tmp_name'][$i];
+              
+              if ($tmpFilePath != ""){
+                
+                $newFilePath = 'images/oeuvres/' . $_FILES['upload']['name'][$i];
 
+                
+                if(!move_uploaded_file($tmpFilePath, $newFilePath)) {
 
-                if ($tmpFilePath != ""){
+                   echo "Erreur";
 
-                    $newFilePath = 'images/oeuvres/' . $_FILES['upload']['name'][$i];
-
-
-                    if(!move_uploaded_file($tmpFilePath, $newFilePath)) {
-
-                        echo "Erreur";
-
-                    }else{
-                        $photoOeuvre= new photoOeuvre("","","","","","","","","","","","","", "","","","","$newFilePath");
-                        $photoOeuvre->enregistreEstPhoto();
-                        $dernierIdPhoto=$photoOeuvre->recupererDernierId();
-                        $photoOeuvre->enregistreEst_possede_photo($dernierIdOeuvre, $dernierIdPhoto);
-                    }
+                }else{
+                    $photoOeuvre= new photoOeuvre("","","","","","","","","","","","","", "","","","","$newFilePath");
+                    $photoOeuvre->enregistreEstPhoto();
+                    $dernierIdPhoto=$photoOeuvre->recupererDernierId();
+                    $photoOeuvre->enregistreEst_possede_photo($dernierIdOeuvre, $dernierIdPhoto);
                 }
+              }
             }
 
-            if (isset($uneOeuvre)){
-                echo 'Oeuvre insérée';
+            if (isset($uneOeuvre))
+            {
+              echo 'Oeuvre insérée';
+          
             }
 
                 
@@ -662,8 +612,8 @@ class Controler
 
                 echo "Erreur lors de l'insertion";
             }
-        }/*fin du isset*/
-        
+   
+        }
 
     }/*fin private*/
     
@@ -716,7 +666,13 @@ class Controler
             $mat=new Materiaux("", "", "");
             $materiauxOeuvre=$mat->afficherMaterielUneOeuvre($idOeuvre);
             $listeMat=$mat->afficheListeMateriaux();
-            $tableauInfoOeuvreMateriel=get_object_vars($materiauxOeuvre);
+   
+            if($materiauxOeuvre != null) 
+            {
+                $tableauInfoOeuvreMateriel=get_object_vars($materiauxOeuvre);   
+            }
+
+            
     
             
             $cat= new Categorie("", "", "", "", "", "");
@@ -746,9 +702,7 @@ class Controler
                           $titre=$_POST["titre"];
                           $titreVariante=$_POST["titreVariante"];
                           $collection=$_POST["collection"];
-                          $collectionEN=$_POST["collectionEN"];
                           $technique=$_POST["technique"];
-                          $techniqueEN=$_POST["techniqueEN"];
                           $dimensions=$_POST["dimensions"];
                           $arrondissement=$_POST["arrondissement"];
                           $coordonneeLatitude=floatval($_POST["coordonneeLatitude"]);
@@ -757,7 +711,7 @@ class Controler
                 
                 
                           $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","");
-                          $oeuvre->modifieUneOeuvre($idOeuvre, $titre, $titreVariante,$collection, $collectionEN,$technique,$techniqueEN, $dimensions,$arrondissement,$coordonneeLatitude, $coordonneeLongitude);
+                          $oeuvre->modifieUneOeuvre($idOeuvre, $titre, $titreVariante,$collection, "",$technique,"", $dimensions,$arrondissement,$coordonneeLatitude, $coordonneeLongitude);
 
              
                           $idCat=intval($_POST["cat"]);
@@ -876,22 +830,31 @@ class Controler
             $oVue->adminSuppCat($categories);
             $oVue->AdminPiedPage();
 
+            
             if(isset($_POST['supprimeCategorie']))
             {
                 $idCat = intval($_POST['supprimeCategorie']);
-
-                $cat= new Categorie("", "", "", "", "", "");
-
-                $cat->supprimerCategorie($idCat);
-                
-                echo '<script language="Javascript">
-                <!--
-                document.location.replace("index.php?page=admin");
-                // -->
-                </script>';
-                
+                try
+                {
+                    
+                    $cat= new Categorie("", "", "", "", "", "");
+                    $cat->supprimerCategorie($idCat);
+                                    
+                    echo '<script language="Javascript">
+                    <!--
+                    document.location.replace("index.php?page=admin");
+                    // -->
+                    </script>';
+                    
+                }
+                catch (Exception $e)
+                {
+                    $erreur = $e->getMessage();
+                    echo $erreur;
+                }
 
             }
+
 
         }
 
@@ -1194,41 +1157,41 @@ class Controler
             if(isset($_POST['ajoutPhoto']))
             {
                 
-                $idCat = intval($_POST['ajoutPhoto']);
-
+                  $idCat = intval($_POST['ajoutPhoto']);                
+                    
+                  $y1=$_POST['top'];
+                  $x1=$_POST['left'];
+                  $w=$_POST['right'];
+                  $h=$_POST['bottom'];
+                  $image = $_FILES['upload']['tmp_name'];
                 
 
-                $tmpFilePath = $_FILES['upload']['tmp_name'];
-  
+                  list( $width,$height ) = getimagesize( $image );
+                  $newwidth = 600;
+                  $newheight = 400;
 
-                        if ($tmpFilePath != "")
-                        {
+                  $thumb = imagecreatetruecolor( $newwidth, $newheight );
+                  $source = imagecreatefromjpeg($image);
 
-                            $newFilePath = 'images/categories/' . $_FILES['upload']['name'];
-
-                            if(!move_uploaded_file($tmpFilePath, $newFilePath)) 
-                            {
-
-                                    echo "Erreur";
-
-                            }
-
-                            else
-
-                            {
-                                        $cat->ajoutImageCat($idCat, $newFilePath);
+                  imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+                  imagejpeg($thumb,$image,100); 
 
 
-                                        echo '<script language="Javascript">
-                                        <!--
-                                        document.location.replace("index.php?page=admin");
-                                        // -->
-                                        </script>';
-                            }
-                        }
-                    
-                    
+                  $im = imagecreatefromjpeg($image);
+                  $dest = imagecreatetruecolor($w,$h);
 
+                  imagecopyresampled($dest,$im,0,0,$x1,$y1,$w,$h,$w,$h);
+                  imagejpeg($dest,"images/categories/". $_FILES['upload']['name'], 100);
+                  $newFilePath = "images/categories/". $_FILES['upload']['name'];
+                
+                  $cat->ajoutImageCat($idCat, $newFilePath);
+
+
+                     echo '<script language="Javascript">
+                     <!--
+                     document.location.replace("index.php?page=admin");
+                     // -->
+                     </script>';
         
         }
 
@@ -1255,47 +1218,50 @@ class Controler
 
             
             if(isset($_POST['ajoutPhoto']))
-            {
+                {
                 
-                $idOeuvre = intval($_POST['ajoutPhoto']);
+                  $idOeuvre = intval($_POST['ajoutPhoto']);
+                
+                  $y1=$_POST['top'];
+                  $x1=$_POST['left'];
+                  $w=$_POST['right'];
+                  $h=$_POST['bottom'];
+                  $image = $_FILES['upload']['tmp_name'];
+                
 
-                $tmpFilePath = $_FILES['upload']['tmp_name'];
-  
+                  list( $width,$height ) = getimagesize( $image );
+                  $newwidth = 600;
+                  $newheight = 400;
 
-                        if ($tmpFilePath != "")
-                        {
+                  $thumb = imagecreatetruecolor( $newwidth, $newheight );
+                  $source = imagecreatefromjpeg($image);
 
-                            $newFilePath = 'images/oeuvres/' . $_FILES['upload']['name'];
-
-                            if(!move_uploaded_file($tmpFilePath, $newFilePath)) 
-                            {
-
-                                    echo "Erreur";
-
-                            }
-
-                            else
-
-                            {
-                                        $oeuvre->ajoutImagePresentation($idOeuvre, $newFilePath);
+                  imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+                  imagejpeg($thumb,$image,100); 
 
 
-                                        echo '<script language="Javascript">
-                                        <!--
-                                        document.location.replace("index.php?page=admin");
-                                        // -->
-                                        </script>';
-                            }
-                        }
-                    
-                    
+                  $im = imagecreatefromjpeg($image);
+                  $dest = imagecreatetruecolor($w,$h);
 
-        
-        }
+                  imagecopyresampled($dest,$im,0,0,$x1,$y1,$w,$h,$w,$h);
+                  imagejpeg($dest,"images/oeuvres/P_". $_FILES['upload']['name'], 100);
+                  $newFilePath = "images/oeuvres/P_". $_FILES['upload']['name'];
+                
+                  $oeuvre->ajoutImagePresentation($idOeuvre, $newFilePath);
+
+
+                     echo '<script language="Javascript">
+                     <!--
+                     document.location.replace("index.php?page=admin");
+                     // -->
+                     </script>';
+                
+                }
 
 
     }
     
+
     private function adminAjoutDescriptionArtiste()
     {
         $oVue = new VueAdmin();
@@ -1303,6 +1269,7 @@ class Controler
         $oVue->adminNavSide();
         $oVue->AdminPiedPage();
     }
+
     
 
 

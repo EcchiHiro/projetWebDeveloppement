@@ -719,7 +719,7 @@ function handleChange()
 
 })();
 
-/**
+        /**
      * Fonction validation de formulaire d'ajoute catégorie par l'admin
      * @author Carlos VASQUEZ 
      * @author Stéphane Leclerc
@@ -755,9 +755,21 @@ function validationForm5()
 
 }
 
+        /**
+     * Fonction qui recupére les informations de l'image croppée (panneau d'administration)
+     * @author BOUET Alexandre 
+     */
 
 
-
+function crop()
+    {
+      var posi = document.getElementById('crop_div');
+      document.getElementById("top").value=posi.offsetTop;
+      document.getElementById("left").value=posi.offsetLeft;
+      document.getElementById("right").value=posi.offsetWidth;
+      document.getElementById("bottom").value=posi.offsetHeight;
+      return true;
+    }
 
 
 

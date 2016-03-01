@@ -1,20 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.4
+-- version 4.4.10
 -- http://www.phpmyadmin.net
 --
--- Client :  127.0.0.1
--- Généré le :  Ven 19 Février 2016 à 20:51
--- Version du serveur :  5.6.15-log
--- Version de PHP :  5.4.24
+-- Client :  localhost:8889
+-- Généré le :  Mar 01 Mars 2016 à 05:33
+-- Version du serveur :  5.5.42
+-- Version de PHP :  7.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Base de données :  `artmontreal`
@@ -26,12 +20,11 @@ SET time_zone = "+00:00";
 -- Structure de la table `admin`
 --
 
-CREATE TABLE IF NOT EXISTS `admin` (
-  `IdAdmin_` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `admin` (
+  `IdAdmin_` int(11) NOT NULL,
   `Login` varchar(32) DEFAULT NULL,
-  `MotPasse` varchar(32) DEFAULT NULL,
-  PRIMARY KEY (`IdAdmin_`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `MotPasse` varchar(32) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `admin`
@@ -46,13 +39,12 @@ INSERT INTO `admin` (`IdAdmin_`, `Login`, `MotPasse`) VALUES
 -- Structure de la table `adresse`
 --
 
-CREATE TABLE IF NOT EXISTS `adresse` (
-  `IdAdresse` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `adresse` (
+  `IdAdresse` int(11) NOT NULL,
   `NumRue` varchar(32) DEFAULT NULL,
   `Rue` varchar(60) DEFAULT NULL,
-  `Ville` varchar(32) DEFAULT NULL,
-  PRIMARY KEY (`IdAdresse`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1315 ;
+  `Ville` varchar(32) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=1315 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `adresse`
@@ -368,14 +360,13 @@ INSERT INTO `adresse` (`IdAdresse`, `NumRue`, `Rue`, `Ville`) VALUES
 -- Structure de la table `artiste`
 --
 
-CREATE TABLE IF NOT EXISTS `artiste` (
-  `IdArtiste` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `artiste` (
+  `IdArtiste` int(11) NOT NULL,
   `Nom` varchar(32) DEFAULT NULL,
   `Prenom` varchar(32) DEFAULT NULL,
   `Collectif` varchar(60) NOT NULL,
-  `photoArtiste` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`IdArtiste`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1000 ;
+  `photoArtiste` varchar(60) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `artiste`
@@ -589,13 +580,12 @@ INSERT INTO `artiste` (`IdArtiste`, `Nom`, `Prenom`, `Collectif`, `photoArtiste`
 -- Structure de la table `categorie`
 --
 
-CREATE TABLE IF NOT EXISTS `categorie` (
-  `IdCat` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `categorie` (
+  `IdCat` int(11) NOT NULL,
   `NomSousCat` varchar(200) DEFAULT NULL,
   `NomSousCatEN` varchar(200) DEFAULT NULL,
-  `PhotoCat` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`IdCat`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=58 ;
+  `PhotoCat` varchar(60) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `categorie`
@@ -624,12 +614,10 @@ INSERT INTO `categorie` (`IdCat`, `NomSousCat`, `NomSousCatEN`, `PhotoCat`) VALU
 -- Structure de la table `est_composee`
 --
 
-CREATE TABLE IF NOT EXISTS `est_composee` (
-  `IdOeuvre` int(11) NOT NULL AUTO_INCREMENT,
-  `IdMat` int(11) NOT NULL,
-  PRIMARY KEY (`IdOeuvre`,`IdMat`),
-  KEY `FK_est_composée_IdMat` (`IdMat`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=950 ;
+CREATE TABLE `est_composee` (
+  `IdOeuvre` int(11) NOT NULL,
+  `IdMat` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=950 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `est_composee`
@@ -1227,12 +1215,11 @@ INSERT INTO `est_composee` (`IdOeuvre`, `IdMat`) VALUES
 -- Structure de la table `materiaux`
 --
 
-CREATE TABLE IF NOT EXISTS `materiaux` (
-  `IdMat` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `materiaux` (
+  `IdMat` int(11) NOT NULL,
   `NomMateriaux` varchar(200) DEFAULT NULL,
-  `NomMateriauxEN` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`IdMat`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=689 ;
+  `NomMateriauxEN` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=689 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `materiaux`
@@ -1380,9 +1367,9 @@ INSERT INTO `materiaux` (`IdMat`, `NomMateriaux`, `NomMateriauxEN`) VALUES
 -- Structure de la table `oeuvre`
 --
 
-CREATE TABLE IF NOT EXISTS `oeuvre` (
-  `IdOeuvre` int(11) NOT NULL AUTO_INCREMENT,
-  `Titre` varchar(60) CHARACTER SET utf8 DEFAULT NULL,
+CREATE TABLE `oeuvre` (
+  `IdOeuvre` int(11) NOT NULL,
+  `Titre` varchar(60) DEFAULT NULL,
   `TitreVariante` varchar(60) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `Collection` varchar(60) DEFAULT NULL,
   `CollectionEN` varchar(60) DEFAULT NULL,
@@ -1397,303 +1384,300 @@ CREATE TABLE IF NOT EXISTS `oeuvre` (
   `IdArtiste` int(11) NOT NULL,
   `IdCat` int(11) NOT NULL,
   `photoPresentation` varchar(60) NOT NULL,
-  PRIMARY KEY (`IdOeuvre`),
-  KEY `FK_Oeuvre_IdAdresse` (`IdAdresse`),
-  KEY `FK_Oeuvre_IdArtiste` (`IdArtiste`),
-  KEY `FK_Oeuvre_IdCat` (`IdCat`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=950 ;
+  `description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci
+) ENGINE=InnoDB AUTO_INCREMENT=950 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `oeuvre`
 --
 
-INSERT INTO `oeuvre` (`IdOeuvre`, `Titre`, `TitreVariante`, `Collection`, `CollectionEN`, `Technique`, `TechniqueEN`, `Dimensions`, `Arrondissement`, `CoordonneeLatitude`, `CoordonneeLongitude`, `EstValide`, `IdAdresse`, `IdArtiste`, `IdCat`, `photoPresentation`) VALUES
-(665, 'Source', NULL, 'Art public', 'Public art', 'Bronze coulé; boulonné', 'Cast bronze; bolted', '549 x 466 x 466 cm', 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.466405, -73.631648, 1, 1014, 801, 42, ''),
-(666, 'Porte de jour', 'Une porte rouge (ouverte, rougeâtre, solaire)', 'Art public', 'Public art', 'Soudé', 'Welded', '298 x 350 x 1070 cm', 'Ville-Marie', 45.51209, -73.550979, 1, 1015, 802, 43, ''),
-(667, 'Regarder les pommetiers', NULL, 'Art public', 'Public art', 'Taillé; assemblé', 'Carved; assembled', '294 x 600 x 182', 'Rosemont–La Petite-Patrie', 45.561585, -73.562673, 1, 1016, 802, 43, ''),
-(668, 'Le malheureux magnifique', NULL, 'Art public', 'Public art', 'Assemblé; cimenté; peint', 'Assembled; cemented; painted', '340 x 235 x 310', 'Le Plateau-Mont-Royal', 45.516907, -73.567846, 1, 1017, 803, 42, ''),
-(669, 'Les clochards célestes', 'Monumental III', 'Art public', 'Public art', 'Assemblé; cimenté; peint', 'Assembled; cemented; painted', '640 x 250 x 420 cm', 'Ville-Marie', 45.516853, -73.555153, 1, 1018, 803, 42, ''),
-(670, 'Discours du roi poète', NULL, 'Art public', 'Public art', NULL, NULL, '233 X 56 X 63 cm', 'Le Sud-Ouest', 45.47239, -73.584704, 1, 1019, 804, 42, ''),
-(671, 'Hommage à Jérôme Le Royer De La Dauversière', NULL, 'Art public', 'Public art', NULL, NULL, '84 x 193 x 81', 'Ville-Marie', 45.508493, -73.5533, 1, 1020, -1, 42, ''),
-(672, 'Obélisque oblique', NULL, 'Art public', 'Public art', 'Pliées; soudées; boulonnées', 'Bends; welded; bolted', '546 x 160 x 190', 'Ville-Marie', 45.506046, -73.526706, 1, 1021, 806, 42, ''),
-(673, 'La source', 'Sergenti', 'Art public', 'Public art', 'Taillé', 'Carved', NULL, 'Rosemont–La Petite-Patrie', 45.534752, -73.617845, 1, 1022, 807, 42, ''),
-(674, 'Vous êtes ici', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, '3000 x 1000 cm', 'Mercier–Hochelaga-Maisonneuve', 45.551183, -73.540539, 1, 1023, 808, 43, ''),
-(675, 'Non titré (Murale en relief et sculpture)', 'Murale en relief et sculpture (extérieur)', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Le Plateau-Mont-Royal', 45.539713, -73.57611, 1, 1024, 809, 42, ''),
-(676, 'Non titré (Vitraux)', 'Vitraux', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.508816, -73.554069, 1, 1025, 810, 44, ''),
-(677, 'Non titré (Murale inuit)', 'Murale inuit', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503792, -73.529322, 1, 1029, 812, 45, ''),
-(678, 'Non titré (Murale peinte)', 'Murale peinte', 'Intégration à l''architecture', 'Integration with architecture', 'Œuvre peinte', 'Painting', NULL, 'Rivière-des-Prairies–Pointe-aux-Trembles', 45.676603, -73.491423, 1, 1030, 810, 45, ''),
-(679, 'Non titré (Fontaine, mosaïque)', 'Fontaine (mosaïque)', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Le Sud-Ouest', 45.472308, -73.572944, 1, 1031, 810, 46, ''),
-(680, 'Bibliotheca Universalis', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Impression', 'Print', NULL, 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.50313, -73.636947, 1, 1032, 813, 47, ''),
-(681, 'Chibouki', 'Chiboukis', 'Intégration à l''architecture', 'Integration with architecture', 'Impression numérique', 'Digital print', '122 x 122cm', 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.503302, -73.636776, 1, 1033, 813, 47, ''),
-(682, 'La mort de Dante', NULL, 'Art public', 'Public art', 'Coulé', 'Cast', '390 x 250 x 210 cm', 'Rosemont–La Petite-Patrie', 45.534445, -73.611721, 1, 1034, 814, 42, ''),
-(683, 'Champlain visite de nouveau le site de Montréal en 1611', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503909, -73.587452, 1, 1035, 815, 45, ''),
-(684, 'Monument à Jean Vauquelin', NULL, 'Art public', 'Public art', 'Bronze coulé; pierre taillée', 'Cast bronze; carved stone', '680cm x 400 cm x 400 cm approximatif', 'Ville-Marie', 45.508588, -73.554655, 1, 1036, 816, 42, ''),
-(685, 'Smoke and steel', NULL, 'Art public', 'Public art', NULL, NULL, '260 x 60 x 90 cm', 'Saint-Léonard', 45.582705, -73.585774, 1, 1037, 817, 42, ''),
-(686, 'Le cycliste', NULL, 'Art public', 'Public art', 'Soudé; peint', 'Welded, painted', '425 x 140 x 539 cm', 'Verdun', 45.456655, -73.542746, 1, 1038, 818, 42, ''),
-(687, 'Contournement', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Cintré et peinturé', 'Bent and painted', NULL, 'Villeray–Saint-Michel–Parc-Extension', 45.560942, -73.635233, 1, 1039, 819, 42, ''),
-(688, 'L''arbre des générations', NULL, 'Art public', 'Public art', 'Découpé; soudé; boulonné; peint', 'Cut out; welded; bolted; painted', '385 x 275 x 548 cm', 'Lachine', 45.430699, -73.666113, 1, 1040, 820, 42, ''),
-(689, 'Vire au vent', NULL, 'Art public', 'Public art', 'Soudage; boulonnage; peint', 'Welding; bolting; painted', '495 x 610 x 295 cm', 'Lachine', 45.42848, -73.682451, 1, 1041, 820, 42, ''),
-(690, 'Sans titre', 'Oiseau', 'Art public', 'Public art', 'Feuilles d''acier coupées; soudées les unes aux autres', 'Steel sheets cut; welded to each other', '150 x 150 x 52 cm', 'Rosemont–La Petite-Patrie', 45.558218, -73.563644, 1, 1042, 821, 42, ''),
-(691, 'Carte du site de Montréal par Champlain en 1611', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503986, -73.587585, 1, 1043, 821, 45, ''),
-(692, 'Les anciennes possessions françaises en Amérique', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503969, -73.587623, 1, 1044, 821, 45, ''),
-(693, 'Les voyages de Jacques Cartier au Canada en 1534 et 1535', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503961, -73.587657, 1, 1045, 821, 45, ''),
-(694, 'Montréal de 1645 à 1672', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503945, -73.587697, 1, 1046, 821, 45, ''),
-(695, 'Montréal en 1760', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503918, -73.587731, 1, 1047, 821, 45, ''),
-(696, 'Plan d''Hochelaga par Jacques Cartier en 1535', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503874, -73.587727, 1, 1048, 821, 45, ''),
-(697, 'Jacques Cartier est reçu par le chef Agouhana', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503842, -73.587707, 1, 1049, 824, 45, ''),
-(698, 'Parades Parures', 'Parades-parures', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, '574 x 81 x 10 cm', 'Rivière-des-Prairies–Pointe-aux-Trembles', 45.649803, -73.578961, 1, 1050, 825, 48, ''),
-(699, 'Le village imaginé. «Le renard l''emporte, le suit à la trace', NULL, 'Art public', 'Public art', 'Assemblé; soudé', 'Assembled; welded', 'Ensemble de l''œuvre : 98 x 115 m', 'Le Sud-Ouest', 45.475158, -73.558862, 1, 1051, 826, 43, ''),
-(700, 'Monument à Jean Drapeau', NULL, 'Art public', 'Public art', 'Bronze coulé; cire perdue', 'Cast bronze; cire perdue', '287 X 200 x 200 cm', 'Ville-Marie', 45.50853, -73.55342, 1, 1052, 827, 42, ''),
-(701, 'Hommage à Maurice Richard', NULL, 'Art public', 'Public art', NULL, NULL, '221 x 327 x 182 cm', 'Mercier–Hochelaga-Maisonneuve', 45.562682, -73.546957, 1, 1053, 828, 42, ''),
-(702, 'La montagne des jours', NULL, 'Art public', 'Public art', 'Gravé au jet de sable; poli', 'Sandblast engraving; polished', '153 X 8 cm', 'Ville-Marie', 45.507069, -73.590031, 1, 1054, 829, 42, ''),
-(703, 'Mémoire ardente', NULL, 'Art public', 'Public art', NULL, NULL, '197 x 197 x 197', 'Ville-Marie', 45.508932, -73.551062, 1, 1055, 829, 42, ''),
-(704, 'Les jours d''été quand le fleuve monte à l''assaut des murs, h', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Mixte', 'Mixed', '86 x 117 x 10 cm', 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.50313, -73.636947, 1, 1056, 830, 48, ''),
-(705, 'Monument à sir Wilfrid Laurier', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '622 x 490 x 106 cm', 'Ville-Marie', 45.4994744, -73.571061, 1, 1057, 831, 42, ''),
-(706, 'Monument au frère André', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '301 x 120 x 50cm', 'Ville-Marie', 45.503309, -73.5666, 1, 1058, 831, 42, ''),
-(707, 'Neuf couleurs au vent', NULL, 'Art public', 'Public art', 'Soudé; sérigraphié', 'Welded; silkscreened', '1650 x 110 x 2510 cm', 'Le Plateau-Mont-Royal', 45.521709, -73.565776, 1, 1059, 832, 43, ''),
-(708, 'Table Ronde', NULL, 'Art public', 'Public art', 'Assemblé; soudé', 'Assembled; welded', NULL, 'LaSalle', 45.428134, -73.661771, 1, 1061, 834, 43, ''),
-(709, 'Trois disques', 'Man, Three Disks;\rL''Homme; Man; The Man', 'Art public', 'Public art', 'Découpé; assemblé; boulonné; soudé ', 'Cut out; assembled; screwed; welded', '2130 x 2200 x 1625 cm', 'Ville-Marie', 45.510658, -73.536837, 1, 1062, 835, 42, ''),
-(710, 'Hermès', NULL, 'Art public', 'Public art', 'Soudé; peint; boulonné', 'Welded; painted; bolted', '320 x 370 x 570 cm', 'Lachine', 45.428752, -73.683435, 1, 1063, 836, 42, ''),
-(711, 'Non titré', NULL, 'Art public', 'Public art', 'Soudés; peints', 'Welded, painted', '700 x 82.5 x 82.5 cm', 'Ville-Marie', 45.51907, -73.556071, 1, 1065, 838, 42, ''),
-(712, 'Trilogie', NULL, 'Art public', 'Public art', 'Soudé; peint', 'Welded, painted', '380 x 366 x 366 cm', 'Lachine', 45.430106, -73.666757, 1, 1066, 838, 42, ''),
-(713, 'Communion', NULL, 'Art public', 'Public art', 'Soudé; peint', 'Welded, painted', '335 x 427 x 853cm', 'LaSalle', 45.423958, -73.598574, 1, 1067, 838, 42, ''),
-(714, 'Non titré (mosaïque en céramique)', 'Sans titre (mosaïque en céramique)', 'Intégration à l''architecture', 'Integration with architecture', 'Peint; assemblé', 'painted; assembled', '381 x 554 cm', 'Le Sud-Ouest', 45.466425, -73.595811, 1, 1068, 839, 49, ''),
-(715, 'Monument à Giovanni Caboto', NULL, 'Art public', 'Public art', 'Bronze coulé; cire perdue', 'Cast bronze; cire perdue', '875 x 800 x 800', 'Ville-Marie', 45.48949, -73.583652, 1, 1069, 840, 42, ''),
-(716, 'La femme-fontaine', NULL, 'Art public', 'Public art', 'Taille directe', 'Direct carving', '183,50 x 57,50 x 40,70 cm', 'Verdun', 45.448399, -73.577621, 1, 1071, 841, 42, ''),
-(717, 'Envol d''oiseaux', 'Puit de lumière en vitraux', 'Intégration à l''architecture', 'Integration with architecture', 'Découpé; assemblé', 'Cut out; assembled', '400 x 65 cm', 'Villeray–Saint-Michel–Parc-Extension', 45.543774, -73.61448, 1, 1072, 842, 44, ''),
-(718, 'Gratte-ciel, cascades d''eau / rues, ruisseau… une constructi', NULL, 'Art public', 'Public art', 'Multiple', 'Multiple', '1700 x 7500 x 5000 cm', 'Ville-Marie', 45.515449, -73.560028, 1, 1073, 843, 43, ''),
-(719, 'Le carrousel sauvage', 'Le carrousel sauvage (SISM-64)\rLe manège d''amour', 'Art public', 'Public art', 'Taillé; assemblé', 'Carved; assembled', '315 x 1828 cm', 'Ville-Marie', 45.501169, -73.59404, 1, 1074, 844, 42, ''),
-(720, 'Décor', NULL, 'Art public', 'Public art', 'Soudé; peint', 'Welded, painted', '134 x 65 x 97 cm', 'Lachine', 45.429875, -73.666409, 1, 1075, 845, 42, ''),
-(721, 'L''eau et la nourriture', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Aluchromie', NULL, ' 274,5 x 812 cm', 'LaSalle', 45.425053, -73.619043, 1, 1076, 846, 45, ''),
-(722, 'Le mélomane', NULL, 'Art public', 'Public art', NULL, NULL, NULL, 'Villeray–Saint-Michel–Parc-Extension', 45.5622, -73.600852, 1, 1077, -1, 42, ''),
-(723, 'Mélangez le Tout', 'Le batteur à œufs', 'Art public', 'Public art', 'Découpe au laser; assemblage; peinture électrostatique (banc', 'Laser cutting; assemblage; electrostatic painting (bench)', '580 x 365 cm', 'Ville-Marie', 45.53434, -73.552733, 1, 1078, -1, 42, ''),
-(724, 'Caesura', 'Œuvre pour la paix', 'Art public', 'Public art', 'Bronze coulé; soudure; béton coulé; taille; polissage.', 'Cast bronze; welding; poured concrete; dressing; polishing.', '500 x 1100 x 1450 cm', 'Villeray–Saint-Michel–Parc-Extension', 45.537512, -73.62802, 1, 1079, 847, 43, ''),
-(725, 'Theatre for Sky Blocks', 'Théâtre pour fragments célestes', 'Art public', 'Public art', 'Soudure; sérigraphie; peinture; coupage', 'Welding; silkscreening; paint; cutting', '300 x 250 x 1000 cm', 'Lachine', 45.433893, -73.69675, 1, 1080, 847, 43, ''),
-(726, 'Les graminées du jardin Saint-Sulpice', NULL, 'Art public', 'Public art', 'Coupé; soudé', 'Cut; welded', '244 x 1000', 'Ahuntsic-Cartierville', 45.559348, -73.641608, 1, 1081, 847, 43, ''),
-(727, 'Give Peace a Chance', NULL, 'Art public', 'Public art', 'Pierre taillée', 'Carved stone', '2300 x 640 cm', 'Ville-Marie', 45.505007, -73.58382, 1, 1082, 849, 43, ''),
-(728, 'Monument au frère Marie-Victorin', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '295  x 140  x 140 cm', 'Rosemont–La Petite-Patrie', 45.557281, -73.555903, 1, 1083, 850, 42, ''),
-(729, 'Le lion de La Feuillée', 'Le lion de Lyon', 'Art public', 'Public art', 'Coulée industriel', 'Casting industrial ', '210 x 230 x 400 cm', 'Rosemont–La Petite-Patrie', 45.558796, -73.555637, 1, 1084, 851, 42, ''),
-(730, 'Agora', NULL, 'Art public', 'Public art', 'Moulage; assemblage', 'Moulding: assembly', '762 x 762 x 762 cm', 'Ville-Marie', 45.512075, -73.554819, 1, 1085, 852, 43, ''),
-(731, 'Mastodo', NULL, 'Art public', 'Public art', 'Moulage; assemblage', 'Moulding; assembly', '420 x 580 x 610 cm', 'Ville-Marie', 45.5118, -73.554681, 1, 1086, 852, 42, ''),
-(732, 'Cailloudo', NULL, 'Art public', 'Public art', 'Coulé; assemblé', 'Cast; assembled', '132 x 425 x 760 cm', 'Saint-Laurent', 45.512457, -73.676799, 1, 1087, 852, 42, ''),
-(733, 'Hommage à Claude Jutra', NULL, 'Art public', 'Public art', 'Assemblé; soudé; découpé; taillé; collé', 'Assembled; welded; cut out; carved; glued', '250 x 75 x 70 cm', 'Le Plateau-Mont-Royal', 45.51324, -73.572945, 1, 1088, 852, 42, ''),
-(734, 'La ville imaginaire', NULL, 'Art public', 'Public art', 'Taillé; assemblé', 'Carved; assembled', '1900 x 1800 x 2750 cm', 'Ville-Marie', 45.512697, -73.537714, 1, 1089, 853, 43, ''),
-(735, 'Révolutions', NULL, 'Art public', 'Public art', NULL, NULL, '850 x 500 cm', 'Ville-Marie', 45.523985, -73.552731, 1, 1090, 854, 42, ''),
-(736, 'L''arc', 'Hommage à Salvador Allende (1908-1973)', 'Art public', 'Public art', NULL, NULL, '305 x 470 x 125', 'Ville-Marie', 45.505855, -73.527741, 1, 1091, 854, 42, ''),
-(737, 'Buste du Dr. José P. Rizal', NULL, 'Art public', 'Public art', 'Fonte à la cire perdue', 'Iron cast in the cire perdue method', '238 x 148 x 135 cm', 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.491014, -73.634079, 1, 1092, 855, 42, ''),
-(738, 'Monument à Christophe Colomb', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '272 x 116 x 94 cm', 'Villeray–Saint-Michel–Parc-Extension', 45.545114, -73.610194, 1, 1093, 856, 42, ''),
-(739, 'Cosmos', 'Murale peinte; Cosmos I, II, III', 'Intégration à l''architecture', 'Integration with architecture', 'Collage; peinture', 'Collage; painting ', '185 x 677 x 5 cm', 'Rivière-des-Prairies–Pointe-aux-Trembles', 45.668131, -73.494621, 1, 1094, 857, 45, ''),
-(740, 'Obélisque en hommage à Charles de Gaulle', 'Mémorial au général De Gaulle', 'Art public', 'Public art', NULL, NULL, '1780 x 240 x 270 cm', 'Le Plateau-Mont-Royal', 45.526107, -73.564759, 1, 1095, 858, 42, ''),
-(741, 'China Wall', NULL, 'Art public', 'Public art', 'Soudé', 'Welded', '225 x 177 x 489 cm', 'Lachine', 45.428562, -73.681682, 1, 1096, 859, 42, ''),
-(742, 'Maisonneuve fonde Montréal le 18 mai 1642', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503819, -73.587641, 1, 1097, 860, 45, ''),
-(743, 'Portail avec bas-reliefs', 'Mémoire', 'Intégration à l''architecture', 'Integration with architecture', 'Fondu; vitrifié; peint; coupé; assemblé', 'Melted; vitrified; painted; cut; assembled', '520 X 520 cm', 'Ville-Marie', 45.513427, -73.546886, 1, 1098, 861, 42, ''),
-(744, 'Place du Temple', NULL, 'Art public', 'Public art', 'Coulé; peint', 'Cast; painted', '500 x 1800 x 6700 cm', 'LaSalle', 45.42362, -73.624915, 1, 1099, 861, 43, ''),
-(745, 'Fontaine de vie', 'Les baigneuses', 'Art public', 'Public art', 'Sculpté', 'Sculpted', '370 x 550 cm', 'Lachine', 45.433162, -73.681258, 1, 1100, 862, 42, ''),
-(746, 'Buste de Simon Bolivar', 'Simón Bolívar', 'Art public', 'Public art', NULL, NULL, '248.5 x 99.5 x 48', 'Ville-Marie', 45.489486, -73.580919, 1, 1101, 863, 42, ''),
-(747, 'Albarello', NULL, 'Art public', 'Public art', 'Soudé; assemblé', 'Welded; assembled', '340 x 290 cm', 'Lachine', 45.42994, -73.666844, 1, 1102, 864, 42, ''),
-(748, 'À la croisée des mots', 'arbre-sculpture', 'Art public', 'Public art', 'Feuilles d''aluminium anodisé; découpées; soudées', 'Anodized aluminum sheets; cut out; welded', '732 x 300 cm', 'Le Sud-Ouest', 45.483797, -73.575105, 1, 1103, 865, 43, ''),
-(749, 'Mots choisis', 'Les mots choisis', 'Intégration à l''architecture', 'Integration with architecture', 'Gravé; assemblé', 'Engraved; assembled', NULL, 'Rivière-des-Prairies–Pointe-aux-Trembles', 45.668131, -73.494621, 1, 1104, 865, 42, ''),
-(750, 'Hommage aux forces vitales du Québec', NULL, 'Art public', 'Public art', 'Techniques multiples', 'Multiple techniques ', '366 x 3800 x 1600 cm', 'LaSalle', 45.420052, -73.603372, 1, 1105, 866, 43, ''),
-(751, 'Monument aux braves de N.D.G.', 'Monument aux combattants\rLes Braves de N.D.G.', 'Art public', 'Public art', 'Bronze moulé', 'Cast bronze ', '400 x 318 cm', 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.472499, -73.613726, 1, 1106, 867, 42, ''),
-(752, 'Optimax', 'Le Sphinx, Optimax (SISM-64)', 'Art public', 'Public art', 'Taille directe', 'Direct carving', '292 x 246 x 1250 cm', 'Ville-Marie', 45.500911, -73.593288, 1, 1107, 868, 42, ''),
-(753, 'Jacques Cartier sur le sommet du mont Royal', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503843, -73.587576, 1, 1108, 869, 45, ''),
-(754, 'Les baigneurs', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Le Sud-Ouest', 45.466339, -73.595615, 1, 1110, 871, 42, ''),
-(755, 'L''eau et la santé', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Aluchromie', NULL, ' 274,5 x 812 cm', 'LaSalle', 45.425053, -73.619043, 1, 1112, 872, 45, ''),
-(756, 'Une leçon d''histoire', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Coulé; taillé; moulé; patiné; collé; pulvérisé', 'Cast; carved; burnished; glued; sprayed', NULL, 'Ville-Marie', 45.533042, -73.551858, 1, 1113, 872, 43, ''),
-(757, 'Delos, septième porte de la perfection et de l''immortalité, ', 'Delos', 'Art public', 'Public art', NULL, NULL, NULL, 'Le Plateau-Mont-Royal', 45.534496, -73.562238, 1, 1114, 873, 42, ''),
-(758, 'Champlain explore le site de Montréal en 1603', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503877, -73.587492, 1, 1115, 874, 45, ''),
-(759, 'Nous deux', NULL, 'Art public', 'Public art', 'Découpé; soudé; meulé; boulonné; peint', 'Cut out; welded; buffed; bolted; painted', '244 x 142 x 161', 'Lachine', 45.429983, -73.666989, 1, 1116, 875, 42, ''),
-(760, 'Colonne', 'Sculpture (extérieur)', 'Intégration à l''architecture', 'Integration with architecture', 'Taille directe; assemblé', 'Direct carving; assembled', '700 x 124,5 cm', 'Le Plateau-Mont-Royal', 45.518992, -73.581993, 1, 1117, 875, 42, ''),
-(761, 'États de choc', 'States of shock', 'Art public', 'Public art', 'Soudé; formé; coulé; briqueté; peint', 'Welded; shaped; poured; briquetted; painted', '15.51m', 'Lachine', 45.438429, -73.718209, 1, 1118, 875, 42, ''),
-(762, 'La ville blanche', NULL, 'Art public', 'Public art', 'Découpé; soudé; boulonné; percé; coulé', 'Cut out; welded; bolted; pierced; cast', '650 x 2400', 'Lachine', 45.428448, -73.68035, 1, 1119, 875, 43, ''),
-(763, 'Espace cubique ou hommage à Malevitch', NULL, 'Art public', 'Public art', 'Taillé; coupé; soudé; assemblé', 'Carved; cut; welded; assembled', '254 x 224 x 225 cm', 'Lachine', 45.429901, -73.666579, 1, 1120, 875, 43, ''),
-(764, 'Cube géométrique', NULL, 'Art public', 'Public art', NULL, NULL, '500 x 390 x 390 cm', 'Saint-Laurent', 45.523012, -73.72101, 1, 1121, 876, 42, ''),
-(765, 'Le jardin de Lyon', NULL, 'Art public', 'Public art', NULL, NULL, NULL, 'Ville-Marie', 45.51247, -73.555461, 1, 1122, 878, 43, ''),
-(766, 'Orbite optique no 2', 'L''Artichaut', 'Art public', 'Public art', 'Béton projeté', 'Projected concrete', '800 cm x 1230 cm', 'Ville-Marie', 45.522507, -73.534649, 1, 1123, 879, 42, ''),
-(767, 'Fontaine', 'Jeux d''enfants\r\rNote : Ce titre était en usage avant le déma', 'Art public', 'Public art', NULL, NULL, '450 x 1450 x 1195 cm', 'Ville-Marie', 45.513958, -73.552921, 1, 1124, 880, 43, ''),
-(768, 'Athéna', NULL, 'Art public', 'Public art', 'Fonte à la cire perdue', 'Iron cast in the cire perdue method', '310 x 100 x 100 cm', 'Villeray–Saint-Michel–Parc-Extension', 45.52774, -73.624282, 1, 1125, 881, 42, ''),
-(769, 'Hommage à Mihai Eminescu, poète roumain', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '243 x 149 cm', 'Le Plateau-Mont-Royal', 45.514796, -73.576459, 1, 1126, 882, 42, ''),
-(770, 'Trait d''union', NULL, 'Art public', 'Public art', 'Ancré; boulonné; collé', 'Anchored; bolted; glued', '265 x 275 x 1800 cm', 'Saint-Léonard', 45.586472, -73.597139, 1, 1127, 883, 42, ''),
-(771, 'Les leçons singulières (volet 1)', 'Les leçons singulières (première partie)', 'Art public', 'Public art', 'Coulé; découpé; formé', 'Cast; cut out; shaped', '97 x 2000 x 1000 cm', 'Le Plateau-Mont-Royal', 45.52158, -73.570456, 1, 1128, 883, 43, ''),
-(772, 'Les leçons singulières (volet 2)', 'Les leçons singulières (deuxième partie)', 'Art public', 'Public art', 'Coulé; découpé; formé', 'Cast; cut out; shaped', '96 x 1800 x 1120 cm', 'Le Plateau-Mont-Royal', 45.523417, -73.568557, 1, 1129, 883, 43, ''),
-(773, 'Détour : le grand jardin', NULL, 'Art public', 'Public art', 'Soudé; boulonné; percé; peint', 'Welded; bolted; pierced; painted', '500 x 1865 x 2109 cm', 'Lachine', 45.428373, -73.681115, 1, 1130, 883, 43, ''),
-(774, 'Le carrousel de l’île', NULL, 'Art public', 'Public art', NULL, NULL, '470 x 1500 cm', 'Verdun', 45.465811, -73.544778, 1, 1131, 883, 43, ''),
-(775, 'Un jardin à soi', NULL, 'Art public', 'Public art', 'Découpé; assemblé', 'Cut out; assembled', '101.5 x 157 x 203 cm', 'Rosemont–La Petite-Patrie', 45.560956, -73.565822, 1, 1132, 883, 43, ''),
-(776, 'Monument pour L', NULL, 'Art public', 'Public art', 'Coulé; soudé; peint', 'Cast; welded; painted', '111 x 4000 x 1500 cm', 'Lachine', 45.43476, -73.699892, 1, 1133, 883, 43, ''),
-(777, 'Volatiles', 'Splish-splash', 'Intégration à l''architecture', 'Integration with architecture', 'Découpé; assemblé', 'Cut out; assembled', NULL, 'LaSalle', 45.436661, -73.607768, 1, 1134, 883, 43, ''),
-(778, 'Nef pour quatorze reines', NULL, 'Art public', 'Public art', NULL, NULL, '0.6 x 21 x 113 m', 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.496042, -73.617702, 1, 1135, 885, 43, ''),
-(779, 'Hommage aux travailleurs', NULL, 'Art public', 'Public art', 'Coulé; peint', 'Cast; painted', '600 x 272 x 138 cm', 'Montréal-Nord', 45.600702, -73.638456, 1, 1136, 886, 42, ''),
-(780, 'Le grand Jean-Paul', NULL, 'Art public', 'Public art', 'Cire perdue', 'Cire perdue method', '202 x 199.5 x 60.5 cm', 'Ville-Marie', 45.503104, -73.560661, 1, 1137, 887, 42, ''),
-(781, 'Monument à Émile Nelligan', 'Buste à l''effigie du poète Émile Nelligan', 'Art public', 'Public art', 'Bronze coulé; cire perdue', 'Cast bronze; cire perdue', '271 x 112 x 132 cm', 'Le Plateau-Mont-Royal', 45.516215, -73.570284, 1, 1138, 887, 42, ''),
-(782, 'Songes', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, '282 x 482 x 2,5 cm', 'Montréal-Nord', 45.61654, -73.62097, 1, 1139, 888, 47, ''),
-(783, 'Jacques Cartier atterit à Hochelaga en 1535', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503907, -73.587428, 1, 1140, 889, 45, ''),
-(784, 'Monument à sir Louis-Hippolyte La Fontaine', NULL, 'Art public', 'Public art', 'Fonte au sable', 'Sand-cast iron', '700 x 570 x 370cm', 'Le Plateau-Mont-Royal', 45.523017, -73.566328, 1, 1141, 889, 42, ''),
-(785, 'Monument aux braves d''Outremont', 'Monument aux morts de la guerre', 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '400 x 600 x 480 cm', 'Outremont', 45.517753, -73.604103, 1, 1142, 889, 42, ''),
-(786, 'L''habitation en milieu urbain', 'L''espace de l''homme dans l''univers', 'Intégration à l''architecture', 'Integration with architecture', 'Modelage', 'Modelling', '251 x 620 x 3,80 cm', 'Le Sud-Ouest', 45.457694, -73.595515, 1, 1143, 889, 42, ''),
-(787, 'Monument à Paul de Chomedey, sieur de Maisonneuve', NULL, 'Art public', 'Public art', NULL, NULL, '9m de haut', 'Ville-Marie', 45.5048, -73.55726, 1, 1144, 889, 42, ''),
-(788, 'Monument à Louis-Octave Crémazie', NULL, 'Art public', 'Public art', 'Bronze coulé; pierre taillée', 'Cast bronze; carved stone', '300 x 300 x 188 cm', 'Le Plateau-Mont-Royal', 45.517388, -73.569581, 1, 1145, 889, 42, ''),
-(789, 'Monument à John Young', NULL, 'Art public', 'Public art', 'Bronze coulé; pierre taillée', 'Cast bronze, carved stone', '520 x 340 x 670cm', 'Ville-Marie', 45.500112, -73.553427, 1, 1146, 889, 42, ''),
-(790, 'Monument à Édouard VII', NULL, 'Art public', 'Public art', 'Coulé à la cire perdue; assemblé à la romaine à l''aide de go', 'Cast in the cire perdue method; assembled Roman style using ', '1400cm', 'Ville-Marie', 45.503724, -73.568507, 1, 1147, 889, 42, ''),
-(791, 'Acier', 'Sous l''eau', 'Art public', 'Public art', 'Soudé; coulé', 'Welded; cast', '385 x 700 x 350cm', 'Ville-Marie', 45.504307, -73.526535, 1, 1148, 893, 42, ''),
-(792, 'Le lion de Belfort', 'La Fontaine de la Sun Life Assurance Company', 'Art public', 'Public art', 'Sculpté (granite); coulé (bronze)', 'Sculpted (granite); cast (bronze)\r', '504 x 232 x 421 cm', 'Ville-Marie', 45.499704, -73.570273, 1, 1149, 894, 42, ''),
-(793, 'Monument aux héros de la guerre des Boers', 'Monument à Lord Strathcona', 'Art public', 'Public art', NULL, NULL, '920 x 2200 x 1600 cm', 'Ville-Marie', 45.49961, -73.570967, 1, 1150, 894, 42, ''),
-(794, 'Monument à sir George-Étienne Cartier', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '25 x 30 x 30m', 'Ville-Marie', 45.514231, -73.58525, 1, 1151, 894, 42, ''),
-(795, 'Départ de La Salle pour aller à la découverte du Mississipi', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503946, -73.587378, 1, 1152, 895, 45, ''),
-(796, 'Totem Kwakiutl', 'Mât totémique Kwakwaka''wakw (Kwakiutl)', 'Art public', 'Public art', 'Sculpté', 'Sculpted', '2130 x 95 cm', 'Ville-Marie', 45.504995, -73.529284, 1, 1153, 896, 42, ''),
-(797, 'Iris', 'Iris (Québec)', 'Art public', 'Public art', 'Feuilles d''aluminium galbées par martelage; soudées entre el', 'Aluminum sheets shaped by hammering; welded together', NULL, 'Ville-Marie', 45.505532, -73.527751, 1, 1154, 898, 42, ''),
-(798, 'Monument à Émilie Gamelin', NULL, 'Art public', 'Public art', 'Bronze coulé; cire perdue', 'Cast bronze; cire perdue', '190 x 122 cm', 'Ville-Marie', 45.51486, -73.559707, 1, 1155, 898, 42, ''),
-(799, 'Les allusifs', NULL, 'Art public', 'Public art', 'Assemblé; soudé; incrusté; gravé', 'Assembled; welded; inlaid; engraved', 'xx cm x 230 cm x 170 cm', 'Le Sud-Ouest', 45.478839, -73.575339, 1, 1156, 899, 43, ''),
-(800, 'Lanka Mata', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, '260 x 524 x 20 cm', 'Le Sud-Ouest', 45.457751, -73.595486, 1, 1157, 900, 44, ''),
-(801, 'L''attente', NULL, 'Art public', 'Public art', 'Assemblé; soudé; vissé', 'Assembled; welded; screwed', '411 x 258 x 258 cm', 'Ahuntsic-Cartierville', 45.532697, -73.725844, 1, 1158, 901, 42, ''),
-(802, 'La façade', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Modélisation 3D; frittage laser sélectif', '3D modelling; selective laser sintering', '115 x 235 x 32 cm', 'Ville-Marie', 45.522767, -73.56267, 1, 1159, 901, 42, ''),
-(803, 'La fermière', NULL, 'Art public', 'Public art', 'Coulé', 'Cast', '575 x 1900 cm', 'Mercier–Hochelaga-Maisonneuve', 45.553561, -73.539698, 1, 1160, 902, 42, ''),
-(804, 'Les petits baigneurs', NULL, 'Art public', 'Public art', 'Coulé; assemblé', 'Cast; assembled', '1000 x 400 x 300 cm', 'Mercier–Hochelaga-Maisonneuve', 45.553359, -73.538434, 1, 1161, 902, 42, ''),
-(805, 'Monument à Dollard des Ormeaux', 'Monument à Adam Dollard des Ormeaux et à ses compagnons', 'Art public', 'Public art', 'Coulé', 'Cast', '800 x 925 x 345 cm', 'Le Plateau-Mont-Royal', 45.525594, -73.573055, 1, 1162, 902, 42, ''),
-(806, 'Monument aux braves de Lachine', NULL, 'Art public', 'Public art', 'Coulé; assemblé', 'Cast; assembled', '524 x 900 x 216 cm', 'Lachine', 45.436555, -73.706738, 1, 1163, 902, 42, ''),
-(807, 'Monument aux Patriotes', NULL, 'Art public', 'Public art', 'Fonte au sable', 'Sand-cast iron', '850 x 410 x 370 cm', 'Ville-Marie', 45.523411, -73.546212, 1, 1164, 902, 42, ''),
-(808, 'Signal dans l''espace', 'Sculpture, extérieur', 'Intégration à l''architecture', 'Integration with architecture', 'Assemblage', 'Assembled', '1370 x 975 x 30 cm', 'LaSalle', 45.42415, -73.623311, 1, 1165, 903, 42, ''),
-(809, 'Temps d''heures', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Assemblé; découpé; peint', 'Assembled; cut out; painted', '540 x 1020 x 303 cm', 'Villeray–Saint-Michel–Parc-Extension', 45.541376, -73.613177, 1, 1166, 903, 43, ''),
-(810, 'Anamorphose d’une fenêtre', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Mercier–Hochelaga-Maisonneuve', 45.595513, -73.523788, 1, 1167, 903, 43, ''),
-(811, 'Monument à John F. Kennedy', NULL, 'Art public', 'Public art', 'Bronze moulé', 'Cast bronze', '355 x 100 x 120', 'Ville-Marie', 45.503367, -73.573689, 1, 1168, 904, 42, ''),
-(812, 'Monument à Joseph Beaubien', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '249 x 76.5 x 65.5 cm', 'Outremont', 45.515161, -73.6078, 1, 1169, 904, 42, ''),
-(813, 'Buste du cardinal Paul-Émile Léger', NULL, 'Art public', 'Public art', 'Coulé', 'Cast', '168 x 75 x 61,5 cm', 'Ville-Marie', 45.509549, -73.561333, 1, 1170, 904, 42, ''),
-(814, 'Debout', 'Debout (Monument à Félix Leclerc)', 'Art public', 'Public art', '23 sections de bronze moulées par enrobage et soudées ensemb', '23 sections of bronze cast by coating and welded together.', '350 cm x 170 cm x 149.5 cm', 'Le Plateau-Mont-Royal', 45.526717, -73.571036, 1, 1171, 905, 42, ''),
-(815, 'La porte de l’avenir', NULL, 'Art public', 'Public art', 'Empilé; gravé; peint', 'Piled up; engraved; painted', '238 x 201,5 x 42 cm', 'Verdun', 45.457215, -73.547032, 1, 1172, 905, 42, ''),
-(816, 'Deux murales', 'Deux murales (céramique)', 'Intégration à l''architecture', 'Integration with architecture', 'Assemblage', 'Assembled', 'Petite : 218 x 744 cm\rGrande : 427 x 881 cm', 'Rosemont–La Petite-Patrie', 45.555969, -73.557184, 1, 1173, 906, 49, ''),
-(817, 'Le théâtre de papier', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, '360 x 1250 x 140 cm', 'Rosemont–La Petite-Patrie', 45.54736, -73.598375, 1, 1174, 907, 50, ''),
-(818, 'Et pourtant elle tourne', 'Verrière cadran solaire', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'L’Île-Bizard–Sainte-Geneviève', 45.489425, -73.882544, 1, 1175, 907, 50, ''),
-(819, 'La réparation', NULL, 'Art public', 'Public art', 'Taille', 'Carved', '294 x 2500 cm', 'Ahuntsic-Cartierville', 45.534994, -73.679998, 1, 1176, 908, 43, ''),
-(820, 'Temple du troisième millénaire', NULL, 'Art public', 'Public art', 'Coulé; découpé; assemblé', 'Cast; cut out; assembled', '475 cm x 380 cm x 75 cm', 'Saint-Laurent', 45.497286, -73.689694, 1, 1177, 909, 43, ''),
-(821, 'Monica', NULL, 'Art public', 'Public art', 'Moulé; collé; soudé; boulonné', 'Cast; glued; welded; bolted', '278 x 211 x 200 cm', 'Lachine', 45.432433, -73.683443, 1, 1178, 828, 42, ''),
-(822, 'Monument à Jackie Robinson', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '254 x 203 x 194 cm', 'Mercier–Hochelaga-Maisonneuve', 45.555846, -73.551088, 1, 1179, 828, 42, ''),
-(823, 'Joseph-Xavier Perrault', 'Monument à Joseph-Xavier Perrault', 'Art public', 'Public art', 'Aluminium moulé et fondu; granit poli', 'Cast aluminum; polished granite ', '280 cm x 92 cm x 92 cm', 'Ville-Marie', 45.501193, -73.561572, 1, 1180, 828, 42, ''),
-(824, 'Hommage à Marguerite Bourgeoys', NULL, 'Art public', 'Public art', 'Bronze coulé; cire perdue', 'Cast bronze; cire perdue', '178 x 414 cm', 'Ville-Marie', 45.507373, -73.555063, 1, 1181, 828, 42, ''),
-(825, 'Forces', NULL, 'Art public', 'Public art', 'Coulé; ancré', 'Cast; anchored', '220 x 370 x 230 cm', 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.485971, -73.674962, 1, 1182, 828, 42, ''),
-(826, 'Monument à Robert Burns', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '511 x 276 x 276 cm', 'Ville-Marie', 45.499462, -73.571571, 1, 1183, 910, 42, ''),
-(827, 'Pont d''Arles en transfert', NULL, 'Art public', 'Public art', 'Soudé; boulonné; peint', 'Welded; bolted; painted', '347 x 320 x 900 cm', 'Lachine', 45.429964, -73.666167, 1, 1184, 911, 43, ''),
-(828, 'Signal pour Takis', NULL, 'Art public', 'Public art', 'Soudé; boulonné', 'Welded; bolted', '850 x 900 x 2000 cm', 'Lachine', 45.428754, -73.682789, 1, 1185, 911, 43, ''),
-(829, 'Lieux sans temple 3', NULL, 'Art public', 'Public art', 'Soudé; patiné; oxydé; collé; boulonné', 'Welded; burnished; oxidized; glued; bolted', '229 x 140 x 117.5 cm', 'Lachine', 45.429924, -73.666603, 1, 1186, 911, 42, ''),
-(830, 'Lieux sans temple 4', NULL, 'Art public', 'Public art', 'Soudé; patiné; oxydé; collé; boulonné', 'Welded; burnished; oxidized; glued; bolted', '225 x 110 x 131 cm', 'Lachine', 45.429923, -73.666567, 1, 1187, 911, 42, ''),
-(831, 'Lieux sans temple 5', NULL, 'Art public', 'Public art', 'Soudé; patiné; oxydé; collé; boulonné', 'Welded; burnished; oxidized; glued; bolted', '250 x 140,5 x 117,5 cm', 'Lachine', 45.429882, -73.66657, 1, 1188, 911, 42, ''),
-(832, 'Souvenir de 1955 ou 2026 Roberval', NULL, 'Art public', 'Public art', 'Découpé; soudé; boulonné; peint', 'Cut out; welded; bolted; painted', '465 x 1017 x 800 cm', 'Lachine', 45.429123, -73.681809, 1, 1189, 911, 43, ''),
-(833, 'Fontaine Wallace', 'Fontaine des Vosges', 'Art public', 'Public art', 'Moulé; boulonné; peint', 'Cast; bolted; painted', '275 cm x 82 x 82 cm', 'Ville-Marie', 45.505419, -73.52812, 1, 1190, 912, 42, ''),
-(834, 'Triptyque sur le paysage', NULL, 'Art public', 'Public art', NULL, NULL, '200 cm', 'Ahuntsic-Cartierville', 45.575443, -73.661664, 1, 1191, 913, 43, ''),
-(835, 'Signe solaire', NULL, 'Art public', 'Public art', NULL, NULL, '277 x 330 x 106.5 cm', 'Ville-Marie', 45.513247, -73.530889, 1, 1192, 914, 42, ''),
-(836, 'Ashapmouchouan', 'L''œuvre était initialement sans-titre, son titre actuel a ét', 'Art public', 'Public art', NULL, NULL, '417 x 245 cm', 'Le Plateau-Mont-Royal', 45.526861, -73.586445, 1, 1193, 915, 42, ''),
-(837, 'Éclosion', 'Note: L''œuvre était initialement sans-titre, son titre actue', 'Art public', 'Public art', 'Découpé; courbé; soudé; boulonné; peint', 'Cut out; bent; welded; bolted; painted', '258 x 142 x 202 cm', 'Lachine', 45.430104, -73.666761, 1, 1194, 915, 42, ''),
-(838, 'À voile déchirée', 'L''œuvre était initialement sans-titre, son titre actuel a ét', 'Art public', 'Public art', NULL, NULL, '469 x 315 x 394 cm', 'Ville-Marie', 45.530132, -73.548258, 1, 1195, 915, 42, ''),
-(839, 'Sublime', 'L''œuvre était initialement sans-titre, son titre actuel a ét', 'Art public', 'Public art', NULL, NULL, '762 x 457 cm', 'Le Sud-Ouest', 45.477999, -73.556237, 1, 1196, 915, 42, ''),
-(840, 'Évolution de joie', 'L''œuvre était initialement sans-titre, son titre actuel a ét', 'Art public', 'Public art', 'Coupé; courbé; soudé', 'Cut; bent; welded', '252.5 x 165 x 335', 'Le Plateau-Mont-Royal', 45.524225, -73.57447, 1, 1197, 915, 42, ''),
-(841, 'Colonne stèle', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Assemblage; inscription', 'Assembled; inscription', '244 x 45,5 x 32 cm', 'Le Plateau-Mont-Royal', 45.524831, -73.582313, 1, 1199, 915, 42, ''),
-(842, 'Regard sur le fleuve', NULL, 'Art public', 'Public art', 'Découpé; soudé', 'Cut out; welded', '312 x 650 x 20 cm', 'Lachine', 45.435609, -73.70641, 1, 1200, 915, 42, ''),
-(843, 'Table des matières de supports du savoir', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Multiple', 'Multiple', '311 x 863 x 6', 'Villeray–Saint-Michel–Parc-Extension', 45.531255, -73.628576, 1, 1201, 915, 48, ''),
-(844, 'Tango de Montréal', NULL, 'Art public', 'Public art', 'Moulage d''argile crue', 'Moulding of raw clay', '1040 x 1740 cm', 'Le Plateau-Mont-Royal', 45.524229, -73.581463, 1, 1202, -1, 42, ''),
-(845, 'Les sons de la musique', NULL, 'Art public', 'Public art', 'Coulé; moulé', 'Cast; moulded', '246 x 1344 x 108 cm', 'Ville-Marie', 45.507074, -73.560927, 1, 1203, 917, 42, ''),
-(846, 'Cheval à plume', NULL, 'Art public', 'Public art', 'Taillé; sculpté; gravé; percé; peint', 'Carved; sculpted; engraved; pierced; painted', '245 x 315 x 210 cm', 'Lachine', 45.427985, -73.679242, 1, 1204, 918, 42, ''),
-(847, 'Études pour la figure, Saint-Laurent', NULL, 'Art public', 'Public art', 'Taillé; gravé; collé; peint', 'Carved; engraved; glued; painted', '310 x 95 x 95 cm', 'Lachine', 45.433725, -73.685529, 1, 1205, 918, 42, ''),
-(848, 'Monument aux braves de Verdun', NULL, 'Art public', 'Public art', NULL, NULL, NULL, 'Verdun', 45.458882, -73.572314, 1, 1206, 919, 42, ''),
-(849, 'After Babel, a Civic Square', 'After Babel\rAfter Babel / A Civic Square\rAfter Babel (a civi', 'Art public', 'Public art', 'Assemblé; soudé; découpé; moulé', 'Assembled; welded; cut out; cast', '450 x 1000 cm', 'Ville-Marie', 45.509963, -73.567202, 1, 1207, 921, 43, ''),
-(850, 'Les sports', 'Murale (mosaïque)', 'Intégration à l''architecture', 'Integration with architecture', 'Assemblage', 'Assembled', '84 x 2261 x 2,5 cm', 'Mercier–Hochelaga-Maisonneuve', 45.562464, -73.547304, 1, 1208, 922, 48, ''),
-(851, 'La joie', 'Murale peinte', 'Intégration à l''architecture', 'Integration with architecture', 'Modelage; peinture', 'Modelling; painting', '254 x 1234,5 x 10', 'Mercier–Hochelaga-Maisonneuve', 45.562047, -73.550076, 1, 1209, 922, 48, ''),
-(852, 'La peur', NULL, 'Art public', 'Public art', 'Peint; soudé; assemblé', 'Painted; welded; assembled', '365 x 121 x 320cm', 'Ville-Marie', 45.501361, -73.555219, 1, 1210, 923, 43, ''),
-(853, 'Monument à la Pointe', 'La Pointe (titre provisoire)', 'Art public', 'Public art', NULL, NULL, '1400 x 400 cm', 'Le Sud-Ouest', 45.476015, -73.573449, 1, 1211, 923, 43, ''),
-(854, 'Daleth', NULL, 'Art public', 'Public art', 'Coulé; gravé; découpé; collé; assemblé', 'Cast; engraved; cut out; glued; assembled', '350 x 6200 cm', 'Ahuntsic-Cartierville', 45.534506, -73.678436, 1, 1212, 923, 43, ''),
-(855, 'Trajectoire no 2', NULL, 'Art public', 'Public art', 'Soudé; peint; patiné; boulonné', 'Welded; painted; burnished; bolted', '195 cm x 103 cm x 276 cm', 'Lachine', 45.430542, -73.666852, 1, 1213, 924, 42, ''),
-(856, 'Trame d’appel', NULL, 'Art public', 'Public art', 'Souder; peint; installation par ancrages chimique', 'Welding; painting; installation by chemical anchoring', '400 x 365 x 183 cm', 'L’Île-Bizard–Sainte-Geneviève', 45.487539, -73.883436, 1, 1214, 924, 42, ''),
-(857, 'La naissance', NULL, 'Art public', 'Public art', 'Découpé; soudé', 'Cut out; welded', '380 X 100 X 140 cm', 'Verdun', 45.448586, -73.577611, 1, 1215, 924, 42, ''),
-(858, 'Le coup de départ', NULL, 'Art public', 'Public art', NULL, NULL, '538 X 371 X165 cm', 'Saint-Laurent', 45.505415, -73.718634, 1, 1216, 924, 42, ''),
-(859, 'Monument à Nelson', 'Colonne Nelson', 'Art public', 'Public art', NULL, NULL, '2055 x 600 x 600 cm', 'Ville-Marie', 45.508186, -73.553845, 1, 1217, 925, 42, ''),
-(860, 'Site/interlude', NULL, 'Art public', 'Public art', 'Découpé; soudé', 'Cut out; welded', '400 x 185 x 8535 cm', 'Lachine', 45.427777, -73.676973, 1, 1218, 926, 43, ''),
-(861, 'Non titré (Fontaine; Les chérubins)', 'Fontaine; Les chérubins', 'Art public', 'Public art', 'Coulée', 'Casting', NULL, 'Outremont', 45.517895, -73.604464, 1, 1219, 927, 42, ''),
-(862, 'La pierre et le feu', NULL, 'Art public', 'Public art', 'Découpé; soudé; boulonné; peint', 'Cut out; welded; bolted; painted', '304 x 122 x 400 cm', 'Lachine', 45.428946, -73.682977, 1, 1220, 928, 42, ''),
-(863, 'Temps d’arrêt', NULL, 'Art public', 'Public art', 'Coupage; assemblage; soudure', 'Cutting; assemblage; welding', '500 x 145 cm', 'Rosemont–La Petite-Patrie', 45.549062, -73.592662, 1, 1221, 928, 42, ''),
-(864, 'L''eau et le transport', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'aluchromie', NULL, '274.5 x 812 cm', 'LaSalle', 45.425053, -73.619043, 1, 1222, 928, 45, ''),
-(865, 'Courbes et vent', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Pierrefonds-Roxboro', 45.495937, -73.847429, 1, 1223, 930, 42, ''),
-(866, 'Fontaine du square Saint-Louis', 'Fontaine Lacroix du square Viger', 'Art public', 'Public art', NULL, NULL, '457 x 240 cm', 'Le Plateau-Mont-Royal', 45.517041, -73.569964, 1, 1224, 931, 42, ''),
-(867, 'Sculpture-fontaine, square Sir-George-Étienne-Cartier', 'Sculpture-fontaine du square G.-É. Cartier', 'Art public', 'Public art', NULL, NULL, '650 x 205 cm', 'Le Sud-Ouest', 45.473413, -73.58639, 1, 1225, 931, 42, ''),
-(868, 'Du long du long', NULL, 'Art public', 'Public art', 'Découpé; soudé; boulonné; peint', 'Cut out; welded; bolted; painted', '120 X 287X 496 cm', 'Lachine', 45.431119, -73.673413, 1, 1226, 932, 42, ''),
-(869, 'Les voûtes d''Ulysse', NULL, 'Art public', 'Public art', 'Découpé; soudé; boulonné', 'Cut out; welded; bolted', '110 X 558 X 1226 cm', 'Lachine', 45.428916, -73.682227, 1, 1227, 932, 42, ''),
-(870, 'L''eau et les sports', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Aluchromie', NULL, ' 274,5 x 812 cm', 'LaSalle', 45.425053, -73.619043, 1, 1228, 932, 45, ''),
-(871, 'From A', NULL, 'Art public', 'Public art', NULL, NULL, '170 x 150 x 590 cm', 'Lachine', 45.428743, -73.686001, 1, 1229, 934, 42, ''),
-(872, 'Force et progrès', NULL, 'Art public', 'Public art', 'Soudé; peint', 'Welded, painted', '255 x 220 x 425 cm', 'Lachine', 45.431031, -73.670124, 1, 1230, 935, 42, ''),
-(873, 'Écluses', NULL, 'Art public', 'Public art', 'Soudé', 'Welded', '415 x 111 x 135 cm', 'Lachine', 45.428215, -73.678237, 1, 1231, 936, 42, ''),
-(874, 'Vitraux', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.508816, -73.554069, 1, 1232, 937, 44, ''),
-(875, 'Jour ou nuit inconnue', 'Motifs et réseaux (titre provisoire)', 'Intégration à l''architecture', 'Integration with architecture', 'Sérigraphie', 'Serigraphy', '254 x 685 x 35 cm', 'Rivière-des-Prairies–Pointe-aux-Trembles', 45.668073, -73.494782, 1, 1233, 938, 48, ''),
-(876, 'Ce qui reste 1997-2001', 'Ce qui reste; DIA-LOG (titre provisoire)', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, '400 x 234 x 2 cm', 'Ville-Marie', 45.501079, -73.555515, 1, 1234, 938, 47, ''),
-(877, 'Le roi Singe', NULL, 'Art public', 'Public art', 'Coulé; assemblé; moulé', 'Cast; assembled; moulded', '550 x 400 x 21 cm', 'Ville-Marie', 45.506907, -73.56059, 1, 1235, 939, 42, ''),
-(878, 'Le spectacle de la curiosité', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Impression sur papier ilfochrome', 'Print on Ilfochrome paper', '260 x 800 cm', 'Ahuntsic-Cartierville', 45.553357, -73.662743, 1, 1236, 940, 47, ''),
-(879, 'Espace vert', NULL, 'Art public', 'Public art', 'Impressions numériques montées à froid sur support de plexig', 'Digital prints cold-mounted on Plexiglas support (acrylic)', '215 x 450 x 36', 'Outremont', 45.519579, -73.619247, 1, 1237, 940, 47, ''),
-(880, 'Être +', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Rosemont–La Petite-Patrie', 45.559685, -73.581582, 1, 1238, 941, 43, ''),
-(881, 'Monument à Louis Cyr', NULL, 'Art public', 'Public art', 'Bronze coulé; cire perdue', 'Cast bronze; cire perdue', '440  x 183  x 180 cm', 'Le Sud-Ouest', 45.475382, -73.593225, 1, 1239, 942, 42, ''),
-(882, 'Le serment de Dollard des Ormeaux et de ses compagnons', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503965, -73.587328, 1, 1240, 943, 45, ''),
-(883, 'Monument à Jean-Olivier Chénier', NULL, 'Art public', 'Public art', 'Sculpture de cuivre formé; soudure à l''étain.', 'Shaped copper sculpture; tin soldering', '400 x 100 x 100 cm', 'Ville-Marie', 45.511042, -73.55496, 1, 1241, 944, 42, ''),
-(884, 'Maisonneuve érige une croix sur la montagne', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503995, -73.587278, 1, 1243, 946, 45, ''),
-(885, 'Monument à Isabelle la Catholique', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '293 x 152.5 x 107 cm', 'Le Plateau-Mont-Royal', 45.531079, -73.586023, 1, 1244, 947, 42, ''),
-(886, 'Épisode', NULL, 'Art public', 'Public art', 'Ciment fondu', 'Aluminous cement ', '184 x 250 x 113 cm', 'Rosemont–La Petite-Patrie', 45.560483, -73.558557, 1, 1245, 948, 42, ''),
-(887, 'Continuum 2009 (à la mémoire de Pierre Perrault)', NULL, 'Art public', 'Public art', 'Assemblé; soudé', 'Assembled; welded', '305 x 770 x 300 cm', 'Mercier–Hochelaga-Maisonneuve', 45.604249, -73.509548, 1, 1246, 949, 42, ''),
-(888, 'Explorer', NULL, 'Art public', 'Public art', 'Soudé; boulonné; découpé; moulé', 'Welded; bolted; cut out; moulded', '484 x 178 x 212 cm', 'Lachine', 45.42889, -73.680853, 1, 1247, 950, 42, ''),
-(889, 'Non titré (Portes)', 'Portes', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.475605, -73.614587, 1, 1250, 953, 52, ''),
-(890, 'Le phare d''Archimède', NULL, 'Art public', 'Public art', 'Meulé; cimenté', 'Buffed; cemented', '750 x 1000 x 1050 cm', 'Lachine', 45.429161, -73.688205, 1, 1251, 954, 43, ''),
-(891, 'Le déjeuner sur l’herbe', NULL, 'Art public', 'Public art', 'Taillé; polissage; tourné; coulé; patiné', 'Carved; polishing; ; cast; burnished', '300 x 900 x 1308 cm', 'Lachine', 45.428482, -73.677576, 1, 1252, 954, 43, ''),
-(892, 'Girafes', 'Non titrée', 'Art public', 'Public art', 'Assemblé; soudé; peint', 'Assembled; welded; painted', '11,8 x 3 m', 'Ville-Marie', 45.520049, -73.532032, 1, 1253, 955, 42, ''),
-(893, 'Migration', NULL, 'Art public', 'Public art', 'Coulé; boulonné', 'Cast; bolted', '465 x 230 x 400 cm', 'Ville-Marie', 45.514075, -73.534655, 1, 1254, 955, 42, ''),
-(894, 'Hommage à René Lévesque', NULL, 'Art public', 'Public art', 'Ciment moulé', 'Moulded cement', '518 x 1829 x 457 cm', 'Lachine', 45.428749, -73.687124, 1, 1255, 955, 42, ''),
-(895, 'Lieu', 'Fleur d''hiver\rSans titre', 'Art public', 'Public art', 'Moulé; assemblé', 'Cast; assembled', '700 x 914 cm', 'Saint-Laurent', 45.51635, -73.725394, 1, 1256, 955, 42, ''),
-(896, 'Les promeneurs', NULL, 'Art public', 'Public art', NULL, NULL, '592 x 190 x 812', 'Saint-Laurent', 45.527273, -73.686882, 1, 1257, 956, 42, ''),
-(897, 'Trampolino', NULL, 'Art public', 'Public art', 'Soudé; assemblé', 'Welded; assembled', '350 x 600', 'Saint-Léonard', 45.585723, -73.596644, 1, 1258, 957, 42, ''),
-(898, 'Dex', NULL, 'Art public', 'Public art', 'Assemblé; soudé; percé', 'Assembled; welded; pierced', '148 x 503 x 730 cm', 'Lachine', 45.430429, -73.666229, 1, 1259, 958, 42, ''),
-(899, 'Affinités', NULL, 'Art public', 'Public art', 'Assemblé; soudé; martelé; découpé; patiné', 'Assembled; welded; hammered; cut out; burnished', '268 x 160 x 150 cm', 'Ville-Marie', 45.495832, -73.59619, 1, 1260, 959, 42, ''),
-(900, 'Puerta de la Amistad', NULL, 'Art public', 'Public art', NULL, NULL, '750 x 120 x 570 cm', 'Ville-Marie', 45.511015, -73.533386, 1, 1261, 960, 42, ''),
-(901, 'Monument à Norman Bethune', NULL, 'Art public', 'Public art', 'Taille directe', 'Direct carving', '380 x 100 x 100 cm', 'Ville-Marie', 45.49597, -73.57946, 1, 1262, 961, 42, ''),
-(902, 'Les sœurs cardinales', 'Les sœurs cardinales (SISM-64)', 'Art public', 'Public art', 'Taille directe', 'Direct carving', '440 x 360 x 100', 'Ville-Marie', 45.499881, -73.594816, 1, 1264, 963, 42, ''),
-(903, 'L''ange de pierre', 'L''ange de pierre, (SISM-64)', 'Art public', 'Public art', 'Sculpté', 'Sculpted', '208 x 152cm', 'Ville-Marie', 45.500421, -73.593759, 1, 1265, 964, 42, '');
-INSERT INTO `oeuvre` (`IdOeuvre`, `Titre`, `TitreVariante`, `Collection`, `CollectionEN`, `Technique`, `TechniqueEN`, `Dimensions`, `Arrondissement`, `CoordonneeLatitude`, `CoordonneeLongitude`, `EstValide`, `IdAdresse`, `IdArtiste`, `IdCat`, `photoPresentation`) VALUES
-(904, 'La fondation de Montréal est décidée à Paris', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.50402, -73.587238, 1, 1267, 967, 45, ''),
-(905, 'Polaris en lumière', NULL, 'Art public', 'Public art', 'Image lumineuse projettée au sol', 'Illuminated image projected on the ground', NULL, 'Ville-Marie', 45.504636, -73.557128, 1, 1268, 968, 53, ''),
-(906, 'Équinoxe', NULL, 'Art public', 'Public art', 'Gravé; incrusté', 'Engraved; inlaid', '248 x 200', 'Ville-Marie', 45.50818, -73.55129, 1, 1269, 969, 43, ''),
-(907, 'Force', NULL, 'Art public', 'Public art', NULL, NULL, '330 x 2900 x 4500 cm', 'Ville-Marie', 45.512625, -73.553821, 1, 1270, 970, 42, ''),
-(908, 'Murale céramique', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Assemblage; peinture', 'Assembly; painting', '213,5 x 1559 cm ', 'Mercier–Hochelaga-Maisonneuve', 45.562047, -73.550076, 1, 1271, 971, 49, ''),
-(909, 'Monument à Nicolas Copernic', NULL, 'Art public', 'Public art', 'Bronzé coulé', 'Cast bronze ', '452 x 148 cm', 'Mercier–Hochelaga-Maisonneuve', 45.560641, -73.549375, 1, 1272, 972, 42, ''),
-(910, 'Dollard des Ormeaux meurt à Long-Sault pour sauver la coloni', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.504105, -73.587259, 1, 1273, 973, 45, ''),
-(911, 'Buste de José de San Martin', NULL, 'Art public', 'Public art', 'Fonte à la cire perdue', 'Iron cast in the cire perdue method', '276 x 105.5 x 95 cm', 'Ville-Marie', 45.489365, -73.580891, 1, 1274, 974, 42, ''),
-(912, 'Spatio-mobile #1', NULL, 'Art public', 'Public art', 'Soudé, peint', 'Welded, painted', '176 x 135 x 150 cm', 'Lachine', 45.430317, -73.666315, 1, 1275, 975, 42, ''),
-(913, 'Le phare du Cosmos', 'Phare cosmique', 'Art public', 'Public art', 'Taille; soudé', 'Carved; welded', '960 x 280 cm', 'Ville-Marie', 45.509335, -73.532705, 1, 1276, 975, 42, ''),
-(914, 'Parvis et portail #22', 'Place de l''an 2000', 'Art public', 'Public art', 'Soudé; poli', 'Welded; polished', '492 x 575 x 1000 cm', 'Saint-Laurent', 45.516024, -73.679906, 1, 1277, 975, 43, ''),
-(915, 'La force', 'La force (SISM-64) \rNon titrée (SISM-64)', 'Art public', 'Public art', 'Coulé; moulé', 'Cast; moulded', '244 x 533 x 275 cm', 'Ville-Marie', 45.500095, -73.595506, 1, 1278, 976, 42, ''),
-(916, 'La sainte Trinité', 'Holy Trinity', 'Art public', 'Public art', 'Moulé; soudé; peint (?)', 'Cast; welded; painted (?)', '130 x 90 x 165', 'Le Plateau-Mont-Royal', 45.517612, -73.569411, 1, 1279, 976, 42, ''),
-(917, 'Rectangle', 'Sans titre', 'Art public', 'Public art', 'Moulé; sculpté', 'Cast; sculpted', '245 x L:124 x L:85 cm', 'Rosemont–La Petite-Patrie', 45.560966, -73.564589, 1, 1280, 976, 42, ''),
-(918, 'Justice et paix', NULL, 'Art public', 'Public art', 'Taillé; sculpté; gravé; peint', 'Carved; sculpted; engraved; painted', '360 x 300 x 570 cm', 'Saint-Léonard', 45.586578, -73.595143, 1, 1282, 976, 42, ''),
-(919, 'L''argoulet', NULL, 'Art public', 'Public art', 'Sculpté; taillé; poli; assemblé', 'Sculpted; carved; polished; assembled', '550 x 130 x 242', 'Verdun', 45.472525, -73.570481, 1, 1283, 977, 42, ''),
-(920, 'Les cariatides', NULL, 'Art public', 'Public art', 'Découpé; collé; boulonné; taillé; peint; planté', 'Cut out; glued; screwed; carved; painted; planted', '262 x 610 x 1723 cm', 'Lachine', 45.428688, -73.684251, 1, 1284, 977, 43, ''),
-(921, 'Les dos blancs', NULL, 'Art public', 'Public art', 'Techniques multiples', 'Multiple techniques ', '251 x 350 x 930 cm', 'Saint-Laurent', 45.521679, -73.671706, 1, 1285, 977, 43, ''),
-(922, 'Le portage', NULL, 'Art public', 'Public art', 'Taillé; sculpté; gravé; boulonnée; collé', 'Carved; sculpted; engraved; screwed; glued', '265 x 260 x 800 cm', 'Lachine', 45.437485, -73.714281, 1, 1286, 977, 43, ''),
-(923, 'Cadran solaire', NULL, 'Art public', 'Public art', 'Soudage; coulé; anodisation; peint', 'Welding; cast; anodized; painted', '350 x 360 x 360 cm', 'Mercier–Hochelaga-Maisonneuve', 45.560805, -73.549767, 1, 1287, 978, 54, ''),
-(924, 'Story Rock', NULL, 'Art public', 'Public art', NULL, NULL, '244 x 240 x 220 cm', 'Lachine', 45.428096, -73.677199, 1, 1288, 979, 42, ''),
-(925, 'Le navigateur', NULL, 'Art public', 'Public art', 'Gravé', 'Engraved', '350 x 620 x 245 cm', 'Lachine', 45.438513, -73.719208, 1, 1289, 979, 42, ''),
-(926, 'Vortexit II', 'Vortexit 2', 'Art public', 'Public art', 'Assemblé; gravé; fixé', 'Assembled; engraved; attached', '270 x 1050 x 1440 cm', 'Lachine', 45.428603, -73.678586, 1, 1290, 979, 42, ''),
-(927, 'Non titré (Traitement pictural au plafond de l''ancien bureau', 'Traitement pictural au plafond de l''ancien bureau du conserv', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.522741, -73.565331, 1, 1291, 980, 45, ''),
-(928, 'Murale extérieure', 'Non titrée', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, '183 x 361,5 cm', 'Ville-Marie', 45.498526, -73.599161, 1, 1292, 981, 55, ''),
-(929, 'Des lauriers pour mémoire, Jean-Duceppe 1923-1990', NULL, 'Art public', 'Public art', 'Forge; soudure; assemblage', 'Forging; welding; assembly', '240 x  1130 cm', 'Rosemont–La Petite-Patrie', 45.543529, -73.566053, 1, 1293, 982, 43, ''),
-(930, 'Monument à Jacques Cartier', NULL, 'Art public', 'Public art', 'Statue originale : cuivre repoussé-estampé; Statue actuelle ', 'Original statue: copper repoussé-embossed; Current statue: c', '9.14 m (h) x 3.6 m (diamètre)', 'Le Sud-Ouest', 45.480058, -73.586269, 1, 1294, 983, 42, ''),
-(931, 'Le banc des amoureux', 'Lover''s Bench', 'Art public', 'Public art', 'Coulé', 'Cast', '184 x 240 x 150 cm', 'Rosemont–La Petite-Patrie', 45.556163, -73.558294, 1, 1295, 984, 42, ''),
-(932, 'Monument à sir John A. Macdonald', NULL, 'Art public', 'Public art', NULL, NULL, '1800 x 486 x 432 cm', 'Ville-Marie', 45.498786, -73.569638, 1, 1296, 985, 42, ''),
-(933, 'Wind Boat', 'Bateau à vent', 'Art public', 'Public art', 'Assemblé; imbriqué', 'Assembled; interlocked', '762 x 183 x 148 cm', 'LaSalle', 45.432687, -73.588115, 1, 1297, 986, 42, ''),
-(934, 'The Passing Song', 'Passing Song, The', 'Art public', 'Public art', NULL, NULL, '456 x 744 cm', 'Lachine', 45.428971, -73.681205, 1, 1298, 986, 43, ''),
-(935, 'The First Jewel', 'La femme au collier', 'Art public', 'Public art', 'Coulé', 'Cast', '172 x 115 x 70 cm', 'Rosemont–La Petite-Patrie', 45.559703, -73.556911, 1, 1299, 987, 42, ''),
-(936, 'Monument à la reine Victoria', NULL, 'Art public', 'Public art', NULL, NULL, '1190 x 437.5 x 437.5 cm', 'Ville-Marie', 45.501421, -73.561586, 1, 1301, 989, 42, ''),
-(937, 'L''étreinte', NULL, 'Art public', 'Public art', 'Aluminium: découpé; plié; soudé et assemblé. Granit: gravé a', 'Aluminum: cut out, bends; welded and assembled. Granite: San', 'Les différents ensemble de l''installation sont répartis dans', 'Ville-Marie', 45.512386, -73.563593, 1, 1302, 942, 43, ''),
-(938, 'Constellation en Sol', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Découpage au laser; impression; assemblage', 'Laser cutting; printing; assembly', NULL, 'Rosemont–La Petite-Patrie', 45.531832, -73.597543, 1, 1303, 991, 48, ''),
-(939, 'Hommage à l''esprit sportif', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Montréal-Nord', 45.594994, -73.637955, 1, 1304, 993, 49, ''),
-(940, 'La Bourrasque', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Découpe au laser', 'Laser cutting ', '2700 x 570 cm', 'Saint-Laurent', 45.504072, -73.705185, 1, 1305, 815, 42, ''),
-(941, 'Voiles', 'Voile I & Voile II', 'Art public', 'Public art', 'Poli, finition effectuée par meuleuse à disque (gros grain)', 'Polished, finished using a disk grinder (coarse grit)', '488 x 310 x 10 cm\r488 x 275 x 13 cm', 'Montréal-Nord', 45.603186, -73.642556, 1, 1306, 995, 42, ''),
-(942, 'Chorégraphie pour les humains et les étoiles', NULL, 'Art public', 'Public art', 'Béton coulé (stèles); vidéoprojections (oeuvre numérique)', NULL, 'Hauteur 1500cm', 'Mercier–Hochelaga-Maisonneuve', 45.560735, -73.550116, 1, 1307, -1, 53, ''),
-(943, 'Carrefour', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Moulage; assemblage', 'Casting; assembly', NULL, 'Verdun', 45.460134, -73.544592, 1, 1308, 996, 42, ''),
-(944, 'Kate & Nora', NULL, 'Art public', 'Public art', NULL, NULL, '100 x 90 x 45 cm', 'Outremont', 45.517594, -73.597311, 1, 1309, 997, 43, ''),
-(945, 'COSMOTOME NO 7, OH HOMME !', NULL, 'Art public', 'Public art', NULL, NULL, NULL, 'Ville-Marie', 45.515301, -73.530778, 1, 1310, 998, 42, ''),
-(946, 'Point d''origine', NULL, 'Art public', 'Public art', 'Aluminium taillé, soudé et assemblé (fini satiné et gravé); ', NULL, '192 x 290 x 633,5 cm', 'Rosemont–La Petite-Patrie', 45.533555, -73.596281, 1, 1311, 999, 42, ''),
-(947, 'La vélocité des lieux', 'La grande roue', 'Art public', 'Public art', 'Assemblage', 'Assemblage', '19 x 16 x 13 m', 'Montréal-Nord', 45.596262, -73.642587, 1, 1312, -1, 42, ''),
-(948, 'oeuvretest', 'oeuvretest', 'oeuvretest', 'oeuvretest', 'oeuvretest', 'oeuvretest', 'oeuvretest', 'Saint-Laurent', 45.21, -73.21, 1, 1313, 994, 44, ''),
-(949, 'testOeuvre', 'cattest', 'cattest', 'cattest', 'cattest', 'cattest', 'cattest', 'Saint-Laurent', 45.23, -73.54, 1, 1314, 995, 43, '');
+INSERT INTO `oeuvre` (`IdOeuvre`, `Titre`, `TitreVariante`, `Collection`, `CollectionEN`, `Technique`, `TechniqueEN`, `Dimensions`, `Arrondissement`, `CoordonneeLatitude`, `CoordonneeLongitude`, `EstValide`, `IdAdresse`, `IdArtiste`, `IdCat`, `photoPresentation`, `description`) VALUES
+(665, 'Source', NULL, 'Art public', 'Public art', 'Bronze coulé; boulonné', 'Cast bronze; bolted', '549 x 466 x 466 cm', 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.466405, -73.631648, 1, 1014, 801, 42, '', 'Située devant l’entrée principale du Centre sportif de Notre-Dame-de Grâce, dans le parc Benny, Source est une sculpture de bronze peint de forme organique constituée de multiples paliers ou tiges de matière texturée ancrée au sol sur trois "pattes" formant un triangle. Elle s''inspire des processus naturels et des transformations engendrées par des phénomènes naturels. L’œuvre est riche sur les plans visuel et symbolique. Cette sculpture aux dénivelés circulaires évoque à la fois une chute d''eau, des rivières déversant au sol une eau bleutée, un bâton de sourcier ou encore, par sa texture, obt'),
+(666, 'Porte de jour', 'Une porte rouge (ouverte, rougeâtre, solaire)', 'Art public', 'Public art', 'Soudé', 'Welded', '298 x 350 x 1070 cm', 'Ville-Marie', 45.51209, -73.550979, 1, 1015, 802, 43, '', 'À mi-chemin entre sculpture et architecture, l’œuvre de Jocelyne Alloucherie est composée de deux structures d’acier corten constituées de trois pans. Les pièces présentent chacune une ouverture qui agit à titre de cadre métaphorique dans le square.(source:artpublic.ville.montreal.qc.ca)'),
+(667, 'Regarder les pommetiers', NULL, 'Art public', 'Public art', 'Taillé; assemblé', 'Carved; assembled', '294 x 600 x 182', 'Rosemont–La Petite-Patrie', 45.561585, -73.562673, 1, 1016, 802, 43, '', 'Parmi la collection de pommetiers du Jardin botanique de Montréal, une sculpture composée de trois volumes verticaux d’acier corten et de deux blocs de granit horizontaux légèrement concaves en leur sommet se présente comme une fenêtre ouverte sur la nature qui l’entoure.(source:artpublic.ville.montreal.qc.ca)'),
+(668, 'Le malheureux magnifique', NULL, 'Art public', 'Public art', 'Assemblé; cimenté; peint', 'Assembled; cemented; painted', '340 x 235 x 310', 'Le Plateau-Mont-Royal', 45.516907, -73.567846, 1, 1017, 803, 42, '', ''),
+(669, 'Les clochards célestes', 'Monumental III', 'Art public', 'Public art', 'Assemblé; cimenté; peint', 'Assembled; cemented; painted', '640 x 250 x 420 cm', 'Ville-Marie', 45.516853, -73.555153, 1, 1018, 803, 42, '', ''),
+(670, 'Discours du roi poète', NULL, 'Art public', 'Public art', NULL, NULL, '233 X 56 X 63 cm', 'Le Sud-Ouest', 45.47239, -73.584704, 1, 1019, 804, 42, '', ''),
+(671, 'Hommage à Jérôme Le Royer De La Dauversière', NULL, 'Art public', 'Public art', NULL, NULL, '84 x 193 x 81', 'Ville-Marie', 45.508493, -73.5533, 1, 1020, -1, 42, '', 'L’œuvre est présentée sur la place De La Dauversière et entretient une relation axiale avec la porte de l’hôtel de Ville, situé de l’autre côté de la rue Notre-Dame, ce qui contribue à sa lecture symbolique. Elle se compose d’un panneau rectangulaire en acier Corten disposé horizontalement et dont la surface oxydée comporte des inscriptions ajourées qui présentent une courte description historique, ainsi que les noms et âges des membres de la première famille de Ville-Marie. Le soir, la lumière traverse les fentes des lettres, lesquelles se réfléchissent sur une plaque de verre trempé posée au sol. Articulée autour de la représentation symbolique de la porte, ouverte et fermée, l’œuvre crée un lien entre le passé et le présent, entre la vision originelle de La Dauversière et les images actuelles que nous retransmet la plaque de verre. (source:artpublic.ville.montreal.qc.ca)'),
+(672, 'Obélisque oblique', NULL, 'Art public', 'Public art', 'Pliées; soudées; boulonnées', 'Bends; welded; bolted', '546 x 160 x 190', 'Ville-Marie', 45.506046, -73.526706, 1, 1021, 806, 42, '', ''),
+(673, 'La source', 'Sergenti', 'Art public', 'Public art', 'Taillé', 'Carved', NULL, 'Rosemont–La Petite-Patrie', 45.534752, -73.617845, 1, 1022, 807, 42, '', 'Au centre d’un bassin, au cœur du parc Guglielmo-Marconi, dans le quartier de La Petite-Italie, un monolithe de pierre représente de manière schématique le jaillissement d''une source d''eau. La surface avant du bloc de pierre est texturée, tandis que le sommet du bloc présente un creux en forme de « V ».(source: artpublic.ville.montreal.qc.ca)'),
+(674, 'Vous êtes ici', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, '3000 x 1000 cm', 'Mercier–Hochelaga-Maisonneuve', 45.551183, -73.540539, 1, 1023, 808, 43, '', ''),
+(675, 'Non titré (Murale en relief et sculpture)', 'Murale en relief et sculpture (extérieur)', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Le Plateau-Mont-Royal', 45.539713, -73.57611, 1, 1024, 809, 42, '', ''),
+(676, 'Non titré (Vitraux)', 'Vitraux', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.508816, -73.554069, 1, 1025, 810, 44, '', ''),
+(677, 'Non titré (Murale inuit)', 'Murale inuit', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503792, -73.529322, 1, 1029, 812, 45, '', ''),
+(678, 'Non titré (Murale peinte)', 'Murale peinte', 'Intégration à l''architecture', 'Integration with architecture', 'Œuvre peinte', 'Painting', NULL, 'Rivière-des-Prairies–Pointe-aux-Trembles', 45.676603, -73.491423, 1, 1030, 810, 45, '', ''),
+(679, 'Non titré (Fontaine, mosaïque)', 'Fontaine (mosaïque)', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Le Sud-Ouest', 45.472308, -73.572944, 1, 1031, 810, 46, '', ''),
+(680, 'Bibliotheca Universalis', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Impression', 'Print', NULL, 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.50313, -73.636947, 1, 1032, 813, 47, '', 'L''œuvre est composée de deux éléments photographiques, l''un présenté à l''extérieur de l''édifice et l''autre, à l''intérieur. Néanmoins, les deux éléments peuvent être aperçus depuis la rue. Le panneau signalétique vertical situé à l’extérieur présente des photographies de tranches de livres et d''objets divers. Sur les deux faces du panneau sont imprimées des images différentes. À l''intérieur, le panneau présente un agencement de 17 éléments qui recomposent l''image d''un meuble de rangement insolite. Sur les tablettes apparaissent des livres, des disques compacts, des documents, etc. (source:artpublic.ville.montreal.qc.ca)'),
+(681, 'Chibouki', 'Chiboukis', 'Intégration à l''architecture', 'Integration with architecture', 'Impression numérique', 'Digital print', '122 x 122cm', 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.503302, -73.636776, 1, 1033, 813, 47, '', ''),
+(682, 'La mort de Dante', NULL, 'Art public', 'Public art', 'Coulé', 'Cast', '390 x 250 x 210 cm', 'Rosemont–La Petite-Patrie', 45.534445, -73.611721, 1, 1034, 814, 42, '', ''),
+(683, 'Champlain visite de nouveau le site de Montréal en 1611', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503909, -73.587452, 1, 1035, 815, 45, '', ''),
+(684, 'Monument à Jean Vauquelin', NULL, 'Art public', 'Public art', 'Bronze coulé; pierre taillée', 'Cast bronze; carved stone', '680cm x 400 cm x 400 cm approximatif', 'Ville-Marie', 45.508588, -73.554655, 1, 1036, 816, 42, '', ''),
+(685, 'Smoke and steel', NULL, 'Art public', 'Public art', NULL, NULL, '260 x 60 x 90 cm', 'Saint-Léonard', 45.582705, -73.585774, 1, 1037, 817, 42, '', ''),
+(686, 'Le cycliste', NULL, 'Art public', 'Public art', 'Soudé; peint', 'Welded, painted', '425 x 140 x 539 cm', 'Verdun', 45.456655, -73.542746, 1, 1038, 818, 42, '', ''),
+(687, 'Contournement', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Cintré et peinturé', 'Bent and painted', NULL, 'Villeray–Saint-Michel–Parc-Extension', 45.560942, -73.635233, 1, 1039, 819, 42, '', ''),
+(688, 'L''arbre des générations', NULL, 'Art public', 'Public art', 'Découpé; soudé; boulonné; peint', 'Cut out; welded; bolted; painted', '385 x 275 x 548 cm', 'Lachine', 45.430699, -73.666113, 1, 1040, 820, 42, '', ''),
+(689, 'Vire au vent', NULL, 'Art public', 'Public art', 'Soudage; boulonnage; peint', 'Welding; bolting; painted', '495 x 610 x 295 cm', 'Lachine', 45.42848, -73.682451, 1, 1041, 820, 42, '', ''),
+(690, 'Sans titre', 'Oiseau', 'Art public', 'Public art', 'Feuilles d''acier coupées; soudées les unes aux autres', 'Steel sheets cut; welded to each other', '150 x 150 x 52 cm', 'Rosemont–La Petite-Patrie', 45.558218, -73.563644, 1, 1042, 821, 42, '', ''),
+(691, 'Carte du site de Montréal par Champlain en 1611', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503986, -73.587585, 1, 1043, 821, 45, '', ''),
+(692, 'Les anciennes possessions françaises en Amérique', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503969, -73.587623, 1, 1044, 821, 45, '', ''),
+(693, 'Les voyages de Jacques Cartier au Canada en 1534 et 1535', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503961, -73.587657, 1, 1045, 821, 45, '', ''),
+(694, 'Montréal de 1645 à 1672', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503945, -73.587697, 1, 1046, 821, 45, '', ''),
+(695, 'Montréal en 1760', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503918, -73.587731, 1, 1047, 821, 45, '', ''),
+(696, 'Plan d''Hochelaga par Jacques Cartier en 1535', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503874, -73.587727, 1, 1048, 821, 45, '', ''),
+(697, 'Jacques Cartier est reçu par le chef Agouhana', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503842, -73.587707, 1, 1049, 824, 45, '', ''),
+(698, 'Parades Parures', 'Parades-parures', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, '574 x 81 x 10 cm', 'Rivière-des-Prairies–Pointe-aux-Trembles', 45.649803, -73.578961, 1, 1050, 825, 48, '', ''),
+(699, 'Le village imaginé. «Le renard l''emporte, le suit à la trace', NULL, 'Art public', 'Public art', 'Assemblé; soudé', 'Assembled; welded', 'Ensemble de l''œuvre : 98 x 115 m', 'Le Sud-Ouest', 45.475158, -73.558862, 1, 1051, 826, 43, '', ''),
+(700, 'Monument à Jean Drapeau', NULL, 'Art public', 'Public art', 'Bronze coulé; cire perdue', 'Cast bronze; cire perdue', '287 X 200 x 200 cm', 'Ville-Marie', 45.50853, -73.55342, 1, 1052, 827, 42, '', ''),
+(701, 'Hommage à Maurice Richard', NULL, 'Art public', 'Public art', NULL, NULL, '221 x 327 x 182 cm', 'Mercier–Hochelaga-Maisonneuve', 45.562682, -73.546957, 1, 1053, 828, 42, '', ''),
+(702, 'La montagne des jours', NULL, 'Art public', 'Public art', 'Gravé au jet de sable; poli', 'Sandblast engraving; polished', '153 X 8 cm', 'Ville-Marie', 45.507069, -73.590031, 1, 1054, 829, 42, '', ''),
+(703, 'Mémoire ardente', NULL, 'Art public', 'Public art', NULL, NULL, '197 x 197 x 197', 'Ville-Marie', 45.508932, -73.551062, 1, 1055, 829, 42, '', ''),
+(704, 'Les jours d''été quand le fleuve monte à l''assaut des murs, h', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Mixte', 'Mixed', '86 x 117 x 10 cm', 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.50313, -73.636947, 1, 1056, 830, 48, '', ''),
+(705, 'Monument à sir Wilfrid Laurier', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '622 x 490 x 106 cm', 'Ville-Marie', 45.4994744, -73.571061, 1, 1057, 831, 42, '', ''),
+(706, 'Monument au frère André', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '301 x 120 x 50cm', 'Ville-Marie', 45.503309, -73.5666, 1, 1058, 831, 42, '', ''),
+(707, 'Neuf couleurs au vent', NULL, 'Art public', 'Public art', 'Soudé; sérigraphié', 'Welded; silkscreened', '1650 x 110 x 2510 cm', 'Le Plateau-Mont-Royal', 45.521709, -73.565776, 1, 1059, 832, 43, '', ''),
+(708, 'Table Ronde', NULL, 'Art public', 'Public art', 'Assemblé; soudé', 'Assembled; welded', NULL, 'LaSalle', 45.428134, -73.661771, 1, 1061, 834, 43, '', ''),
+(709, 'Trois disques', 'Man, Three Disks;\rL''Homme; Man; The Man', 'Art public', 'Public art', 'Découpé; assemblé; boulonné; soudé ', 'Cut out; assembled; screwed; welded', '2130 x 2200 x 1625 cm', 'Ville-Marie', 45.510658, -73.536837, 1, 1062, 835, 42, '', ''),
+(710, 'Hermès', NULL, 'Art public', 'Public art', 'Soudé; peint; boulonné', 'Welded; painted; bolted', '320 x 370 x 570 cm', 'Lachine', 45.428752, -73.683435, 1, 1063, 836, 42, '', ''),
+(711, 'Non titré', NULL, 'Art public', 'Public art', 'Soudés; peints', 'Welded, painted', '700 x 82.5 x 82.5 cm', 'Ville-Marie', 45.51907, -73.556071, 1, 1065, 838, 42, '', ''),
+(712, 'Trilogie', NULL, 'Art public', 'Public art', 'Soudé; peint', 'Welded, painted', '380 x 366 x 366 cm', 'Lachine', 45.430106, -73.666757, 1, 1066, 838, 42, '', ''),
+(713, 'Communion', NULL, 'Art public', 'Public art', 'Soudé; peint', 'Welded, painted', '335 x 427 x 853cm', 'LaSalle', 45.423958, -73.598574, 1, 1067, 838, 42, '', ''),
+(714, 'Non titré (mosaïque en céramique)', 'Sans titre (mosaïque en céramique)', 'Intégration à l''architecture', 'Integration with architecture', 'Peint; assemblé', 'painted; assembled', '381 x 554 cm', 'Le Sud-Ouest', 45.466425, -73.595811, 1, 1068, 839, 49, '', ''),
+(715, 'Monument à Giovanni Caboto', NULL, 'Art public', 'Public art', 'Bronze coulé; cire perdue', 'Cast bronze; cire perdue', '875 x 800 x 800', 'Ville-Marie', 45.48949, -73.583652, 1, 1069, 840, 42, '', ''),
+(716, 'La femme-fontaine', NULL, 'Art public', 'Public art', 'Taille directe', 'Direct carving', '183,50 x 57,50 x 40,70 cm', 'Verdun', 45.448399, -73.577621, 1, 1071, 841, 42, '', ''),
+(717, 'Envol d''oiseaux', 'Puit de lumière en vitraux', 'Intégration à l''architecture', 'Integration with architecture', 'Découpé; assemblé', 'Cut out; assembled', '400 x 65 cm', 'Villeray–Saint-Michel–Parc-Extension', 45.543774, -73.61448, 1, 1072, 842, 44, '', ''),
+(718, 'Gratte-ciel, cascades d''eau / rues, ruisseau… une constructi', NULL, 'Art public', 'Public art', 'Multiple', 'Multiple', '1700 x 7500 x 5000 cm', 'Ville-Marie', 45.515449, -73.560028, 1, 1073, 843, 43, '', ''),
+(719, 'Le carrousel sauvage', 'Le carrousel sauvage (SISM-64)\rLe manège d''amour', 'Art public', 'Public art', 'Taillé; assemblé', 'Carved; assembled', '315 x 1828 cm', 'Ville-Marie', 45.501169, -73.59404, 1, 1074, 844, 42, '', ''),
+(720, 'Décor', NULL, 'Art public', 'Public art', 'Soudé; peint', 'Welded, painted', '134 x 65 x 97 cm', 'Lachine', 45.429875, -73.666409, 1, 1075, 845, 42, '', ''),
+(721, 'L''eau et la nourriture', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Aluchromie', NULL, ' 274,5 x 812 cm', 'LaSalle', 45.425053, -73.619043, 1, 1076, 846, 45, '', ''),
+(722, 'Le mélomane', NULL, 'Art public', 'Public art', NULL, NULL, NULL, 'Villeray–Saint-Michel–Parc-Extension', 45.5622, -73.600852, 1, 1077, -1, 42, '', 'Sculpture en bronze reposant sur un socle de béton, l''œuvre figure une autruche géante qui plonge sa tête dans le pavillon d''un gramophone. L''œuvre est installée au parc François-Perrault, à proximité de l''Ecole Joseph-François-Perrault, dans l''arrondissement de Villeray-Saint-Michel-Parc Extension.'),
+(723, 'Mélangez le Tout', 'Le batteur à œufs', 'Art public', 'Public art', 'Découpe au laser; assemblage; peinture électrostatique (banc', 'Laser cutting; assemblage; electrostatic painting (bench)', '580 x 365 cm', 'Ville-Marie', 45.53434, -73.552733, 1, 1078, -1, 42, '', 'Le « batteur à œufs » est situé dans un espace adjacent à l’entrée arrière du centre Jean-Claude-Malépart, le long de l’avenue Gascon. À cet endroit, l’œuvre signale la présence du centre, consolidant son lien avec le quartier. L’instrument de cuisine surdimensionné est entouré d’un banc circulaire rouge constituant un lieu de repos et d’échange. De la sorte, cet objet du quotidien évoque la mixité et la rencontre. Comme un batteur à œufs qui incorpore les ingrédients, le centre Jean-Claude-Malépart rassemble les citoyens du quartier de Sainte-Marie. Dans ce lieu sportif et communautaire, le « tout » est à l’image de ses parties, un mélange des âges, des cultures et des intérêts.(source:artpublic.ville.montreal.qc.ca)'),
+(724, 'Caesura', 'Œuvre pour la paix', 'Art public', 'Public art', 'Bronze coulé; soudure; béton coulé; taille; polissage.', 'Cast bronze; welding; poured concrete; dressing; polishing.', '500 x 1100 x 1450 cm', 'Villeray–Saint-Michel–Parc-Extension', 45.537512, -73.62802, 1, 1079, 847, 43, '', ''),
+(725, 'Theatre for Sky Blocks', 'Théâtre pour fragments célestes', 'Art public', 'Public art', 'Soudure; sérigraphie; peinture; coupage', 'Welding; silkscreening; paint; cutting', '300 x 250 x 1000 cm', 'Lachine', 45.433893, -73.69675, 1, 1080, 847, 43, '', ''),
+(726, 'Les graminées du jardin Saint-Sulpice', NULL, 'Art public', 'Public art', 'Coupé; soudé', 'Cut; welded', '244 x 1000', 'Ahuntsic-Cartierville', 45.559348, -73.641608, 1, 1081, 847, 43, '', ''),
+(727, 'Give Peace a Chance', NULL, 'Art public', 'Public art', 'Pierre taillée', 'Carved stone', '2300 x 640 cm', 'Ville-Marie', 45.505007, -73.58382, 1, 1082, 849, 43, '', ''),
+(728, 'Monument au frère Marie-Victorin', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '295  x 140  x 140 cm', 'Rosemont–La Petite-Patrie', 45.557281, -73.555903, 1, 1083, 850, 42, '', ''),
+(729, 'Le lion de La Feuillée', 'Le lion de Lyon', 'Art public', 'Public art', 'Coulée industriel', 'Casting industrial ', '210 x 230 x 400 cm', 'Rosemont–La Petite-Patrie', 45.558796, -73.555637, 1, 1084, 851, 42, '', ''),
+(730, 'Agora', NULL, 'Art public', 'Public art', 'Moulage; assemblage', 'Moulding: assembly', '762 x 762 x 762 cm', 'Ville-Marie', 45.512075, -73.554819, 1, 1085, 852, 43, '', ''),
+(731, 'Mastodo', NULL, 'Art public', 'Public art', 'Moulage; assemblage', 'Moulding; assembly', '420 x 580 x 610 cm', 'Ville-Marie', 45.5118, -73.554681, 1, 1086, 852, 42, '', ''),
+(732, 'Cailloudo', NULL, 'Art public', 'Public art', 'Coulé; assemblé', 'Cast; assembled', '132 x 425 x 760 cm', 'Saint-Laurent', 45.512457, -73.676799, 1, 1087, 852, 42, '', ''),
+(733, 'Hommage à Claude Jutra', NULL, 'Art public', 'Public art', 'Assemblé; soudé; découpé; taillé; collé', 'Assembled; welded; cut out; carved; glued', '250 x 75 x 70 cm', 'Le Plateau-Mont-Royal', 45.51324, -73.572945, 1, 1088, 852, 42, '', ''),
+(734, 'La ville imaginaire', NULL, 'Art public', 'Public art', 'Taillé; assemblé', 'Carved; assembled', '1900 x 1800 x 2750 cm', 'Ville-Marie', 45.512697, -73.537714, 1, 1089, 853, 43, '', ''),
+(735, 'Révolutions', NULL, 'Art public', 'Public art', NULL, NULL, '850 x 500 cm', 'Ville-Marie', 45.523985, -73.552731, 1, 1090, 854, 42, '', ''),
+(736, 'L''arc', 'Hommage à Salvador Allende (1908-1973)', 'Art public', 'Public art', NULL, NULL, '305 x 470 x 125', 'Ville-Marie', 45.505855, -73.527741, 1, 1091, 854, 42, '', ''),
+(737, 'Buste du Dr. José P. Rizal', NULL, 'Art public', 'Public art', 'Fonte à la cire perdue', 'Iron cast in the cire perdue method', '238 x 148 x 135 cm', 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.491014, -73.634079, 1, 1092, 855, 42, '', ''),
+(738, 'Monument à Christophe Colomb', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '272 x 116 x 94 cm', 'Villeray–Saint-Michel–Parc-Extension', 45.545114, -73.610194, 1, 1093, 856, 42, '', ''),
+(739, 'Cosmos', 'Murale peinte; Cosmos I, II, III', 'Intégration à l''architecture', 'Integration with architecture', 'Collage; peinture', 'Collage; painting ', '185 x 677 x 5 cm', 'Rivière-des-Prairies–Pointe-aux-Trembles', 45.668131, -73.494621, 1, 1094, 857, 45, '', ''),
+(740, 'Obélisque en hommage à Charles de Gaulle', 'Mémorial au général De Gaulle', 'Art public', 'Public art', NULL, NULL, '1780 x 240 x 270 cm', 'Le Plateau-Mont-Royal', 45.526107, -73.564759, 1, 1095, 858, 42, '', ''),
+(741, 'China Wall', NULL, 'Art public', 'Public art', 'Soudé', 'Welded', '225 x 177 x 489 cm', 'Lachine', 45.428562, -73.681682, 1, 1096, 859, 42, '', ''),
+(742, 'Maisonneuve fonde Montréal le 18 mai 1642', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503819, -73.587641, 1, 1097, 860, 45, '', ''),
+(743, 'Portail avec bas-reliefs', 'Mémoire', 'Intégration à l''architecture', 'Integration with architecture', 'Fondu; vitrifié; peint; coupé; assemblé', 'Melted; vitrified; painted; cut; assembled', '520 X 520 cm', 'Ville-Marie', 45.513427, -73.546886, 1, 1098, 861, 42, '', ''),
+(744, 'Place du Temple', NULL, 'Art public', 'Public art', 'Coulé; peint', 'Cast; painted', '500 x 1800 x 6700 cm', 'LaSalle', 45.42362, -73.624915, 1, 1099, 861, 43, '', ''),
+(745, 'Fontaine de vie', 'Les baigneuses', 'Art public', 'Public art', 'Sculpté', 'Sculpted', '370 x 550 cm', 'Lachine', 45.433162, -73.681258, 1, 1100, 862, 42, '', ''),
+(746, 'Buste de Simon Bolivar', 'Simón Bolívar', 'Art public', 'Public art', NULL, NULL, '248.5 x 99.5 x 48', 'Ville-Marie', 45.489486, -73.580919, 1, 1101, 863, 42, '', ''),
+(747, 'Albarello', NULL, 'Art public', 'Public art', 'Soudé; assemblé', 'Welded; assembled', '340 x 290 cm', 'Lachine', 45.42994, -73.666844, 1, 1102, 864, 42, '', ''),
+(748, 'À la croisée des mots', 'arbre-sculpture', 'Art public', 'Public art', 'Feuilles d''aluminium anodisé; découpées; soudées', 'Anodized aluminum sheets; cut out; welded', '732 x 300 cm', 'Le Sud-Ouest', 45.483797, -73.575105, 1, 1103, 865, 43, '', ''),
+(749, 'Mots choisis', 'Les mots choisis', 'Intégration à l''architecture', 'Integration with architecture', 'Gravé; assemblé', 'Engraved; assembled', NULL, 'Rivière-des-Prairies–Pointe-aux-Trembles', 45.668131, -73.494621, 1, 1104, 865, 42, '', ''),
+(750, 'Hommage aux forces vitales du Québec', NULL, 'Art public', 'Public art', 'Techniques multiples', 'Multiple techniques ', '366 x 3800 x 1600 cm', 'LaSalle', 45.420052, -73.603372, 1, 1105, 866, 43, '', ''),
+(751, 'Monument aux braves de N.D.G.', 'Monument aux combattants\rLes Braves de N.D.G.', 'Art public', 'Public art', 'Bronze moulé', 'Cast bronze ', '400 x 318 cm', 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.472499, -73.613726, 1, 1106, 867, 42, '', ''),
+(752, 'Optimax', 'Le Sphinx, Optimax (SISM-64)', 'Art public', 'Public art', 'Taille directe', 'Direct carving', '292 x 246 x 1250 cm', 'Ville-Marie', 45.500911, -73.593288, 1, 1107, 868, 42, '', ''),
+(753, 'Jacques Cartier sur le sommet du mont Royal', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503843, -73.587576, 1, 1108, 869, 45, '', ''),
+(754, 'Les baigneurs', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Le Sud-Ouest', 45.466339, -73.595615, 1, 1110, 871, 42, '', ''),
+(755, 'L''eau et la santé', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Aluchromie', NULL, ' 274,5 x 812 cm', 'LaSalle', 45.425053, -73.619043, 1, 1112, 872, 45, '', ''),
+(756, 'Une leçon d''histoire', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Coulé; taillé; moulé; patiné; collé; pulvérisé', 'Cast; carved; burnished; glued; sprayed', NULL, 'Ville-Marie', 45.533042, -73.551858, 1, 1113, 872, 43, '', ''),
+(757, 'Delos, septième porte de la perfection et de l''immortalité, ', 'Delos', 'Art public', 'Public art', NULL, NULL, NULL, 'Le Plateau-Mont-Royal', 45.534496, -73.562238, 1, 1114, 873, 42, '', ''),
+(758, 'Champlain explore le site de Montréal en 1603', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503877, -73.587492, 1, 1115, 874, 45, '', ''),
+(759, 'Nous deux', NULL, 'Art public', 'Public art', 'Découpé; soudé; meulé; boulonné; peint', 'Cut out; welded; buffed; bolted; painted', '244 x 142 x 161', 'Lachine', 45.429983, -73.666989, 1, 1116, 875, 42, '', ''),
+(760, 'Colonne', 'Sculpture (extérieur)', 'Intégration à l''architecture', 'Integration with architecture', 'Taille directe; assemblé', 'Direct carving; assembled', '700 x 124,5 cm', 'Le Plateau-Mont-Royal', 45.518992, -73.581993, 1, 1117, 875, 42, '', ''),
+(761, 'États de choc', 'States of shock', 'Art public', 'Public art', 'Soudé; formé; coulé; briqueté; peint', 'Welded; shaped; poured; briquetted; painted', '15.51m', 'Lachine', 45.438429, -73.718209, 1, 1118, 875, 42, '', ''),
+(762, 'La ville blanche', NULL, 'Art public', 'Public art', 'Découpé; soudé; boulonné; percé; coulé', 'Cut out; welded; bolted; pierced; cast', '650 x 2400', 'Lachine', 45.428448, -73.68035, 1, 1119, 875, 43, '', ''),
+(763, 'Espace cubique ou hommage à Malevitch', NULL, 'Art public', 'Public art', 'Taillé; coupé; soudé; assemblé', 'Carved; cut; welded; assembled', '254 x 224 x 225 cm', 'Lachine', 45.429901, -73.666579, 1, 1120, 875, 43, '', ''),
+(764, 'Cube géométrique', NULL, 'Art public', 'Public art', NULL, NULL, '500 x 390 x 390 cm', 'Saint-Laurent', 45.523012, -73.72101, 1, 1121, 876, 42, '', ''),
+(765, 'Le jardin de Lyon', NULL, 'Art public', 'Public art', NULL, NULL, NULL, 'Ville-Marie', 45.51247, -73.555461, 1, 1122, 878, 43, '', ''),
+(766, 'Orbite optique no 2', 'L''Artichaut', 'Art public', 'Public art', 'Béton projeté', 'Projected concrete', '800 cm x 1230 cm', 'Ville-Marie', 45.522507, -73.534649, 1, 1123, 879, 42, '', ''),
+(767, 'Fontaine', 'Jeux d''enfants\r\rNote : Ce titre était en usage avant le déma', 'Art public', 'Public art', NULL, NULL, '450 x 1450 x 1195 cm', 'Ville-Marie', 45.513958, -73.552921, 1, 1124, 880, 43, '', ''),
+(768, 'Athéna', NULL, 'Art public', 'Public art', 'Fonte à la cire perdue', 'Iron cast in the cire perdue method', '310 x 100 x 100 cm', 'Villeray–Saint-Michel–Parc-Extension', 45.52774, -73.624282, 1, 1125, 881, 42, '', ''),
+(769, 'Hommage à Mihai Eminescu, poète roumain', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '243 x 149 cm', 'Le Plateau-Mont-Royal', 45.514796, -73.576459, 1, 1126, 882, 42, '', ''),
+(770, 'Trait d''union', NULL, 'Art public', 'Public art', 'Ancré; boulonné; collé', 'Anchored; bolted; glued', '265 x 275 x 1800 cm', 'Saint-Léonard', 45.586472, -73.597139, 1, 1127, 883, 42, '', ''),
+(771, 'Les leçons singulières (volet 1)', 'Les leçons singulières (première partie)', 'Art public', 'Public art', 'Coulé; découpé; formé', 'Cast; cut out; shaped', '97 x 2000 x 1000 cm', 'Le Plateau-Mont-Royal', 45.52158, -73.570456, 1, 1128, 883, 43, '', ''),
+(772, 'Les leçons singulières (volet 2)', 'Les leçons singulières (deuxième partie)', 'Art public', 'Public art', 'Coulé; découpé; formé', 'Cast; cut out; shaped', '96 x 1800 x 1120 cm', 'Le Plateau-Mont-Royal', 45.523417, -73.568557, 1, 1129, 883, 43, '', ''),
+(773, 'Détour : le grand jardin', NULL, 'Art public', 'Public art', 'Soudé; boulonné; percé; peint', 'Welded; bolted; pierced; painted', '500 x 1865 x 2109 cm', 'Lachine', 45.428373, -73.681115, 1, 1130, 883, 43, '', ''),
+(774, 'Le carrousel de l’île', NULL, 'Art public', 'Public art', NULL, NULL, '470 x 1500 cm', 'Verdun', 45.465811, -73.544778, 1, 1131, 883, 43, '', ''),
+(775, 'Un jardin à soi', NULL, 'Art public', 'Public art', 'Découpé; assemblé', 'Cut out; assembled', '101.5 x 157 x 203 cm', 'Rosemont–La Petite-Patrie', 45.560956, -73.565822, 1, 1132, 883, 43, '', ''),
+(776, 'Monument pour L', NULL, 'Art public', 'Public art', 'Coulé; soudé; peint', 'Cast; welded; painted', '111 x 4000 x 1500 cm', 'Lachine', 45.43476, -73.699892, 1, 1133, 883, 43, '', ''),
+(777, 'Volatiles', 'Splish-splash', 'Intégration à l''architecture', 'Integration with architecture', 'Découpé; assemblé', 'Cut out; assembled', NULL, 'LaSalle', 45.436661, -73.607768, 1, 1134, 883, 43, '', ''),
+(778, 'Nef pour quatorze reines', NULL, 'Art public', 'Public art', NULL, NULL, '0.6 x 21 x 113 m', 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.496042, -73.617702, 1, 1135, 885, 43, '', ''),
+(779, 'Hommage aux travailleurs', NULL, 'Art public', 'Public art', 'Coulé; peint', 'Cast; painted', '600 x 272 x 138 cm', 'Montréal-Nord', 45.600702, -73.638456, 1, 1136, 886, 42, '', ''),
+(780, 'Le grand Jean-Paul', NULL, 'Art public', 'Public art', 'Cire perdue', 'Cire perdue method', '202 x 199.5 x 60.5 cm', 'Ville-Marie', 45.503104, -73.560661, 1, 1137, 887, 42, '', ''),
+(781, 'Monument à Émile Nelligan', 'Buste à l''effigie du poète Émile Nelligan', 'Art public', 'Public art', 'Bronze coulé; cire perdue', 'Cast bronze; cire perdue', '271 x 112 x 132 cm', 'Le Plateau-Mont-Royal', 45.516215, -73.570284, 1, 1138, 887, 42, '', ''),
+(782, 'Songes', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, '282 x 482 x 2,5 cm', 'Montréal-Nord', 45.61654, -73.62097, 1, 1139, 888, 47, '', ''),
+(783, 'Jacques Cartier atterit à Hochelaga en 1535', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503907, -73.587428, 1, 1140, 889, 45, '', ''),
+(784, 'Monument à sir Louis-Hippolyte La Fontaine', NULL, 'Art public', 'Public art', 'Fonte au sable', 'Sand-cast iron', '700 x 570 x 370cm', 'Le Plateau-Mont-Royal', 45.523017, -73.566328, 1, 1141, 889, 42, '', ''),
+(785, 'Monument aux braves d''Outremont', 'Monument aux morts de la guerre', 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '400 x 600 x 480 cm', 'Outremont', 45.517753, -73.604103, 1, 1142, 889, 42, '', ''),
+(786, 'L''habitation en milieu urbain', 'L''espace de l''homme dans l''univers', 'Intégration à l''architecture', 'Integration with architecture', 'Modelage', 'Modelling', '251 x 620 x 3,80 cm', 'Le Sud-Ouest', 45.457694, -73.595515, 1, 1143, 889, 42, '', ''),
+(787, 'Monument à Paul de Chomedey, sieur de Maisonneuve', NULL, 'Art public', 'Public art', NULL, NULL, '9m de haut', 'Ville-Marie', 45.5048, -73.55726, 1, 1144, 889, 42, '', ''),
+(788, 'Monument à Louis-Octave Crémazie', NULL, 'Art public', 'Public art', 'Bronze coulé; pierre taillée', 'Cast bronze; carved stone', '300 x 300 x 188 cm', 'Le Plateau-Mont-Royal', 45.517388, -73.569581, 1, 1145, 889, 42, '', ''),
+(789, 'Monument à John Young', NULL, 'Art public', 'Public art', 'Bronze coulé; pierre taillée', 'Cast bronze, carved stone', '520 x 340 x 670cm', 'Ville-Marie', 45.500112, -73.553427, 1, 1146, 889, 42, '', ''),
+(790, 'Monument à Édouard VII', NULL, 'Art public', 'Public art', 'Coulé à la cire perdue; assemblé à la romaine à l''aide de go', 'Cast in the cire perdue method; assembled Roman style using ', '1400cm', 'Ville-Marie', 45.503724, -73.568507, 1, 1147, 889, 42, '', ''),
+(791, 'Acier', 'Sous l''eau', 'Art public', 'Public art', 'Soudé; coulé', 'Welded; cast', '385 x 700 x 350cm', 'Ville-Marie', 45.504307, -73.526535, 1, 1148, 893, 42, '', ''),
+(792, 'Le lion de Belfort', 'La Fontaine de la Sun Life Assurance Company', 'Art public', 'Public art', 'Sculpté (granite); coulé (bronze)', 'Sculpted (granite); cast (bronze)\r', '504 x 232 x 421 cm', 'Ville-Marie', 45.499704, -73.570273, 1, 1149, 894, 42, '', ''),
+(793, 'Monument aux héros de la guerre des Boers', 'Monument à Lord Strathcona', 'Art public', 'Public art', NULL, NULL, '920 x 2200 x 1600 cm', 'Ville-Marie', 45.49961, -73.570967, 1, 1150, 894, 42, '', ''),
+(794, 'Monument à sir George-Étienne Cartier', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '25 x 30 x 30m', 'Ville-Marie', 45.514231, -73.58525, 1, 1151, 894, 42, '', ''),
+(795, 'Départ de La Salle pour aller à la découverte du Mississipi', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503946, -73.587378, 1, 1152, 895, 45, '', ''),
+(796, 'Totem Kwakiutl', 'Mât totémique Kwakwaka''wakw (Kwakiutl)', 'Art public', 'Public art', 'Sculpté', 'Sculpted', '2130 x 95 cm', 'Ville-Marie', 45.504995, -73.529284, 1, 1153, 896, 42, '', ''),
+(797, 'Iris', 'Iris (Québec)', 'Art public', 'Public art', 'Feuilles d''aluminium galbées par martelage; soudées entre el', 'Aluminum sheets shaped by hammering; welded together', NULL, 'Ville-Marie', 45.505532, -73.527751, 1, 1154, 898, 42, '', ''),
+(798, 'Monument à Émilie Gamelin', NULL, 'Art public', 'Public art', 'Bronze coulé; cire perdue', 'Cast bronze; cire perdue', '190 x 122 cm', 'Ville-Marie', 45.51486, -73.559707, 1, 1155, 898, 42, '', ''),
+(799, 'Les allusifs', NULL, 'Art public', 'Public art', 'Assemblé; soudé; incrusté; gravé', 'Assembled; welded; inlaid; engraved', 'xx cm x 230 cm x 170 cm', 'Le Sud-Ouest', 45.478839, -73.575339, 1, 1156, 899, 43, '', ''),
+(800, 'Lanka Mata', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, '260 x 524 x 20 cm', 'Le Sud-Ouest', 45.457751, -73.595486, 1, 1157, 900, 44, '', ''),
+(801, 'L''attente', NULL, 'Art public', 'Public art', 'Assemblé; soudé; vissé', 'Assembled; welded; screwed', '411 x 258 x 258 cm', 'Ahuntsic-Cartierville', 45.532697, -73.725844, 1, 1158, 901, 42, '', ''),
+(802, 'La façade', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Modélisation 3D; frittage laser sélectif', '3D modelling; selective laser sintering', '115 x 235 x 32 cm', 'Ville-Marie', 45.522767, -73.56267, 1, 1159, 901, 42, '', ''),
+(803, 'La fermière', NULL, 'Art public', 'Public art', 'Coulé', 'Cast', '575 x 1900 cm', 'Mercier–Hochelaga-Maisonneuve', 45.553561, -73.539698, 1, 1160, 902, 42, '', ''),
+(804, 'Les petits baigneurs', NULL, 'Art public', 'Public art', 'Coulé; assemblé', 'Cast; assembled', '1000 x 400 x 300 cm', 'Mercier–Hochelaga-Maisonneuve', 45.553359, -73.538434, 1, 1161, 902, 42, '', ''),
+(805, 'Monument à Dollard des Ormeaux', 'Monument à Adam Dollard des Ormeaux et à ses compagnons', 'Art public', 'Public art', 'Coulé', 'Cast', '800 x 925 x 345 cm', 'Le Plateau-Mont-Royal', 45.525594, -73.573055, 1, 1162, 902, 42, '', ''),
+(806, 'Monument aux braves de Lachine', NULL, 'Art public', 'Public art', 'Coulé; assemblé', 'Cast; assembled', '524 x 900 x 216 cm', 'Lachine', 45.436555, -73.706738, 1, 1163, 902, 42, '', ''),
+(807, 'Monument aux Patriotes', NULL, 'Art public', 'Public art', 'Fonte au sable', 'Sand-cast iron', '850 x 410 x 370 cm', 'Ville-Marie', 45.523411, -73.546212, 1, 1164, 902, 42, '', ''),
+(808, 'Signal dans l''espace', 'Sculpture, extérieur', 'Intégration à l''architecture', 'Integration with architecture', 'Assemblage', 'Assembled', '1370 x 975 x 30 cm', 'LaSalle', 45.42415, -73.623311, 1, 1165, 903, 42, '', ''),
+(809, 'Temps d''heures', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Assemblé; découpé; peint', 'Assembled; cut out; painted', '540 x 1020 x 303 cm', 'Villeray–Saint-Michel–Parc-Extension', 45.541376, -73.613177, 1, 1166, 903, 43, '', ''),
+(810, 'Anamorphose d’une fenêtre', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Mercier–Hochelaga-Maisonneuve', 45.595513, -73.523788, 1, 1167, 903, 43, '', ''),
+(811, 'Monument à John F. Kennedy', NULL, 'Art public', 'Public art', 'Bronze moulé', 'Cast bronze', '355 x 100 x 120', 'Ville-Marie', 45.503367, -73.573689, 1, 1168, 904, 42, '', ''),
+(812, 'Monument à Joseph Beaubien', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '249 x 76.5 x 65.5 cm', 'Outremont', 45.515161, -73.6078, 1, 1169, 904, 42, '', ''),
+(813, 'Buste du cardinal Paul-Émile Léger', NULL, 'Art public', 'Public art', 'Coulé', 'Cast', '168 x 75 x 61,5 cm', 'Ville-Marie', 45.509549, -73.561333, 1, 1170, 904, 42, '', ''),
+(814, 'Debout', 'Debout (Monument à Félix Leclerc)', 'Art public', 'Public art', '23 sections de bronze moulées par enrobage et soudées ensemb', '23 sections of bronze cast by coating and welded together.', '350 cm x 170 cm x 149.5 cm', 'Le Plateau-Mont-Royal', 45.526717, -73.571036, 1, 1171, 905, 42, '', ''),
+(815, 'La porte de l’avenir', NULL, 'Art public', 'Public art', 'Empilé; gravé; peint', 'Piled up; engraved; painted', '238 x 201,5 x 42 cm', 'Verdun', 45.457215, -73.547032, 1, 1172, 905, 42, '', ''),
+(816, 'Deux murales', 'Deux murales (céramique)', 'Intégration à l''architecture', 'Integration with architecture', 'Assemblage', 'Assembled', 'Petite : 218 x 744 cm\rGrande : 427 x 881 cm', 'Rosemont–La Petite-Patrie', 45.555969, -73.557184, 1, 1173, 906, 49, '', ''),
+(817, 'Le théâtre de papier', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, '360 x 1250 x 140 cm', 'Rosemont–La Petite-Patrie', 45.54736, -73.598375, 1, 1174, 907, 50, '', ''),
+(818, 'Et pourtant elle tourne', 'Verrière cadran solaire', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'L’Île-Bizard–Sainte-Geneviève', 45.489425, -73.882544, 1, 1175, 907, 50, '', ''),
+(819, 'La réparation', NULL, 'Art public', 'Public art', 'Taille', 'Carved', '294 x 2500 cm', 'Ahuntsic-Cartierville', 45.534994, -73.679998, 1, 1176, 908, 43, '', ''),
+(820, 'Temple du troisième millénaire', NULL, 'Art public', 'Public art', 'Coulé; découpé; assemblé', 'Cast; cut out; assembled', '475 cm x 380 cm x 75 cm', 'Saint-Laurent', 45.497286, -73.689694, 1, 1177, 909, 43, '', ''),
+(821, 'Monica', NULL, 'Art public', 'Public art', 'Moulé; collé; soudé; boulonné', 'Cast; glued; welded; bolted', '278 x 211 x 200 cm', 'Lachine', 45.432433, -73.683443, 1, 1178, 828, 42, '', ''),
+(822, 'Monument à Jackie Robinson', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '254 x 203 x 194 cm', 'Mercier–Hochelaga-Maisonneuve', 45.555846, -73.551088, 1, 1179, 828, 42, '', ''),
+(823, 'Joseph-Xavier Perrault', 'Monument à Joseph-Xavier Perrault', 'Art public', 'Public art', 'Aluminium moulé et fondu; granit poli', 'Cast aluminum; polished granite ', '280 cm x 92 cm x 92 cm', 'Ville-Marie', 45.501193, -73.561572, 1, 1180, 828, 42, '', ''),
+(824, 'Hommage à Marguerite Bourgeoys', NULL, 'Art public', 'Public art', 'Bronze coulé; cire perdue', 'Cast bronze; cire perdue', '178 x 414 cm', 'Ville-Marie', 45.507373, -73.555063, 1, 1181, 828, 42, '', ''),
+(825, 'Forces', NULL, 'Art public', 'Public art', 'Coulé; ancré', 'Cast; anchored', '220 x 370 x 230 cm', 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.485971, -73.674962, 1, 1182, 828, 42, '', ''),
+(826, 'Monument à Robert Burns', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '511 x 276 x 276 cm', 'Ville-Marie', 45.499462, -73.571571, 1, 1183, 910, 42, '', ''),
+(827, 'Pont d''Arles en transfert', NULL, 'Art public', 'Public art', 'Soudé; boulonné; peint', 'Welded; bolted; painted', '347 x 320 x 900 cm', 'Lachine', 45.429964, -73.666167, 1, 1184, 911, 43, '', ''),
+(828, 'Signal pour Takis', NULL, 'Art public', 'Public art', 'Soudé; boulonné', 'Welded; bolted', '850 x 900 x 2000 cm', 'Lachine', 45.428754, -73.682789, 1, 1185, 911, 43, '', ''),
+(829, 'Lieux sans temple 3', NULL, 'Art public', 'Public art', 'Soudé; patiné; oxydé; collé; boulonné', 'Welded; burnished; oxidized; glued; bolted', '229 x 140 x 117.5 cm', 'Lachine', 45.429924, -73.666603, 1, 1186, 911, 42, '', ''),
+(830, 'Lieux sans temple 4', NULL, 'Art public', 'Public art', 'Soudé; patiné; oxydé; collé; boulonné', 'Welded; burnished; oxidized; glued; bolted', '225 x 110 x 131 cm', 'Lachine', 45.429923, -73.666567, 1, 1187, 911, 42, '', ''),
+(831, 'Lieux sans temple 5', NULL, 'Art public', 'Public art', 'Soudé; patiné; oxydé; collé; boulonné', 'Welded; burnished; oxidized; glued; bolted', '250 x 140,5 x 117,5 cm', 'Lachine', 45.429882, -73.66657, 1, 1188, 911, 42, '', ''),
+(832, 'Souvenir de 1955 ou 2026 Roberval', NULL, 'Art public', 'Public art', 'Découpé; soudé; boulonné; peint', 'Cut out; welded; bolted; painted', '465 x 1017 x 800 cm', 'Lachine', 45.429123, -73.681809, 1, 1189, 911, 43, '', ''),
+(833, 'Fontaine Wallace', 'Fontaine des Vosges', 'Art public', 'Public art', 'Moulé; boulonné; peint', 'Cast; bolted; painted', '275 cm x 82 x 82 cm', 'Ville-Marie', 45.505419, -73.52812, 1, 1190, 912, 42, '', ''),
+(834, 'Triptyque sur le paysage', NULL, 'Art public', 'Public art', NULL, NULL, '200 cm', 'Ahuntsic-Cartierville', 45.575443, -73.661664, 1, 1191, 913, 43, '', ''),
+(835, 'Signe solaire', NULL, 'Art public', 'Public art', NULL, NULL, '277 x 330 x 106.5 cm', 'Ville-Marie', 45.513247, -73.530889, 1, 1192, 914, 42, '', ''),
+(836, 'Ashapmouchouan', 'L''œuvre était initialement sans-titre, son titre actuel a ét', 'Art public', 'Public art', NULL, NULL, '417 x 245 cm', 'Le Plateau-Mont-Royal', 45.526861, -73.586445, 1, 1193, 915, 42, '', ''),
+(837, 'Éclosion', 'Note: L''œuvre était initialement sans-titre, son titre actue', 'Art public', 'Public art', 'Découpé; courbé; soudé; boulonné; peint', 'Cut out; bent; welded; bolted; painted', '258 x 142 x 202 cm', 'Lachine', 45.430104, -73.666761, 1, 1194, 915, 42, '', ''),
+(838, 'À voile déchirée', 'L''œuvre était initialement sans-titre, son titre actuel a ét', 'Art public', 'Public art', NULL, NULL, '469 x 315 x 394 cm', 'Ville-Marie', 45.530132, -73.548258, 1, 1195, 915, 42, '', ''),
+(839, 'Sublime', 'L''œuvre était initialement sans-titre, son titre actuel a ét', 'Art public', 'Public art', NULL, NULL, '762 x 457 cm', 'Le Sud-Ouest', 45.477999, -73.556237, 1, 1196, 915, 42, '', ''),
+(840, 'Évolution de joie', 'L''œuvre était initialement sans-titre, son titre actuel a ét', 'Art public', 'Public art', 'Coupé; courbé; soudé', 'Cut; bent; welded', '252.5 x 165 x 335', 'Le Plateau-Mont-Royal', 45.524225, -73.57447, 1, 1197, 915, 42, '', ''),
+(841, 'Colonne stèle', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Assemblage; inscription', 'Assembled; inscription', '244 x 45,5 x 32 cm', 'Le Plateau-Mont-Royal', 45.524831, -73.582313, 1, 1199, 915, 42, '', ''),
+(842, 'Regard sur le fleuve', NULL, 'Art public', 'Public art', 'Découpé; soudé', 'Cut out; welded', '312 x 650 x 20 cm', 'Lachine', 45.435609, -73.70641, 1, 1200, 915, 42, '', ''),
+(843, 'Table des matières de supports du savoir', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Multiple', 'Multiple', '311 x 863 x 6', 'Villeray–Saint-Michel–Parc-Extension', 45.531255, -73.628576, 1, 1201, 915, 48, '', ''),
+(844, 'Tango de Montréal', NULL, 'Art public', 'Public art', 'Moulage d''argile crue', 'Moulding of raw clay', '1040 x 1740 cm', 'Le Plateau-Mont-Royal', 45.524229, -73.581463, 1, 1202, -1, 42, '', 'Située sur la place Gérald-Godin, en plein cœur de l’arrondissement du Plateau-Mont-Royal, en face de la maison de la culture du Plateau-Mont-Royal, l''œuvre est intégrée au mur nord de l''immeuble du 4433-4435-4437, rue Rivard. Il s''agit de la reproduction en grand format du poème « Tango de Montréal » composé et publié dans le recueil Sarzène, en 1983, par Gérald Godin.(source:artpublic.ville.montreal.qc.ca)'),
+(845, 'Les sons de la musique', NULL, 'Art public', 'Public art', 'Coulé; moulé', 'Cast; moulded', '246 x 1344 x 108 cm', 'Ville-Marie', 45.507074, -73.560927, 1, 1203, 917, 42, '', ''),
+(846, 'Cheval à plume', NULL, 'Art public', 'Public art', 'Taillé; sculpté; gravé; percé; peint', 'Carved; sculpted; engraved; pierced; painted', '245 x 315 x 210 cm', 'Lachine', 45.427985, -73.679242, 1, 1204, 918, 42, '', ''),
+(847, 'Études pour la figure, Saint-Laurent', NULL, 'Art public', 'Public art', 'Taillé; gravé; collé; peint', 'Carved; engraved; glued; painted', '310 x 95 x 95 cm', 'Lachine', 45.433725, -73.685529, 1, 1205, 918, 42, '', ''),
+(848, 'Monument aux braves de Verdun', NULL, 'Art public', 'Public art', NULL, NULL, NULL, 'Verdun', 45.458882, -73.572314, 1, 1206, 919, 42, '', ''),
+(849, 'After Babel, a Civic Square', 'After Babel\rAfter Babel / A Civic Square\rAfter Babel (a civi', 'Art public', 'Public art', 'Assemblé; soudé; découpé; moulé', 'Assembled; welded; cut out; cast', '450 x 1000 cm', 'Ville-Marie', 45.509963, -73.567202, 1, 1207, 921, 43, '', ''),
+(850, 'Les sports', 'Murale (mosaïque)', 'Intégration à l''architecture', 'Integration with architecture', 'Assemblage', 'Assembled', '84 x 2261 x 2,5 cm', 'Mercier–Hochelaga-Maisonneuve', 45.562464, -73.547304, 1, 1208, 922, 48, '', ''),
+(851, 'La joie', 'Murale peinte', 'Intégration à l''architecture', 'Integration with architecture', 'Modelage; peinture', 'Modelling; painting', '254 x 1234,5 x 10', 'Mercier–Hochelaga-Maisonneuve', 45.562047, -73.550076, 1, 1209, 922, 48, '', ''),
+(852, 'La peur', NULL, 'Art public', 'Public art', 'Peint; soudé; assemblé', 'Painted; welded; assembled', '365 x 121 x 320cm', 'Ville-Marie', 45.501361, -73.555219, 1, 1210, 923, 43, '', ''),
+(853, 'Monument à la Pointe', 'La Pointe (titre provisoire)', 'Art public', 'Public art', NULL, NULL, '1400 x 400 cm', 'Le Sud-Ouest', 45.476015, -73.573449, 1, 1211, 923, 43, '', ''),
+(854, 'Daleth', NULL, 'Art public', 'Public art', 'Coulé; gravé; découpé; collé; assemblé', 'Cast; engraved; cut out; glued; assembled', '350 x 6200 cm', 'Ahuntsic-Cartierville', 45.534506, -73.678436, 1, 1212, 923, 43, '', ''),
+(855, 'Trajectoire no 2', NULL, 'Art public', 'Public art', 'Soudé; peint; patiné; boulonné', 'Welded; painted; burnished; bolted', '195 cm x 103 cm x 276 cm', 'Lachine', 45.430542, -73.666852, 1, 1213, 924, 42, '', ''),
+(856, 'Trame d’appel', NULL, 'Art public', 'Public art', 'Souder; peint; installation par ancrages chimique', 'Welding; painting; installation by chemical anchoring', '400 x 365 x 183 cm', 'L’Île-Bizard–Sainte-Geneviève', 45.487539, -73.883436, 1, 1214, 924, 42, '', ''),
+(857, 'La naissance', NULL, 'Art public', 'Public art', 'Découpé; soudé', 'Cut out; welded', '380 X 100 X 140 cm', 'Verdun', 45.448586, -73.577611, 1, 1215, 924, 42, '', ''),
+(858, 'Le coup de départ', NULL, 'Art public', 'Public art', NULL, NULL, '538 X 371 X165 cm', 'Saint-Laurent', 45.505415, -73.718634, 1, 1216, 924, 42, '', ''),
+(859, 'Monument à Nelson', 'Colonne Nelson', 'Art public', 'Public art', NULL, NULL, '2055 x 600 x 600 cm', 'Ville-Marie', 45.508186, -73.553845, 1, 1217, 925, 42, '', ''),
+(860, 'Site/interlude', NULL, 'Art public', 'Public art', 'Découpé; soudé', 'Cut out; welded', '400 x 185 x 8535 cm', 'Lachine', 45.427777, -73.676973, 1, 1218, 926, 43, '', ''),
+(861, 'Non titré (Fontaine; Les chérubins)', 'Fontaine; Les chérubins', 'Art public', 'Public art', 'Coulée', 'Casting', NULL, 'Outremont', 45.517895, -73.604464, 1, 1219, 927, 42, '', ''),
+(862, 'La pierre et le feu', NULL, 'Art public', 'Public art', 'Découpé; soudé; boulonné; peint', 'Cut out; welded; bolted; painted', '304 x 122 x 400 cm', 'Lachine', 45.428946, -73.682977, 1, 1220, 928, 42, '', ''),
+(863, 'Temps d’arrêt', NULL, 'Art public', 'Public art', 'Coupage; assemblage; soudure', 'Cutting; assemblage; welding', '500 x 145 cm', 'Rosemont–La Petite-Patrie', 45.549062, -73.592662, 1, 1221, 928, 42, '', ''),
+(864, 'L''eau et le transport', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'aluchromie', NULL, '274.5 x 812 cm', 'LaSalle', 45.425053, -73.619043, 1, 1222, 928, 45, '', ''),
+(865, 'Courbes et vent', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Pierrefonds-Roxboro', 45.495937, -73.847429, 1, 1223, 930, 42, '', ''),
+(866, 'Fontaine du square Saint-Louis', 'Fontaine Lacroix du square Viger', 'Art public', 'Public art', NULL, NULL, '457 x 240 cm', 'Le Plateau-Mont-Royal', 45.517041, -73.569964, 1, 1224, 931, 42, '', ''),
+(867, 'Sculpture-fontaine, square Sir-George-Étienne-Cartier', 'Sculpture-fontaine du square G.-É. Cartier', 'Art public', 'Public art', NULL, NULL, '650 x 205 cm', 'Le Sud-Ouest', 45.473413, -73.58639, 1, 1225, 931, 42, '', ''),
+(868, 'Du long du long', NULL, 'Art public', 'Public art', 'Découpé; soudé; boulonné; peint', 'Cut out; welded; bolted; painted', '120 X 287X 496 cm', 'Lachine', 45.431119, -73.673413, 1, 1226, 932, 42, '', ''),
+(869, 'Les voûtes d''Ulysse', NULL, 'Art public', 'Public art', 'Découpé; soudé; boulonné', 'Cut out; welded; bolted', '110 X 558 X 1226 cm', 'Lachine', 45.428916, -73.682227, 1, 1227, 932, 42, '', ''),
+(870, 'L''eau et les sports', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Aluchromie', NULL, ' 274,5 x 812 cm', 'LaSalle', 45.425053, -73.619043, 1, 1228, 932, 45, '', ''),
+(871, 'From A', NULL, 'Art public', 'Public art', NULL, NULL, '170 x 150 x 590 cm', 'Lachine', 45.428743, -73.686001, 1, 1229, 934, 42, '', ''),
+(872, 'Force et progrès', NULL, 'Art public', 'Public art', 'Soudé; peint', 'Welded, painted', '255 x 220 x 425 cm', 'Lachine', 45.431031, -73.670124, 1, 1230, 935, 42, '', ''),
+(873, 'Écluses', NULL, 'Art public', 'Public art', 'Soudé', 'Welded', '415 x 111 x 135 cm', 'Lachine', 45.428215, -73.678237, 1, 1231, 936, 42, '', ''),
+(874, 'Vitraux', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.508816, -73.554069, 1, 1232, 937, 44, '', ''),
+(875, 'Jour ou nuit inconnue', 'Motifs et réseaux (titre provisoire)', 'Intégration à l''architecture', 'Integration with architecture', 'Sérigraphie', 'Serigraphy', '254 x 685 x 35 cm', 'Rivière-des-Prairies–Pointe-aux-Trembles', 45.668073, -73.494782, 1, 1233, 938, 48, '', ''),
+(876, 'Ce qui reste 1997-2001', 'Ce qui reste; DIA-LOG (titre provisoire)', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, '400 x 234 x 2 cm', 'Ville-Marie', 45.501079, -73.555515, 1, 1234, 938, 47, '', ''),
+(877, 'Le roi Singe', NULL, 'Art public', 'Public art', 'Coulé; assemblé; moulé', 'Cast; assembled; moulded', '550 x 400 x 21 cm', 'Ville-Marie', 45.506907, -73.56059, 1, 1235, 939, 42, '', ''),
+(878, 'Le spectacle de la curiosité', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Impression sur papier ilfochrome', 'Print on Ilfochrome paper', '260 x 800 cm', 'Ahuntsic-Cartierville', 45.553357, -73.662743, 1, 1236, 940, 47, '', ''),
+(879, 'Espace vert', NULL, 'Art public', 'Public art', 'Impressions numériques montées à froid sur support de plexig', 'Digital prints cold-mounted on Plexiglas support (acrylic)', '215 x 450 x 36', 'Outremont', 45.519579, -73.619247, 1, 1237, 940, 47, '', '');
+INSERT INTO `oeuvre` (`IdOeuvre`, `Titre`, `TitreVariante`, `Collection`, `CollectionEN`, `Technique`, `TechniqueEN`, `Dimensions`, `Arrondissement`, `CoordonneeLatitude`, `CoordonneeLongitude`, `EstValide`, `IdAdresse`, `IdArtiste`, `IdCat`, `photoPresentation`, `description`) VALUES
+(880, 'Être +', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Rosemont–La Petite-Patrie', 45.559685, -73.581582, 1, 1238, 941, 43, '', ''),
+(881, 'Monument à Louis Cyr', NULL, 'Art public', 'Public art', 'Bronze coulé; cire perdue', 'Cast bronze; cire perdue', '440  x 183  x 180 cm', 'Le Sud-Ouest', 45.475382, -73.593225, 1, 1239, 942, 42, '', ''),
+(882, 'Le serment de Dollard des Ormeaux et de ses compagnons', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503965, -73.587328, 1, 1240, 943, 45, '', ''),
+(883, 'Monument à Jean-Olivier Chénier', NULL, 'Art public', 'Public art', 'Sculpture de cuivre formé; soudure à l''étain.', 'Shaped copper sculpture; tin soldering', '400 x 100 x 100 cm', 'Ville-Marie', 45.511042, -73.55496, 1, 1241, 944, 42, '', ''),
+(884, 'Maisonneuve érige une croix sur la montagne', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503995, -73.587278, 1, 1243, 946, 45, '', ''),
+(885, 'Monument à Isabelle la Catholique', NULL, 'Art public', 'Public art', 'Bronze coulé', 'Cast bronze ', '293 x 152.5 x 107 cm', 'Le Plateau-Mont-Royal', 45.531079, -73.586023, 1, 1244, 947, 42, '', ''),
+(886, 'Épisode', NULL, 'Art public', 'Public art', 'Ciment fondu', 'Aluminous cement ', '184 x 250 x 113 cm', 'Rosemont–La Petite-Patrie', 45.560483, -73.558557, 1, 1245, 948, 42, '', ''),
+(887, 'Continuum 2009 (à la mémoire de Pierre Perrault)', NULL, 'Art public', 'Public art', 'Assemblé; soudé', 'Assembled; welded', '305 x 770 x 300 cm', 'Mercier–Hochelaga-Maisonneuve', 45.604249, -73.509548, 1, 1246, 949, 42, '', ''),
+(888, 'Explorer', NULL, 'Art public', 'Public art', 'Soudé; boulonné; découpé; moulé', 'Welded; bolted; cut out; moulded', '484 x 178 x 212 cm', 'Lachine', 45.42889, -73.680853, 1, 1247, 950, 42, '', ''),
+(889, 'Non titré (Portes)', 'Portes', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Côte-des-Neiges–Notre-Dame-de-Grâce', 45.475605, -73.614587, 1, 1250, 953, 52, '', ''),
+(890, 'Le phare d''Archimède', NULL, 'Art public', 'Public art', 'Meulé; cimenté', 'Buffed; cemented', '750 x 1000 x 1050 cm', 'Lachine', 45.429161, -73.688205, 1, 1251, 954, 43, '', ''),
+(891, 'Le déjeuner sur l’herbe', NULL, 'Art public', 'Public art', 'Taillé; polissage; tourné; coulé; patiné', 'Carved; polishing; ; cast; burnished', '300 x 900 x 1308 cm', 'Lachine', 45.428482, -73.677576, 1, 1252, 954, 43, '', ''),
+(892, 'Girafes', 'Non titrée', 'Art public', 'Public art', 'Assemblé; soudé; peint', 'Assembled; welded; painted', '11,8 x 3 m', 'Ville-Marie', 45.520049, -73.532032, 1, 1253, 955, 42, '', ''),
+(893, 'Migration', NULL, 'Art public', 'Public art', 'Coulé; boulonné', 'Cast; bolted', '465 x 230 x 400 cm', 'Ville-Marie', 45.514075, -73.534655, 1, 1254, 955, 42, '', ''),
+(894, 'Hommage à René Lévesque', NULL, 'Art public', 'Public art', 'Ciment moulé', 'Moulded cement', '518 x 1829 x 457 cm', 'Lachine', 45.428749, -73.687124, 1, 1255, 955, 42, '', ''),
+(895, 'Lieu', 'Fleur d''hiver\rSans titre', 'Art public', 'Public art', 'Moulé; assemblé', 'Cast; assembled', '700 x 914 cm', 'Saint-Laurent', 45.51635, -73.725394, 1, 1256, 955, 42, '', ''),
+(896, 'Les promeneurs', NULL, 'Art public', 'Public art', NULL, NULL, '592 x 190 x 812', 'Saint-Laurent', 45.527273, -73.686882, 1, 1257, 956, 42, '', ''),
+(897, 'Trampolino', NULL, 'Art public', 'Public art', 'Soudé; assemblé', 'Welded; assembled', '350 x 600', 'Saint-Léonard', 45.585723, -73.596644, 1, 1258, 957, 42, '', ''),
+(898, 'Dex', NULL, 'Art public', 'Public art', 'Assemblé; soudé; percé', 'Assembled; welded; pierced', '148 x 503 x 730 cm', 'Lachine', 45.430429, -73.666229, 1, 1259, 958, 42, '', ''),
+(899, 'Affinités', NULL, 'Art public', 'Public art', 'Assemblé; soudé; martelé; découpé; patiné', 'Assembled; welded; hammered; cut out; burnished', '268 x 160 x 150 cm', 'Ville-Marie', 45.495832, -73.59619, 1, 1260, 959, 42, '', ''),
+(900, 'Puerta de la Amistad', NULL, 'Art public', 'Public art', NULL, NULL, '750 x 120 x 570 cm', 'Ville-Marie', 45.511015, -73.533386, 1, 1261, 960, 42, '', ''),
+(901, 'Monument à Norman Bethune', NULL, 'Art public', 'Public art', 'Taille directe', 'Direct carving', '380 x 100 x 100 cm', 'Ville-Marie', 45.49597, -73.57946, 1, 1262, 961, 42, '', ''),
+(902, 'Les sœurs cardinales', 'Les sœurs cardinales (SISM-64)', 'Art public', 'Public art', 'Taille directe', 'Direct carving', '440 x 360 x 100', 'Ville-Marie', 45.499881, -73.594816, 1, 1264, 963, 42, '', ''),
+(903, 'L''ange de pierre', 'L''ange de pierre, (SISM-64)', 'Art public', 'Public art', 'Sculpté', 'Sculpted', '208 x 152cm', 'Ville-Marie', 45.500421, -73.593759, 1, 1265, 964, 42, '', ''),
+(904, 'La fondation de Montréal est décidée à Paris', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.50402, -73.587238, 1, 1267, 966, 45, '', ''),
+(905, 'Polaris en lumière', NULL, 'Art public', 'Public art', 'Image lumineuse projettée au sol', 'Illuminated image projected on the ground', NULL, 'Ville-Marie', 45.504636, -73.557128, 1, 1268, 968, 53, '', ''),
+(906, 'Équinoxe', NULL, 'Art public', 'Public art', 'Gravé; incrusté', 'Engraved; inlaid', '248 x 200', 'Ville-Marie', 45.50818, -73.55129, 1, 1269, 969, 43, '', ''),
+(907, 'Force', NULL, 'Art public', 'Public art', NULL, NULL, '330 x 2900 x 4500 cm', 'Ville-Marie', 45.512625, -73.553821, 1, 1270, 970, 42, '', ''),
+(908, 'Murale céramique', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Assemblage; peinture', 'Assembly; painting', '213,5 x 1559 cm ', 'Mercier–Hochelaga-Maisonneuve', 45.562047, -73.550076, 1, 1271, 971, 49, '', ''),
+(909, 'Monument à Nicolas Copernic', NULL, 'Art public', 'Public art', 'Bronzé coulé', 'Cast bronze ', '452 x 148 cm', 'Mercier–Hochelaga-Maisonneuve', 45.560641, -73.549375, 1, 1272, 972, 42, '', ''),
+(910, 'Dollard des Ormeaux meurt à Long-Sault pour sauver la coloni', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.504105, -73.587259, 1, 1273, 973, 45, '', ''),
+(911, 'Buste de José de San Martin', NULL, 'Art public', 'Public art', 'Fonte à la cire perdue', 'Iron cast in the cire perdue method', '276 x 105.5 x 95 cm', 'Ville-Marie', 45.489365, -73.580891, 1, 1274, 974, 42, '', ''),
+(912, 'Spatio-mobile #1', NULL, 'Art public', 'Public art', 'Soudé, peint', 'Welded, painted', '176 x 135 x 150 cm', 'Lachine', 45.430317, -73.666315, 1, 1275, 975, 42, '', ''),
+(913, 'Le phare du Cosmos', 'Phare cosmique', 'Art public', 'Public art', 'Taille; soudé', 'Carved; welded', '960 x 280 cm', 'Ville-Marie', 45.509335, -73.532705, 1, 1276, 975, 42, '', ''),
+(914, 'Parvis et portail #22', 'Place de l''an 2000', 'Art public', 'Public art', 'Soudé; poli', 'Welded; polished', '492 x 575 x 1000 cm', 'Saint-Laurent', 45.516024, -73.679906, 1, 1277, 975, 43, '', ''),
+(915, 'La force', 'La force (SISM-64) \rNon titrée (SISM-64)', 'Art public', 'Public art', 'Coulé; moulé', 'Cast; moulded', '244 x 533 x 275 cm', 'Ville-Marie', 45.500095, -73.595506, 1, 1278, 976, 42, '', ''),
+(916, 'La sainte Trinité', 'Holy Trinity', 'Art public', 'Public art', 'Moulé; soudé; peint (?)', 'Cast; welded; painted (?)', '130 x 90 x 165', 'Le Plateau-Mont-Royal', 45.517612, -73.569411, 1, 1279, 976, 42, '', ''),
+(917, 'Rectangle', 'Sans titre', 'Art public', 'Public art', 'Moulé; sculpté', 'Cast; sculpted', '245 x L:124 x L:85 cm', 'Rosemont–La Petite-Patrie', 45.560966, -73.564589, 1, 1280, 976, 42, '', ''),
+(918, 'Justice et paix', NULL, 'Art public', 'Public art', 'Taillé; sculpté; gravé; peint', 'Carved; sculpted; engraved; painted', '360 x 300 x 570 cm', 'Saint-Léonard', 45.586578, -73.595143, 1, 1282, 976, 42, '', ''),
+(919, 'L''argoulet', NULL, 'Art public', 'Public art', 'Sculpté; taillé; poli; assemblé', 'Sculpted; carved; polished; assembled', '550 x 130 x 242', 'Verdun', 45.472525, -73.570481, 1, 1283, 977, 42, '', ''),
+(920, 'Les cariatides', NULL, 'Art public', 'Public art', 'Découpé; collé; boulonné; taillé; peint; planté', 'Cut out; glued; screwed; carved; painted; planted', '262 x 610 x 1723 cm', 'Lachine', 45.428688, -73.684251, 1, 1284, 977, 43, '', ''),
+(921, 'Les dos blancs', NULL, 'Art public', 'Public art', 'Techniques multiples', 'Multiple techniques ', '251 x 350 x 930 cm', 'Saint-Laurent', 45.521679, -73.671706, 1, 1285, 977, 43, '', ''),
+(922, 'Le portage', NULL, 'Art public', 'Public art', 'Taillé; sculpté; gravé; boulonnée; collé', 'Carved; sculpted; engraved; screwed; glued', '265 x 260 x 800 cm', 'Lachine', 45.437485, -73.714281, 1, 1286, 977, 43, '', ''),
+(923, 'Cadran solaire', NULL, 'Art public', 'Public art', 'Soudage; coulé; anodisation; peint', 'Welding; cast; anodized; painted', '350 x 360 x 360 cm', 'Mercier–Hochelaga-Maisonneuve', 45.560805, -73.549767, 1, 1287, 978, 54, '', ''),
+(924, 'Story Rock', NULL, 'Art public', 'Public art', NULL, NULL, '244 x 240 x 220 cm', 'Lachine', 45.428096, -73.677199, 1, 1288, 979, 42, '', ''),
+(925, 'Le navigateur', NULL, 'Art public', 'Public art', 'Gravé', 'Engraved', '350 x 620 x 245 cm', 'Lachine', 45.438513, -73.719208, 1, 1289, 979, 42, '', ''),
+(926, 'Vortexit II', 'Vortexit 2', 'Art public', 'Public art', 'Assemblé; gravé; fixé', 'Assembled; engraved; attached', '270 x 1050 x 1440 cm', 'Lachine', 45.428603, -73.678586, 1, 1290, 979, 42, '', ''),
+(927, 'Non titré (Traitement pictural au plafond de l''ancien bureau', 'Traitement pictural au plafond de l''ancien bureau du conserv', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.522741, -73.565331, 1, 1291, 980, 45, '', ''),
+(928, 'Murale extérieure', 'Non titrée', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, '183 x 361,5 cm', 'Ville-Marie', 45.498526, -73.599161, 1, 1292, 981, 55, '', ''),
+(929, 'Des lauriers pour mémoire, Jean-Duceppe 1923-1990', NULL, 'Art public', 'Public art', 'Forge; soudure; assemblage', 'Forging; welding; assembly', '240 x  1130 cm', 'Rosemont–La Petite-Patrie', 45.543529, -73.566053, 1, 1293, 982, 43, '', ''),
+(930, 'Monument à Jacques Cartier', NULL, 'Art public', 'Public art', 'Statue originale : cuivre repoussé-estampé; Statue actuelle ', 'Original statue: copper repoussé-embossed; Current statue: c', '9.14 m (h) x 3.6 m (diamètre)', 'Le Sud-Ouest', 45.480058, -73.586269, 1, 1294, 983, 42, '', ''),
+(931, 'Le banc des amoureux', 'Lover''s Bench', 'Art public', 'Public art', 'Coulé', 'Cast', '184 x 240 x 150 cm', 'Rosemont–La Petite-Patrie', 45.556163, -73.558294, 1, 1295, 984, 42, '', ''),
+(932, 'Monument à sir John A. Macdonald', NULL, 'Art public', 'Public art', NULL, NULL, '1800 x 486 x 432 cm', 'Ville-Marie', 45.498786, -73.569638, 1, 1296, 985, 42, '', ''),
+(933, 'Wind Boat', 'Bateau à vent', 'Art public', 'Public art', 'Assemblé; imbriqué', 'Assembled; interlocked', '762 x 183 x 148 cm', 'LaSalle', 45.432687, -73.588115, 1, 1297, 986, 42, '', ''),
+(934, 'The Passing Song', 'Passing Song, The', 'Art public', 'Public art', NULL, NULL, '456 x 744 cm', 'Lachine', 45.428971, -73.681205, 1, 1298, 986, 43, '', ''),
+(935, 'The First Jewel', 'La femme au collier', 'Art public', 'Public art', 'Coulé', 'Cast', '172 x 115 x 70 cm', 'Rosemont–La Petite-Patrie', 45.559703, -73.556911, 1, 1299, 987, 42, '', ''),
+(936, 'Monument à la reine Victoria', NULL, 'Art public', 'Public art', NULL, NULL, '1190 x 437.5 x 437.5 cm', 'Ville-Marie', 45.501421, -73.561586, 1, 1301, 989, 42, '', ''),
+(937, 'L''étreinte', NULL, 'Art public', 'Public art', 'Aluminium: découpé; plié; soudé et assemblé. Granit: gravé a', 'Aluminum: cut out, bends; welded and assembled. Granite: San', 'Les différents ensemble de l''installation sont répartis dans', 'Ville-Marie', 45.512386, -73.563593, 1, 1302, 942, 43, '', ''),
+(938, 'Constellation en Sol', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Découpage au laser; impression; assemblage', 'Laser cutting; printing; assembly', NULL, 'Rosemont–La Petite-Patrie', 45.531832, -73.597543, 1, 1303, 991, 48, '', ''),
+(939, 'Hommage à l''esprit sportif', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Montréal-Nord', 45.594994, -73.637955, 1, 1304, 993, 49, '', ''),
+(940, 'La Bourrasque', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Découpe au laser', 'Laser cutting ', '2700 x 570 cm', 'Saint-Laurent', 45.504072, -73.705185, 1, 1305, 815, 42, '', ''),
+(941, 'Voiles', 'Voile I & Voile II', 'Art public', 'Public art', 'Poli, finition effectuée par meuleuse à disque (gros grain)', 'Polished, finished using a disk grinder (coarse grit)', '488 x 310 x 10 cm\r488 x 275 x 13 cm', 'Montréal-Nord', 45.603186, -73.642556, 1, 1306, 995, 42, '', ''),
+(942, 'Chorégraphie pour les humains et les étoiles', NULL, 'Art public', 'Public art', 'Béton coulé (stèles); vidéoprojections (oeuvre numérique)', NULL, 'Hauteur 1500cm', 'Mercier–Hochelaga-Maisonneuve', 45.560735, -73.550116, 1, 1307, -1, 53, '', 'Pour amener le public à se rapprocher de l’infiniment grand, Mouna Andraos et Melissa Mongiat ont imaginé une œuvre invitant le public à incarner différentes scènes cosmiques et à réinventer le mouvement des astres et des planètes avec leur corps. Au coucher du soleil, une image céleste apparaît sur la façade extérieure du planétarium près de l’entrée principale. Dès qu’une personne entre dans la zone d’interactivité, délimitée par sept stèles en béton posées sur le sol, des projections animent la surface du bâtiment, et le public est invité à faire l’expérience d’une danse cosmique. Le mouvement des passants, qui incarnent les astres et les planètes, déclenche l’animation de phénomènes célestes projetés sur la façade d’aluminium. Les chorégraphies peuvent être exécutées individuellement ou en groupe et font (re)découvrir, de manière ludique, le cosmos et l’astronomie à des visiteurs de tout âge. Pendant huit minutes, les participants suivent des instructions projetées sur la façade du planétarium et miment avec leur corps des phénomènes cosmiques dans une amusante séquence de mouvements. Un mélange ludique d’images animées et de passants devenus danseurs devient le théâtre de manifestations poétiques des astres et de l’univers.(source:artpublic.ville.montreal.qc.ca)'),
+(943, 'Carrefour', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Moulage; assemblage', 'Casting; assembly', NULL, 'Verdun', 45.460134, -73.544592, 1, 1308, 996, 42, '', ''),
+(944, 'Kate & Nora', NULL, 'Art public', 'Public art', NULL, NULL, '100 x 90 x 45 cm', 'Outremont', 45.517594, -73.597311, 1, 1309, 997, 43, '', ''),
+(945, 'COSMOTOME NO 7, OH HOMME !', NULL, 'Art public', 'Public art', NULL, NULL, NULL, 'Ville-Marie', 45.515301, -73.530778, 1, 1310, 998, 42, '', ''),
+(946, 'Point d''origine', NULL, 'Art public', 'Public art', 'Aluminium taillé, soudé et assemblé (fini satiné et gravé); ', NULL, '192 x 290 x 633,5 cm', 'Rosemont–La Petite-Patrie', 45.533555, -73.596281, 1, 1311, 999, 42, '', ''),
+(947, 'La vélocité des lieux', 'La grande roue', 'Art public', 'Public art', 'Assemblage', 'Assemblage', '19 x 16 x 13 m', 'Montréal-Nord', 45.596262, -73.642587, 1, 1312, -1, 42, '', 'Rencontre entre la sculpture monumentale et l’art forain, l’œuvre se compose de cinq silhouettes courbées évoquant des autobus, déposées sur huit colonnes d’acier ajouré. Le tout figure un manège communément appelé « grande roue ». L’œuvre, quoique statique, suggère le mouvement. Visible dans la distance, elle s’impose comme un élément clé du paysage urbain et se veut l’expression du flux routier et humain ambiant, à l’image de l’achalandage du secteur. Évoquant la collectivité, le jeu, le vertige, la fête et le plaisir du mouvement, cette œuvre est l’occasion d’une évasion par l’imaginaire à l’intérieur d’un contexte où règne l’efficacité des déplacements quotidiens. (source:artpublic.ville.montreal.qc.ca)'),
+(948, 'oeuvretest', 'oeuvretest', 'oeuvretest', 'oeuvretest', 'oeuvretest', 'oeuvretest', 'oeuvretest', 'Saint-Laurent', 45.21, -73.21, 1, 1313, 994, 44, '', ''),
+(949, 'testOeuvre', 'cattest', 'cattest', 'cattest', 'cattest', 'cattest', 'cattest', 'Saint-Laurent', 45.23, -73.54, 1, 1314, 995, 43, '', '');
 
 -- --------------------------------------------------------
 
@@ -1701,11 +1685,10 @@ INSERT INTO `oeuvre` (`IdOeuvre`, `Titre`, `TitreVariante`, `Collection`, `Colle
 -- Structure de la table `photos`
 --
 
-CREATE TABLE IF NOT EXISTS `photos` (
-  `IdPhotographie` int(11) NOT NULL AUTO_INCREMENT,
-  `Photo` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`IdPhotographie`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+CREATE TABLE `photos` (
+  `IdPhotographie` int(11) NOT NULL,
+  `Photo` varchar(60) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `photos`
@@ -1723,12 +1706,10 @@ INSERT INTO `photos` (`IdPhotographie`, `Photo`) VALUES
 -- Structure de la table `possede`
 --
 
-CREATE TABLE IF NOT EXISTS `possede` (
-  `IdOeuvre` int(11) NOT NULL AUTO_INCREMENT,
-  `IdPhotographie` int(11) NOT NULL,
-  PRIMARY KEY (`IdOeuvre`,`IdPhotographie`),
-  KEY `FK_possede_IdPhotographie` (`IdPhotographie`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=950 ;
+CREATE TABLE `possede` (
+  `IdOeuvre` int(11) NOT NULL,
+  `IdPhotographie` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=950 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `possede`
@@ -1740,6 +1721,118 @@ INSERT INTO `possede` (`IdOeuvre`, `IdPhotographie`) VALUES
 (949, 14),
 (949, 15);
 
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`IdAdmin_`);
+
+--
+-- Index pour la table `adresse`
+--
+ALTER TABLE `adresse`
+  ADD PRIMARY KEY (`IdAdresse`);
+
+--
+-- Index pour la table `artiste`
+--
+ALTER TABLE `artiste`
+  ADD PRIMARY KEY (`IdArtiste`);
+
+--
+-- Index pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`IdCat`);
+
+--
+-- Index pour la table `est_composee`
+--
+ALTER TABLE `est_composee`
+  ADD PRIMARY KEY (`IdOeuvre`,`IdMat`),
+  ADD KEY `FK_est_composée_IdMat` (`IdMat`);
+
+--
+-- Index pour la table `materiaux`
+--
+ALTER TABLE `materiaux`
+  ADD PRIMARY KEY (`IdMat`);
+
+--
+-- Index pour la table `oeuvre`
+--
+ALTER TABLE `oeuvre`
+  ADD PRIMARY KEY (`IdOeuvre`),
+  ADD KEY `FK_Oeuvre_IdAdresse` (`IdAdresse`),
+  ADD KEY `FK_Oeuvre_IdArtiste` (`IdArtiste`),
+  ADD KEY `FK_Oeuvre_IdCat` (`IdCat`);
+
+--
+-- Index pour la table `photos`
+--
+ALTER TABLE `photos`
+  ADD PRIMARY KEY (`IdPhotographie`);
+
+--
+-- Index pour la table `possede`
+--
+ALTER TABLE `possede`
+  ADD PRIMARY KEY (`IdOeuvre`,`IdPhotographie`),
+  ADD KEY `FK_possede_IdPhotographie` (`IdPhotographie`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `IdAdmin_` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `adresse`
+--
+ALTER TABLE `adresse`
+  MODIFY `IdAdresse` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1315;
+--
+-- AUTO_INCREMENT pour la table `artiste`
+--
+ALTER TABLE `artiste`
+  MODIFY `IdArtiste` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1000;
+--
+-- AUTO_INCREMENT pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  MODIFY `IdCat` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=58;
+--
+-- AUTO_INCREMENT pour la table `est_composee`
+--
+ALTER TABLE `est_composee`
+  MODIFY `IdOeuvre` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=950;
+--
+-- AUTO_INCREMENT pour la table `materiaux`
+--
+ALTER TABLE `materiaux`
+  MODIFY `IdMat` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=689;
+--
+-- AUTO_INCREMENT pour la table `oeuvre`
+--
+ALTER TABLE `oeuvre`
+  MODIFY `IdOeuvre` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=950;
+--
+-- AUTO_INCREMENT pour la table `photos`
+--
+ALTER TABLE `photos`
+  MODIFY `IdPhotographie` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT pour la table `possede`
+--
+ALTER TABLE `possede`
+  MODIFY `IdOeuvre` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=950;
 --
 -- Contraintes pour les tables exportées
 --
@@ -1765,7 +1858,3 @@ ALTER TABLE `oeuvre`
 ALTER TABLE `possede`
   ADD CONSTRAINT `FK_possede_IdOeuvre` FOREIGN KEY (`IdOeuvre`) REFERENCES `oeuvre` (`IdOeuvre`),
   ADD CONSTRAINT `FK_possede_IdPhotographie` FOREIGN KEY (`IdPhotographie`) REFERENCES `photos` (`IdPhotographie`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

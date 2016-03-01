@@ -91,17 +91,24 @@ class Oeuvre {
         * @var Char Photoprésentation
         **/
         public $photoPresentation;
+    
+        /**
+        *
+        * @var Char idMateriaux
+        **/
+        public $description;
 
         /**
         *
         * @var Char idMateriaux
         **/
-        public $IdMateriaux;
-
+        public $IdMateriaux; 
+       
         /**
          * @var BaseDDonnee Objet base de données qui permet la connexion
          */
         static $database;
+        //////SETTER
         /**
          *
          * @brief set l'id de l'oeuvre
@@ -216,6 +223,14 @@ class Oeuvre {
         }
         /**
          *
+         * @brief set description
+         */
+        public function setDescription($val) {
+            $this->description=$val;
+        }
+        //////GETTER
+        /**
+         *
          * @brief get id de l'oeuvre
          */
         public function getIdOeuvre() {
@@ -327,6 +342,13 @@ class Oeuvre {
         echo $this->photoPresentation;
         }
         /**
+         *
+         * @brief  get la description de l'oeuvre
+         */
+        public function getDescription($val) {
+        echo $this->description=$val;
+        }
+        /**
          * @brief Constructeur de la classe ouvres
          * @param INT $idOeuvre
          * @param string $titre
@@ -344,8 +366,9 @@ class Oeuvre {
          * @param INT $idArtiste
          * @param INT $idCat
          * @param string $photoPresentation
+         * @param string $description
          */
-    public function __construct($idOeuvre, $titre, $titreVariante, $collection ,$collectionEN ,$technique, $techniqueEN, $dimensions, $arrondissement, $coordonneeLatitude, $coordonneeLongitude, $estValide, $idAdresse, $idArtiste, $idCat, $photoPresentation) {
+    public function __construct($idOeuvre, $titre, $titreVariante, $collection ,$collectionEN ,$technique, $techniqueEN, $dimensions, $arrondissement, $coordonneeLatitude, $coordonneeLongitude, $estValide, $idAdresse, $idArtiste, $idCat, $photoPresentation, $description) {
         if (!isset(self::$database))
             self::$database = new pdoBDD();
             $this->idOeuvre = $idOeuvre;
@@ -364,6 +387,7 @@ class Oeuvre {
             $this->idArtiste = $idArtiste;
             $this->idCategorie = $idCat;
             $this->photoPresentation = $photoPresentation;
+            $this->description = $description;
     }
 
 
@@ -380,7 +404,7 @@ class Oeuvre {
 
         foreach ($lignes as $ligne) {
 
-            $uneOeuvre=new Oeuvre($ligne["IdOeuvre"],$ligne["Titre"], $ligne["TitreVariante"], $ligne["Collection"], $ligne["CollectionEN"], $ligne["Technique"], $ligne["TechniqueEN"], $ligne["Dimensions"], $ligne["Arrondissement"], $ligne["CoordonneeLatitude"], $ligne["CoordonneeLongitude"], $ligne["EstValide"], $ligne["IdAdresse"],  $ligne["IdArtiste"], $ligne["IdCat"],"");
+            $uneOeuvre=new Oeuvre($ligne["IdOeuvre"],$ligne["Titre"], $ligne["TitreVariante"], $ligne["Collection"], $ligne["CollectionEN"], $ligne["Technique"], $ligne["TechniqueEN"], $ligne["Dimensions"], $ligne["Arrondissement"], $ligne["CoordonneeLatitude"], $ligne["CoordonneeLongitude"], $ligne["EstValide"], $ligne["IdAdresse"],  $ligne["IdArtiste"], $ligne["IdCat"],"","");
 
             $LesOeuvres[] = $uneOeuvre;
         }
@@ -403,7 +427,7 @@ class Oeuvre {
 
         foreach ($lignes as $ligne) {
 
-            $uneOeuvre=new Oeuvre($ligne["IdOeuvre"],$ligne["Titre"], $ligne["TitreVariante"], $ligne["Collection"], $ligne["CollectionEN"], $ligne["Technique"], $ligne["TechniqueEN"], $ligne["Dimensions"], $ligne["Arrondissement"], $ligne["CoordonneeLatitude"], $ligne["CoordonneeLongitude"], $ligne["EstValide"], $ligne["IdAdresse"],  $ligne["IdArtiste"], $ligne["IdCat"],"");
+            $uneOeuvre=new Oeuvre($ligne["IdOeuvre"],$ligne["Titre"], $ligne["TitreVariante"], $ligne["Collection"], $ligne["CollectionEN"], $ligne["Technique"], $ligne["TechniqueEN"], $ligne["Dimensions"], $ligne["Arrondissement"], $ligne["CoordonneeLatitude"], $ligne["CoordonneeLongitude"], $ligne["EstValide"], $ligne["IdAdresse"],  $ligne["IdArtiste"], $ligne["IdCat"],"","");
 
             $LesOeuvres[] = $uneOeuvre;
         }
@@ -425,7 +449,7 @@ class Oeuvre {
 
         foreach ($lignes as $ligne) {
 
-            $uneOeuvre=new Oeuvre( $ligne["IdOeuvre"], $ligne["Titre"], $ligne["TitreVariante"], $ligne["Collection"], "", $ligne["Technique"], "", $ligne["Dimensions"], $ligne["Arrondissement"],"", "" , $ligne["EstValide"],"","","" ,"");
+            $uneOeuvre=new Oeuvre( $ligne["IdOeuvre"], $ligne["Titre"], $ligne["TitreVariante"], $ligne["Collection"], "", $ligne["Technique"], "", $ligne["Dimensions"], $ligne["Arrondissement"],"", "" , $ligne["EstValide"],"","","" ,"","");
 
             $LesOeuvres[] = $uneOeuvre;
         }
@@ -476,7 +500,7 @@ class Oeuvre {
         self::$database->query("SELECT DISTINCT Arrondissement FROM oeuvre");
         $lignes = self::$database->resultset();
         foreach ($lignes as $ligne) {
-            $unArrondissement = new Oeuvre("", "", "", "" ,"" ,"", "", "", $ligne['Arrondissement'], "", "", "","","","","");
+            $unArrondissement = new Oeuvre("", "", "", "" ,"" ,"", "", "", $ligne['Arrondissement'], "", "", "","","","","","");
             $listeArrondissement[] = $unArrondissement;
         }
         return $listeArrondissement;
@@ -493,7 +517,7 @@ class Oeuvre {
         self::$database->bind(':IdCat', $idCat);
         $lignes = self::$database->resultset();
         foreach ($lignes as $ligne) {
-         $oeuvre = new Oeuvre($ligne['IdOeuvre'],  $ligne['Titre'], "", "" ,"" ,"", "", "", "", "", "", "","","","",$ligne['photoPresentation']);
+         $oeuvre = new Oeuvre($ligne['IdOeuvre'],  $ligne['Titre'], "", "" ,"" ,"", "", "", "", "", "", "","","","",$ligne['photoPresentation'],"");
         $listeOeuvres[] = $oeuvre;
         }
         if (!empty($listeOeuvres))
@@ -508,12 +532,12 @@ class Oeuvre {
      */
     public static function afficheOeuvreParArtiste($idArtiste)
     {
-        self::$database->query("SELECT Titre, photoPresentation FROM oeuvre JOIN artiste ON oeuvre.IdArtiste = artiste.IdArtiste WHERE artiste.IdArtiste = :idArtiste AND EstValide = 1");
+        self::$database->query("SELECT IdOeuvre, Titre, photoPresentation FROM oeuvre JOIN artiste ON oeuvre.IdArtiste = artiste.IdArtiste WHERE artiste.IdArtiste = :idArtiste AND EstValide = 1");
         //On lie les paramètres aux valeurs
         self::$database->bind(':idArtiste', $idArtiste);
         $lignes = self::$database->resultset();
         foreach ($lignes as $ligne) {
-         $oeuvre = new Oeuvre("",  $ligne['Titre'], "", "" ,"" ,"", "", "", "", "", "", "","","","",$ligne['photoPresentation']);
+         $oeuvre = new Oeuvre($ligne['IdOeuvre'], $ligne['Titre'], "", "" ,"" ,"", "", "", "", "", "", "","","","",$ligne['photoPresentation'],"");
         $listeOeuvres[] = $oeuvre;
         }
             return $listeOeuvres;
@@ -618,7 +642,7 @@ class Oeuvre {
 
         foreach ($lignes as $ligne) {
 
-            $oeuvreCoordonnees=new Oeuvre("",$ligne["Titre"], "", "", "", "", "", "","", $ligne["CoordonneeLatitude"], $ligne["CoordonneeLongitude"], "", "",  "", "","");
+            $oeuvreCoordonnees=new Oeuvre("",$ligne["Titre"], "", "", "", "", "", "","", $ligne["CoordonneeLatitude"], $ligne["CoordonneeLongitude"], "", "",  "", "","","");
 
             $oeuvresCoordonnes[] = $oeuvreCoordonnees;
         }
@@ -659,7 +683,7 @@ class Oeuvre {
      */
     public static function afficherUneOeuvre($idOeuvre)
     {
-        self::$database->query("SELECT IdOeuvre, Titre, TitreVariante, Collection, CollectionEN, Technique, TechniqueEN, Dimensions, Arrondissement, CoordonneeLatitude, CoordonneeLongitude, EstValide, IdAdresse, IdArtiste, IdCat, photoPresentation FROM oeuvre WHERE IdOeuvre=:IdOeuvre");
+        self::$database->query("SELECT IdOeuvre, Titre, TitreVariante, Collection, CollectionEN, Technique, TechniqueEN, Dimensions, Arrondissement, CoordonneeLatitude, CoordonneeLongitude, EstValide, IdAdresse, IdArtiste, IdCat, photoPresentation, description FROM oeuvre WHERE IdOeuvre=:IdOeuvre");
         self::$database->bind("IdOeuvre",$idOeuvre);
         
         $ligne = self::$database->uneLigne();
@@ -739,7 +763,7 @@ class Oeuvre {
 
  public function enregistreOuvresAdmin()
  {
-  //On lie les paramètres auxvaleurs
+  //On lie les paramètres aux valeurs
 
   $db = self::$database->getDatabase();
   $titre =  $this->titre;
@@ -781,7 +805,7 @@ class Oeuvre {
 
         foreach ($lignes as $ligne) {
 
-            $oeuvre = new Oeuvre($ligne['IdOeuvre'],  $ligne['Titre'], "", "" ,"" ,"", "", "", "", "", "", "","","","",$ligne['photoPresentation']);
+            $oeuvre = new Oeuvre($ligne['IdOeuvre'],  $ligne['Titre'], "", "" ,"" ,"", "", "", "", "", "", "","","","",$ligne['photoPresentation'],"");
             $listeOeuvres[] = $oeuvre;
         }
         
@@ -902,14 +926,14 @@ class photoOeuvre extends Oeuvre
          */
 
 
-    public function __construct($idOeuvre, $titre, $titreVariante, $collection ,$collectionEN ,$technique, $techniqueEN, $dimensions, $arrondissement, $coordonneeLatitude, $coordonneeLongitude, $estValide,$idAdresse, $idArtiste, $idCat, $photoPresentation, $idPhotographie, $photo)
+    public function __construct($idOeuvre, $titre, $titreVariante, $collection ,$collectionEN ,$technique, $techniqueEN, $dimensions, $arrondissement, $coordonneeLatitude, $coordonneeLongitude, $estValide,$idAdresse, $idArtiste, $idCat, $photoPresentation, $description, $idPhotographie, $photo)
     {
 
         if (!isset(self::$database))
             self::$database = new pdoBDD();
 
             //:: on va chercher le parent (class oeuvres)
-            parent::__construct($idOeuvre, $titre, $titreVariante, $collection ,$collectionEN ,$technique, $techniqueEN, $dimensions, $arrondissement, $coordonneeLatitude, $coordonneeLongitude, $estValide, $idAdresse, $idArtiste, $idCat, $photoPresentation);
+            parent::__construct($idOeuvre, $titre, $titreVariante, $collection ,$collectionEN ,$technique, $techniqueEN, $dimensions, $arrondissement, $coordonneeLatitude, $coordonneeLongitude, $estValide, $idAdresse, $idArtiste, $idCat, $photoPresentation,$description);
 
             $this->idPhotographie = $idPhotographie;
             $this->photo = $photo;
@@ -919,17 +943,18 @@ class photoOeuvre extends Oeuvre
 
     /**
      * @brief méthode qui affiche toute les photographies des oeuvres
-     * @author Alexandre BOUET  
+     * @author Alexandre BOUET
+     * @author Cristian MANRIQUE 
      */
 
     public static function afficheToutesLesPhotos()
     {
-        self::$database->query("SELECT oeuvre.Titre, oeuvre.photoPresentation FROM oeuvre WHERE EstValide = 1");
+        self::$database->query("SELECT oeuvre.idOeuvre, oeuvre.Titre, oeuvre.photoPresentation FROM oeuvre WHERE EstValide = 1");
 
         $lignes = self::$database->resultset();
 
         foreach ($lignes as $ligne) {
-            $unePhoto = new photoOeuvre ("",  $ligne['Titre'], "", "" ,"" ,"", "", "", "", "", "", "","", "","",$ligne['photoPresentation'] ,"","");
+            $unePhoto = new photoOeuvre ($ligne['idOeuvre'],  $ligne['Titre'], "", "" ,"" ,"", "", "", "", "", "", "","", "","",$ligne['photoPresentation'] ,"","","");
             $ListePhotosOeuvres[] = $unePhoto;
         }
 
@@ -954,7 +979,7 @@ class photoOeuvre extends Oeuvre
         self::$database->bind(':idOeuvre', $idOeuvre);
         $lignes = self::$database->resultset();
         foreach ($lignes as $ligne) {
-            $unePhoto = new photoOeuvre ("","","","","","","","","","","","","", "","","","",$ligne['Photo']);
+            $unePhoto = new photoOeuvre ("","","","","","","","","","","","","", "","","","",$ligne['Photo'],"");
                      $listePhoto[] = $unePhoto;
             }
         if (!empty($listePhoto))
@@ -974,7 +999,7 @@ class photoOeuvre extends Oeuvre
 
     public static function affichePhotosOeuvresParIdArt($idArtiste)
     {
-        self::$database->query("SELECT oeuvre.Titre, oeuvre.photoPresentation FROM oeuvre JOIN artiste ON oeuvre.IdArtiste = artiste.IdArtiste WHERE oeuvre.IdArtiste=:idArtiste AND EstValide = 1");
+        self::$database->query("SELECT oeuvre.idOeuvre, oeuvre.Titre, oeuvre.photoPresentation FROM oeuvre JOIN artiste ON oeuvre.IdArtiste = artiste.IdArtiste WHERE oeuvre.IdArtiste=:idArtiste AND EstValide = 1");
 
         //On lie les paramètres aux valeurs
         self::$database->bind(':idArtiste', $idArtiste);
@@ -982,7 +1007,7 @@ class photoOeuvre extends Oeuvre
         $lignes = self::$database->resultset();
 
         foreach ($lignes as $ligne) {
-            $unePhoto = new photoOeuvre ("",  $ligne['Titre'], "", "" ,"" ,"", "", "", "", "", "", "","", "","",$ligne['photoPresentation'] ,"","");
+            $unePhoto = new photoOeuvre ($ligne['idOeuvre'],  $ligne['Titre'], "", "" ,"" ,"", "", "", "", "", "", "","", "","",$ligne['photoPresentation'] ,"","","");
             $ListePhotosOeuvres[] = $unePhoto;
         }
 
@@ -1002,12 +1027,12 @@ class photoOeuvre extends Oeuvre
 
     public static function affichePhotosOeuvresParNomCat($NomSousCat)
     {
-        self::$database->query("SELECT oeuvre.Titre, oeuvre.photoPresentation FROM oeuvre JOIN categorie ON oeuvre.IdCat = categorie.IdCat WHERE categorie.NomSousCat =:NomSousCat AND EstValide = 1");
+        self::$database->query("SELECT oeuvre.idOeuvre, oeuvre.Titre, oeuvre.photoPresentation FROM oeuvre JOIN categorie ON oeuvre.IdCat = categorie.IdCat WHERE categorie.NomSousCat =:NomSousCat AND EstValide = 1");
         //On lie les paramètres auxvaleurs
         self::$database->bind(':NomSousCat', $NomSousCat);
         $lignes = self::$database->resultset();
         foreach ($lignes as $ligne) {
-            $unePhoto = new photoOeuvre ("",  $ligne['Titre'], "", "" ,"" ,"", "", "", "", "", "", "","", "","",$ligne['photoPresentation'] ,"","");
+            $unePhoto = new photoOeuvre ($ligne['idOeuvre'],  $ligne['Titre'], "", "" ,"" ,"", "", "", "", "", "", "","", "","",$ligne['photoPresentation'] ,"","","");
             $ListePhotosOeuvres[] = $unePhoto;
         }
         if (!empty($ListePhotosOeuvres))
@@ -1026,12 +1051,12 @@ class photoOeuvre extends Oeuvre
 
     public static function affichePhotosOeuvresParNomMat($NomMateriaux)
     {
-        self::$database->query("SELECT oeuvre.Titre, oeuvre.photoPresentation FROM oeuvre JOIN est_composee ON oeuvre.IdOeuvre = est_composee.IdOeuvre JOIN materiaux ON est_composee.IdMat = materiaux.IdMat WHERE materiaux.NomMateriaux=:NomMateriaux AND EstValide = 1");
+        self::$database->query("SELECT oeuvre.idOeuvre, oeuvre.Titre, oeuvre.photoPresentation FROM oeuvre JOIN est_composee ON oeuvre.IdOeuvre = est_composee.IdOeuvre JOIN materiaux ON est_composee.IdMat = materiaux.IdMat WHERE materiaux.NomMateriaux=:NomMateriaux AND EstValide = 1");
         //On lie les paramètres auxvaleurs
         self::$database->bind(':NomMateriaux', $NomMateriaux);
         $lignes = self::$database->resultset();
         foreach ($lignes as $ligne) {
-            $unePhoto = new photoOeuvre("",  $ligne['Titre'], "", "" ,"" ,"", "", "", "", "", "", "","", "","",$ligne['photoPresentation'] ,"","");
+            $unePhoto = new photoOeuvre($ligne['idOeuvre'],  $ligne['Titre'], "", "" ,"" ,"", "", "", "", "", "", "","", "","",$ligne['photoPresentation'] ,"","","");
             $ListePhotosOeuvres[] = $unePhoto;
         }
         if (!empty($ListePhotosOeuvres))
@@ -1048,12 +1073,12 @@ class photoOeuvre extends Oeuvre
 
     public static function affichePhotosOeuvresParNomArrond($NomArrond)
     {
-        self::$database->query("SELECT oeuvre.Titre, oeuvre.photoPresentation FROM oeuvre WHERE oeuvre.Arrondissement = :NomArrond AND EstValide = 1");
+        self::$database->query("SELECT oeuvre.idOeuvre, oeuvre.Titre, oeuvre.photoPresentation FROM oeuvre WHERE oeuvre.Arrondissement = :NomArrond AND EstValide = 1");
         //On lie les paramètres auxvaleurs
         self::$database->bind(':NomArrond', $NomArrond);
         $lignes = self::$database->resultset();
         foreach ($lignes as $ligne) {
-            $unePhoto = new photoOeuvre("",  $ligne['Titre'], "", "" ,"" ,"", "", "", "", "", "", "","", "","",$ligne['photoPresentation'] ,"","");
+            $unePhoto = new photoOeuvre($ligne['idOeuvre'],  $ligne['Titre'], "", "" ,"" ,"", "", "", "", "", "", "","", "","",$ligne['photoPresentation'] ,"","","");
             $ListePhotosOeuvres[] = $unePhoto;
         }
         if (!empty($ListePhotosOeuvres))

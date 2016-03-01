@@ -1182,10 +1182,6 @@ public function adminAjoutImageArtiste($listeArtistes) {
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
-                    
-                    <div class="alert alert-info">
-                        L'image que vous choisiez pour un artiste doit faire maximum 250*250 pixels.
-                    </div>
 
                     <div class="panel panel-green">
                         <div class="panel-heading">
@@ -1197,8 +1193,11 @@ public function adminAjoutImageArtiste($listeArtistes) {
                                     <form action="" method="post" name="form4" enctype="multipart/form-data">
 
                                         <div class="form-group">
+                                                <div class="alert alert-info">
+                                                   Etape 1 : Selectionnez un artiste 
+                                                </div>
                                             <label>Artiste sans photographies présents dans la base de donnés</label>
-                                            <select class="form-control" name="ajoutPhoto">
+                                            <select class="form-control" name="ajoutPhoto" onchange="affichageEtape2()">
                                                 <option value="" selected >Choisir un artiste</option>
                                                 <?php
 
@@ -1214,12 +1213,15 @@ public function adminAjoutImageArtiste($listeArtistes) {
                                                 ?>
                                             </select>
                                         </div>
+                                        <div id="Etape2Admin">
+                                           <div class="alert alert-info">
+                                                   Etape 2 : Selectionnez une image (maximum 250*250 pixels)
+                                            </div>
                                         
-                                        <label class="control-label">Selectionnez une image</label>
-                                        
-                                        <input name="upload" type="file" /><br>
-
+                                        <input name="upload" type="file" onchange="loadFile(event)" /><br>
+                                            <img id="output"/>
                                         <input type="submit" class="btn btn-lg btn-success"  value="Ajout photographie">
+                                        </div>
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
@@ -1271,9 +1273,6 @@ public function adminAjoutImageCat($categories) {
             <div class="row">
                 <div class="col-lg-12">
                     
-                    <div class="alert alert-info">
-                        Choissiez un fichier, puis selectionnez la zone de l'image que vous voulez rogner pour l'envoyer.
-                    </div>
 
                     <div class="panel panel-green">
                         <div class="panel-heading">
@@ -1285,8 +1284,11 @@ public function adminAjoutImageCat($categories) {
                                     <form action="" method="post" name="form4" enctype="multipart/form-data" onsubmit="return crop();">
 
                                         <div class="form-group">
+                                                 <div class="alert alert-info">
+                                                   Etape 1 : Selectionnez une catégorie
+                                                </div>
                                             <label>Catégories sans photographies présents dans la base de donnés</label>
-                                            <select class="form-control" name="ajoutPhoto">
+                                            <select class="form-control" name="ajoutPhoto" onchange="affichageEtape2()">
                                                 <option value="" selected >Choisir une catégorie</option>
                                                 <?php
 
@@ -1302,33 +1304,29 @@ public function adminAjoutImageCat($categories) {
                                                 ?>
                                             </select>
                                         </div>
-                                        
-                                     <label class="control-label">Selectionnez une image</label>
-                                        
-                                        <input name="upload" type="file" accept="image/*" onchange="loadFile(event)"/><br>
-                                        
-                                     <div id="crop_wrapper" style="display:none">
-                                          <img id="output"/>
-                                          <div id="crop_div"></div>
-                                     </div>
+                                    <div id="Etape2Admin">
+                                              <div class="alert alert-info">
+                                                       Etape 2 : Selectionnez une image, et déplacez le cadre
+                                                       sur votre photographie pour la rogner.
+                                              </div>
 
-                                      <input type="hidden" value="" id="top" name="top">
-                                      <input type="hidden" value="" id="left" name="left">
-                                      <input type="hidden" value="" id="right" name="right">
-                                      <input type="hidden" value="" id="bottom" name="bottom">                                        
+                                            <input name="upload" type="file" accept="image/*" onchange="loadFile(event)"/><br>
 
-                                        <input type="submit" class="btn btn-lg btn-success"  value="Ajout photographie">
-                                        
+                                         <div id="crop_wrapper" style="display:none">
+                                              <img id="output"/>
+                                              <div id="crop_div"></div>
+                                         </div>
 
+                                          <input type="hidden" value="" id="top" name="top">
+                                          <input type="hidden" value="" id="left" name="left">
+                                          <input type="hidden" value="" id="right" name="right">
+                                          <input type="hidden" value="" id="bottom" name="bottom">                                        
+
+                                            <input type="submit" class="btn btn-lg btn-success"  value="Ajout photographie">
+                                     </div>   
+                                    
                                     </form>
                                 </div>
-                                <script>
-                                  var loadFile = function(event) {
-                                    var output = document.getElementById('output');
-                                    output.src = URL.createObjectURL(event.target.files[0]);
-                                    document.getElementById('crop_wrapper').style.display="block";
-                                  };
-                                </script>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
                             </div>
@@ -1378,11 +1376,7 @@ public function adminAjoutImagePresentationOeuvre($listeOeuvre) {
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
-                    
-                    
-                    <div class="alert alert-info">
-                        Choissiez un fichier, puis selectionnez la zone de l'image que vous voulez rogner pour l'envoyer.
-                    </div>
+
                     <div class="panel panel-green">
                         <div class="panel-heading">
                             Formulaire d'ajout d'image de présentation d'oeuvre
@@ -1393,8 +1387,11 @@ public function adminAjoutImagePresentationOeuvre($listeOeuvre) {
                                     <form action="" method="post" name="form4" enctype="multipart/form-data" onsubmit="return crop();">
 
                                         <div class="form-group">
+                                                <div class="alert alert-info">
+                                                   Etape 1 : Selectionnez une oeuvre
+                                                </div>
                                             <label>Oeuvres sans images de présentation dans la base de donnée</label>
-                                            <select class="form-control" name="ajoutPhoto">
+                                            <select class="form-control" name="ajoutPhoto" onchange="affichageEtape2()">
                                                 <option value="" selected >Choisir une oeuvre</option>
                                                 <?php
 
@@ -1410,33 +1407,29 @@ public function adminAjoutImagePresentationOeuvre($listeOeuvre) {
                                                 ?>
                                             </select>
                                         </div>
+                                       <div id="Etape2Admin">
+                                              <div class="alert alert-info">
+                                                       Etape 2 : Selectionnez une image, et déplacez le cadre
+                                                       sur votre photographie pour la rogner.
+                                              </div>
                                         
-                                        <label class="control-label">Selectionnez une image</label>
-                                        
-                                        <input name="upload" type="file" accept="image/*" onchange="loadFile(event)"/><br>
-                                        
-                                     <div id="crop_wrapper" style="display:none">
-                                          <img id="output"/>
-                                          <div id="crop_div"></div>
-                                     </div>
+                                              <input name="upload" type="file" accept="image/*" onchange="loadFile(event)"/><br>
 
-                                      <input type="hidden" value="" id="top" name="top">
-                                      <input type="hidden" value="" id="left" name="left">
-                                      <input type="hidden" value="" id="right" name="right">
-                                      <input type="hidden" value="" id="bottom" name="bottom">                                        
+                                               <div id="crop_wrapper" style="display:none">
+                                                  <img id="output"/>
+                                                  <div id="crop_div"></div>
+                                               </div>
 
-                                        <input type="submit" class="btn btn-lg btn-success"  value="Ajout photographie">
+                                              <input type="hidden" value="" id="top" name="top">
+                                              <input type="hidden" value="" id="left" name="left">
+                                              <input type="hidden" value="" id="right" name="right">
+                                              <input type="hidden" value="" id="bottom" name="bottom">                                        
+
+                                             <input type="submit" class="btn btn-lg btn-success"  value="Ajout photographie">
                                         
-
+                                        </div>
                                     </form>
                                 </div>
-                                <script>
-                                  var loadFile = function(event) {
-                                    var output = document.getElementById('output');
-                                    output.src = URL.createObjectURL(event.target.files[0]);
-                                    document.getElementById('crop_wrapper').style.display="block";
-                                  };
-                                </script>
                                 <!-- /.col-lg-6 (nested) -->
                             </div>
                             <!-- /.row (nested) -->

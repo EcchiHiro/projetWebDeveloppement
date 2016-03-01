@@ -258,11 +258,12 @@
       self::$database->bind(':Rue', $nomRue); 
   
 
-    
-
       self::$database->execute();
      }
+        
+        
+        
 
-    }
+}
 
 ?>

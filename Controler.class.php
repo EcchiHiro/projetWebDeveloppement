@@ -921,7 +921,7 @@ class Controler
                      $nomArtiste=$var["Nom"];
                  }
 
-                 $artiste=new Artiste("","","","","");
+                 $artiste=new Artiste("","","","","","");
                  $idArtiste=$artiste->recuperIdArtiste($nomArtiste);
 
             //Recuperer les categories. 
@@ -942,7 +942,8 @@ class Controler
                     }
                    
                }
-            }   
+            }  
+            header("location:index.php?page=admin");
         } 
 
          /**
@@ -1038,7 +1039,7 @@ class Controler
                     else 
                        $prenom = "";
                         
-                    $artiste = new Artiste("", $nom, $prenom,$nomCollectif, "");
+                    $artiste = new Artiste("", $nom, $prenom,$nomCollectif, "","");
                      if (!$artiste->existArtiste()){
                             $artiste->enregistreArtiste();  
                     }                          

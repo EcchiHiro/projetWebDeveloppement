@@ -229,7 +229,7 @@
             foreach ($lignes as $ligne) {
 
              $unArtiste = new Artiste($ligne['IdArtiste'], $ligne['Nom'], $ligne['Prenom'], $ligne['Collectif'], $ligne['photoArtiste'],$ligne['descriptionArtiste']);
-
+            
                 $listeArtiste[] = $unArtiste;
             }
 
@@ -296,6 +296,8 @@
             self::$database->bind(':Collectif', $this->collectif);
 
             self::$database->bind(':photoArtiste', $this->photoArtiste);
+         
+            
 
             self::$database->execute();
         }
@@ -399,7 +401,7 @@
 
             foreach ($lignes as $ligne) {
 
-                $unArtiste = new Artiste($ligne['IdArtiste'], $ligne['Nom'], $ligne['Prenom'], $ligne['Collectif'], $ligne['photoArtiste']);
+             $unArtiste = new Artiste($ligne['IdArtiste'], $ligne['Nom'], $ligne['Prenom'], $ligne['Collectif'], $ligne['photoArtiste'],$ligne['descriptionArtiste']);
 
                 $listeArtiste[] = $unArtiste;
             }
@@ -428,14 +430,15 @@
          * @author Stéphane Leclerc  
          */
 
-        public function ajoutDescriptionArtiste()
+     public function ajoutDescriptionArtiste($idArtiste,$descriptionArtiste)
         {
-         self::$database->query("UPDATE artiste SET descriptionArtiste = :descriptionArtiste WHERE IdArtiste =:idArtiste");
+         self::$database->query("UPDATE artiste SET descriptionArtiste = :descriptionArtiste WHERE IdArtiste =:IdArtiste");
 
-         self::$database->bind(":idArtiste", $idArtiste);
+         self::$database->bind(":IdArtiste", $idArtiste);
          self::$database->bind(":descriptionArtiste", $descriptionArtiste);
 
          self::$database->execute();
+
         }
 
 

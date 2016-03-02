@@ -86,7 +86,10 @@ class Controler
                     break;                             
                 case 'adminAjoutImgOeuvre' :
                     $this->adminAjoutImgPresentationOeuvre();
-                    break;                
+                    break; 
+                case 'adminAjoutDescriptionArtiste':
+                    $this->adminAjoutDescriptionArtiste();
+                    break;
                 default:
                     $this->accueil();
                     break;
@@ -107,7 +110,7 @@ class Controler
             $cat= new Categorie("", "", "", "", "", "");
             //  Liste des categories
             $categories  = $cat->afficheCategories();
-            $artiste = new Artiste("","","","","");
+            $artiste = new Artiste("","","","","","");
             //Liste des artistes
             $artisteListe = $artiste->afficheListeArtiste();
             $mat = new Materiaux("","","");
@@ -171,7 +174,7 @@ class Controler
             $geolocalisation = false;
             
             $oVue = new Vue();
-            $artiste = new Artiste("","","","","");
+            $artiste = new Artiste("","","","","","");
             $artisteListe = $artiste->afficheListeArtiste();
             $oVue->Vheader($geolocalisation);
             $oVue->afficheArtistes($artisteListe);
@@ -203,7 +206,7 @@ class Controler
         //  Liste des categories
         $categories  = $cat->afficheCategories();
 
-        $artistes=new Artiste("", "", "", "", "");
+        $artistes=new Artiste("", "", "", "", "","");
 
         //  Liste des Artistes
         $listeArtistes=$artistes->afficheListeArtiste();
@@ -333,7 +336,7 @@ class Controler
             $oVue->Vheader($geolocalisation);
             // On recupere l'id de l'artiste passé en param
             $idArtiste = intval($_GET['artiste']);
-            $artiste = new Artiste("","","","","");
+            $artiste = new Artiste("","","","","","");
             $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","");
             // Appel de la fonction d'affichage des informations d'un artiste grace à son id
 
@@ -361,7 +364,7 @@ class Controler
             $idOeuvre = $_GET['idOeuvre'];
             $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "", "", "", "");
             $oeuvreInfo = $oeuvre->afficheInformationsOeuvre($idOeuvre);
-            $artiste = new Artiste("","","","","");
+            $artiste = new Artiste("","","","","","");
             $artisteResultat = $artiste->afficheArtisteDuneOeuvre($idOeuvre);
             $mat = new Materiaux("","","");
             //liste des materiaux
@@ -398,7 +401,7 @@ class Controler
             $categories  = $cat->afficheCategories();
 
             // connection
-            $artiste = new Artiste("","","","","");
+            $artiste = new Artiste("","","","","","");
             //Liste des artistes
             $artisteListe = $artiste->afficheListeArtiste();
 
@@ -528,7 +531,7 @@ class Controler
         //  Liste des categories
         $categories  = $cat->afficheCategories();
 
-        $artistes=new Artiste("", "", "", "", "");
+        $artistes=new Artiste("", "", "", "", "","");
 
         //  Liste des Artistes
         $listeArtistes=$artistes->afficheListeArtiste();
@@ -544,7 +547,7 @@ class Controler
         if(isset($_POST['nomArtiste']))
             {
 
-                $unArtiste=new Artiste("",$_POST['nomArtiste'], $_POST['PrenomArtiste'], $_POST['collectif'], "");
+                $unArtiste=new Artiste("",$_POST['nomArtiste'], $_POST['PrenomArtiste'], $_POST['collectif'], "","");
 
                 $unArtiste->enregistreArtiste();
 
@@ -680,7 +683,7 @@ class Controler
             $categoriesListe  = $cat->afficheCategories();
 
             
-            $artiste=new Artiste("", "", "", "", "");
+            $artiste=new Artiste("", "", "", "", "","");
             $artisteOeuvre=$artiste->afficheArtisteUneOeuvre($idOeuvre);
             $listeArtiste = $artiste->afficheListeArtiste();
             
@@ -865,7 +868,7 @@ class Controler
 
         private function installBD(){
 
-            $artistesNonIdentifie= new Artiste(-1, "non identifie", "", "", "");
+            $artistesNonIdentifie= new Artiste(-1, "non identifie", "", "", "","");
             $artisteNonIdentifie=$artistesNonIdentifie->enregistreArtiste();
 
             $materielsNonIdentifie= new Materiaux(-1, "non identifie", "");
@@ -1072,7 +1075,7 @@ class Controler
         {
             $oVue = new VueAdmin();
             // connection
-            $artistes=new Artiste("", "", "", "", "");
+            $artistes=new Artiste("", "", "", "", "","");
 
             //  Liste des Artistes
             $listeArtistes=$artistes->afficheListeArtisteSansPhoto();
@@ -1265,9 +1268,37 @@ class Controler
     private function adminAjoutDescriptionArtiste()
     {
         $oVue = new VueAdmin();
+        
+        $artiste=new Artiste("", "", "", "", "","");
+        $listeArtistes=$artiste->afficheListeArtiste();
+        
         $oVue->AdminTopPage();
         $oVue->adminNavSide();
+        $oVue->adminAjoutDescriptionArtiste($listeArtistes);
         $oVue->AdminPiedPage();
+        
+        if(isset($_POST['ajouteDescription']))
+        {
+          
+                    try{
+                        $idArtiste = intval($_POST["ajouteDescription"]);
+                       
+                        $descriptionArtiste=$_POST['descriptionArtiste'];
+                        $artiste->ajoutDescriptionArtiste($idArtiste,$descriptionArtiste);
+                      
+                    }
+                catch(Exception $e)
+                {
+                    $erreur=$e->getMessage();
+                    echo $erreur;
+                }
+               
+            
+        }
+       
+        
+            
+        
     }
 
     

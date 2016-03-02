@@ -49,7 +49,7 @@
         $idArtiste =$_POST['artistes'];
 
         //Nouvelle connection
-        $artiste = new Artiste("","","","","");
+        $artiste = new Artiste("","","","","","");
         $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","");
         $photoOeuvre = new photoOeuvre("","","","","","","","","","","","","","", "","","","");
 

@@ -1476,7 +1476,7 @@ public function adminAjoutImagePresentationOeuvre($listeOeuvre) {
      */
     }    
 
-    public function adminAjoutDescriptionArtiste()
+    public function adminAjoutDescriptionArtiste($listeArtistes)
     {
       ?>
       
@@ -1494,24 +1494,42 @@ public function adminAjoutImagePresentationOeuvre($listeOeuvre) {
 
             <div class="panel panel-green">
                 <div class="panel-heading">
-                    Formulaire d'ajout d'image de présentation d'oeuvre
+                    Formulaire d'ajout d'une description d'un artiste
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <form action="" method="post" name="form4" enctype="multipart/form-data">
+                            <form action="index.php?page=adminAjoutDescriptionArtiste" method="post" name="form4" id="form4">
 
+                                   <h3>Formulaire d'ajout un descripton d'un artiste</h3>
                                 <div class="form-group">
-                                    <label>Oeuvres sans images de présentation dans la base de donnée</label>
+                                    <label>Artistes dans descriptions</label>
   
+                                    <select class="form-control" name="ajouteDescription">
+                                        <option value="" selected >Choisir un artiste</option>
+                                        <?php
+
+                                                foreach ($listeArtistes as $artiste)
+                                                {
+                                                    
+                                                    echo "<option value='";
+                                                    echo $artiste->idArtiste;
+                                                    echo "'>";
+                                                    echo $artiste->nomArtiste." ".$artiste->prenomArtiste;
+                                                    echo "</option>";
+                                                }
+     
+                                        ?>
+                                    </select>
                                 </div>
-
-                                <label class="control-label">Selectionnez une image</label>
-
-                                <input name="upload" type="file" /><br>
-
-                                <input type="submit" class="btn btn-lg btn-success"  value="Ajout photographie">
+                                <h2>Biographie</h2>
+                                <input type="text" class="form-control" placeholder="Enter text" value="" name="descriptionArtiste" id="descriptionArtiste">
+                                <div id="msj12" class="erreurs" style="display:none">Il faut remplir ce champ</div> 
+                              
+                                <input type="submit" onclick="validationForm5()" class="btn btn-lg btn-success"  value="ajoute Description" >
                             </form>
+                            
+                            
                         </div>
                         <!-- /.col-lg-6 (nested) -->
                     </div>

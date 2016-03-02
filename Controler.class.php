@@ -338,7 +338,7 @@ class Controler
             $idArtiste = intval($_GET['artiste']);
 
             $artiste = new Artiste("","","","","","");
-            $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","");
+            $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","");
 
            
             // Appel de la fonction d'affichage des informations d'un artiste grace à son id

@@ -339,7 +339,7 @@ public function adminMain() {
                             <h4>Dernière mise à jour connue :</h4>
                             <p>20/01/2016</p>                            
                             <a href="index.php?page=installBD" ><button type="submit" class="btn btn-lg btn-info" name="install">Install BD</button></a>
-                            <a href="index.php?page=admin" ><button type="submit" class="btn btn-lg btn-info" name="update">Mettre à jour</button></a>    
+                            <a href="index.php?page=migration" ><button type="submit" class="btn btn-lg btn-info" name="update">Mettre à jour</button></a>    
                         </div>
                         <!-- /.panel-body -->
                     </div>

@@ -262,6 +262,20 @@ public function adminNavSide() {
                                 <li>
                                     <a href="index.php?page=adminAjoutImgOeuvre">Ajouter une image de présentation d'oeuvre</a>
                                 </li>
+                        
+                            </ul>
+                                    <!-- /.nav-second-level -->
+                        </li>
+                           
+                        <li>
+                            <a href="#"><i class="fa fa-edit fa-fw"></i> Gestion des artistes <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="index.php?page=adminAjoutDescriptionArtiste">Ajouter une description</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -325,7 +339,7 @@ public function adminMain() {
                             <h4>Dernière mise à jour connue :</h4>
                             <p>20/01/2016</p>                            
                             <a href="index.php?page=installBD" ><button type="submit" class="btn btn-lg btn-info" name="install">Install BD</button></a>
-                            <a href="index.php?page=migration" ><button type="submit" class="btn btn-lg btn-info" name="update">Mettre à jour</button></a>    
+                            <a href="index.php?page=admin" ><button type="submit" class="btn btn-lg btn-info" name="update">Mettre à jour</button></a>    
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -1443,14 +1457,88 @@ public function adminAjoutImagePresentationOeuvre($listeOeuvre) {
             <!-- /.row -->
         </div>
 
-    </div>
+</div>
     <!-- /#wrapper -->
 
         <?php
-
+    /**
+     * Affiche la page d'ajouter description d'un artiste
+     * @access public
+     * @param     
+     * @author Stéphane Leclerc
+     */
     }    
 
+    public function adminAjoutDescriptionArtiste($listeArtistes)
+    {
+      ?>
+      
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Gestion artiste</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
 
+
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    Formulaire d'ajout d'une description d'un artiste
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <form action="index.php?page=adminAjoutDescriptionArtiste" method="post" name="form4" id="form4">
+
+                                   <h3>Formulaire d'ajout un descripton d'un artiste</h3>
+                                <div class="form-group">
+                                    <label>Artistes dans descriptions</label>
+  
+                                    <select class="form-control" name="ajouteDescription">
+                                        <option value="" selected >Choisir un artiste</option>
+                                        <?php
+
+                                                foreach ($listeArtistes as $artiste)
+                                                {
+                                                    
+                                                    echo "<option value='";
+                                                    echo $artiste->idArtiste;
+                                                    echo "'>";
+                                                    echo $artiste->nomArtiste." ".$artiste->prenomArtiste;
+                                                    echo "</option>";
+                                                }
+     
+                                        ?>
+                                    </select>
+                                </div>
+                                <h2>Biographie</h2>
+                                <input type="text" class="form-control" placeholder="Enter text" value="" name="descriptionArtiste" id="descriptionArtiste">
+                                <div id="msj12" class="erreurs" style="display:none">Il faut remplir ce champ</div> 
+                              
+                                <input type="submit" onclick="validationForm5()" class="btn btn-lg btn-success"  value="ajoute Description" >
+                            </form>
+                            
+                            
+                        </div>
+                        <!-- /.col-lg-6 (nested) -->
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+</div>
+</div>
+      <?php  
+    }
 
 
 

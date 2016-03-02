@@ -107,6 +107,16 @@
             $this->photoArtiste=$val;
 
         }
+     
+        /**
+        * @brief set la description de l'artiste
+        */
+
+        public function setDescriptionArtiste($val) {
+
+            $this->descriptionArtiste=$val;
+
+         }
 
         /**
          *
@@ -161,6 +171,16 @@
             echo $this->photoArtiste;
 
         }
+     
+        /**
+        * @brief get la description de l'artiste
+        */
+
+        public function getDescriptionArtiste() {
+
+         echo $this->descriptionArtiste;
+
+        }
 
 
 
@@ -174,7 +194,7 @@
          * @author Carlos VASQUEZ          
          */
 
-        public function __construct($idArtiste, $nomArtiste, $prenomArtiste, $collectif, $photoArtiste) {
+     public function __construct($idArtiste, $nomArtiste, $prenomArtiste, $collectif, $photoArtiste,$descriptionArtiste) {
             if (!isset(self::$database))
                 self::$database = new pdoBDD();
 
@@ -187,6 +207,9 @@
                 $this->collectif = $collectif;
 
                 $this->photoArtiste = $photoArtiste;
+              
+                $this->descriptionArtiste=$descriptionArtiste;
+      
 
 
         }
@@ -205,8 +228,8 @@
 
             foreach ($lignes as $ligne) {
 
-                $unArtiste = new Artiste($ligne['IdArtiste'], $ligne['Nom'], $ligne['Prenom'], $ligne['Collectif'], $ligne['photoArtiste']);
-
+             $unArtiste = new Artiste($ligne['IdArtiste'], $ligne['Nom'], $ligne['Prenom'], $ligne['Collectif'], $ligne['photoArtiste'],$ligne['descriptionArtiste']);
+            
                 $listeArtiste[] = $unArtiste;
             }
 
@@ -273,6 +296,8 @@
             self::$database->bind(':Collectif', $this->collectif);
 
             self::$database->bind(':photoArtiste', $this->photoArtiste);
+         
+            
 
             self::$database->execute();
         }
@@ -376,7 +401,7 @@
 
             foreach ($lignes as $ligne) {
 
-                $unArtiste = new Artiste($ligne['IdArtiste'], $ligne['Nom'], $ligne['Prenom'], $ligne['Collectif'], $ligne['photoArtiste']);
+             $unArtiste = new Artiste($ligne['IdArtiste'], $ligne['Nom'], $ligne['Prenom'], $ligne['Collectif'], $ligne['photoArtiste'],$ligne['descriptionArtiste']);
 
                 $listeArtiste[] = $unArtiste;
             }
@@ -398,6 +423,22 @@
              self::$database->bind(":image", $newFilePath);
 
              self::$database->execute();
+        }
+     
+         /**
+         * @brief méthode qui ajoute une description de l'artiste
+         * @author Stéphane Leclerc  
+         */
+
+     public function ajoutDescriptionArtiste($idArtiste,$descriptionArtiste)
+        {
+         self::$database->query("UPDATE artiste SET descriptionArtiste = :descriptionArtiste WHERE IdArtiste =:IdArtiste");
+
+         self::$database->bind(":IdArtiste", $idArtiste);
+         self::$database->bind(":descriptionArtiste", $descriptionArtiste);
+
+         self::$database->execute();
+
         }
 
 

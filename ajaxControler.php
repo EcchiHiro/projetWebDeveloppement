@@ -49,9 +49,11 @@
         $idArtiste =$_POST['artistes'];
 
         //Nouvelle connection
-        $artiste = new Artiste("","","","","");
-        $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","");         
-        $photoOeuvre = new photoOeuvre("","","","","","","","","","","","","","", "","","","","");
+
+        $artiste = new Artiste("","","","","","");
+        $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","");
+        $photoOeuvre = new photoOeuvre("","","","","","","","","","","","","","", "","","","");
+
 
         //Recherche Tous d'un artiste par $idArtiste
         $ResultatArtiste = $artiste->afficheArtisteParId($idArtiste);

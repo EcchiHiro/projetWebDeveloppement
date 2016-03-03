@@ -710,10 +710,10 @@ public function adminModifieOeuvre($infoOeuvre,$tableauInfoOeuvreMateriel,$categ
                                                     {
                                                         $nomMat[] = $mat->nomMateriaux;
                                                     }
-                                                    $listMat = implode(' &',$nomMat);
+                                                    $listMat = implode('&',$nomMat);
                                                 ?>
                                             <label>Matériaux</label>
-                                             <input type="text" class="form-control" placeholder="Enter text" name="matériaux" value="<?php echo $listMat ?>">
+                                             <input type="text" class="form-control" placeholder="Enter text" name="matériaux" value="<?php echo $listMat?>">
                                         </div>                                        
                                         <div class="form-group">
                                             <label>Artiste</label>
@@ -1176,7 +1176,7 @@ public function adminSuppCat($categories, $erreur) {
      * @author Alexandre BOUET 
      */
     
-public function adminAjoutImageArtiste($listeArtistes) {
+public function adminAjoutImageArtiste($listeArtistes, $message) {
         ?>
 
 
@@ -1191,7 +1191,11 @@ public function adminAjoutImageArtiste($listeArtistes) {
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
-
+                                        <?php
+                                          if (isset($message))  {
+                                             echo "<div class='alert alert-danger'>$message</div>";   
+                                          }
+                                         ?>
                     <div class="panel panel-green">
                         <div class="panel-heading">
                             Formulaire d'ajout d'images pour un artiste
@@ -1200,7 +1204,6 @@ public function adminAjoutImageArtiste($listeArtistes) {
                             <div class="row">
                                 <div class="col-lg-6">
                                     <form action="" method="post" name="form4" enctype="multipart/form-data">
-
                                         <div class="form-group">
                                                 <div class="alert alert-info">
                                                    Etape 1 : Selectionnez un artiste 
@@ -1260,7 +1263,7 @@ public function adminAjoutImageArtiste($listeArtistes) {
      * @author Alexandre BOUET 
      */
     
-public function adminAjoutImageCat($categories) {
+public function adminAjoutImageCat($categories, $message) {
         ?>
 
 <script type="text/javascript">
@@ -1281,7 +1284,11 @@ public function adminAjoutImageCat($categories) {
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
-                    
+                                        <?php
+                                          if (isset($message))  {
+                                             echo "<div class='alert alert-danger'>$message</div>";   
+                                          }
+                                         ?>
 
                     <div class="panel panel-green">
                         <div class="panel-heading">
@@ -1364,7 +1371,7 @@ public function adminAjoutImageCat($categories) {
      * @author Alexandre BOUET 
      */
     
-public function adminAjoutImagePresentationOeuvre($listeOeuvre) {
+public function adminAjoutImagePresentationOeuvre($listeOeuvre, $message) {
         ?>
 
 <script type="text/javascript">
@@ -1385,6 +1392,12 @@ public function adminAjoutImagePresentationOeuvre($listeOeuvre) {
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
+                    
+                                        <?php
+                                          if (isset($message))  {
+                                             echo "<div class='alert alert-danger'>$message</div>";   
+                                          }
+                                         ?>
 
                     <div class="panel panel-green">
                         <div class="panel-heading">

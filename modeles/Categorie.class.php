@@ -304,7 +304,7 @@ class Categorie {
            self::$database->query(" INSERT INTO categorie (IdCat, NomSousCat, NomSousCatEN, PhotoCat) values (:IdCat, :NomSousCat, :NomSousCatEN, :PhotoCat)");
 
            //On lie les paramètres auxvaleurs
-           self::$database->bind(':IdCat', "");
+           self::$database->bind(':IdCat', -1);
 
            self::$database->bind(':NomSousCat',$this->nomSousCat);
 
@@ -442,9 +442,6 @@ class Categorie {
 
              self::$database->execute();
         }
-        
-
- 
 
 
 }

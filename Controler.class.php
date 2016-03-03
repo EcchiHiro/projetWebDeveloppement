@@ -51,44 +51,141 @@ class Controler
                 case 'recherche' :
                     $this->recherche();
                     break;
-                case 'admin' :
-                    $this->admin();
-                    break;
-                case 'adminAjout' :
-                    $this->adminAjoutOeuvre();
-                    break;
-                case 'adminModifSupp' :
-                    $this->adminGereOeuvres();
-                    break;
-                case 'adminModif' :
-                    $this->adminModifOeuvre();
-                    break;                    
-                case 'adminValide' :
-                    $this->adminValideOeuvre();
-                    break;
-                case 'adminAjoutCat' :
-                    $this->adminAjoutCat();
-                    break;
-                case 'adminSuppCat' :
-                    $this->adminSuppCat();
-                    break;                
                 case 'login' :
                     $this->adminLogin();
                     break; 
                 case 'detruireSession' :
                     $this->detruireSession();
-                    break;                       
+                    break;  
+                case 'admin' :
+                     //Si la variable session User existe            
+                    if($_SESSION["User"])
+                    {
+                        $this->admin();
+                    }
+                    else
+                    {
+                        //Si non, rediriger vers Login
+                        header("Location: index.php?page=login");
+                    }
+                    break;
+                case 'adminAjout' :
+                    //Si la variable session User existe            
+                    if($_SESSION["User"])
+                    {
+                        $this->adminAjoutOeuvre();
+                    }
+                    else
+                    {
+                        //Si non, rediriger vers Login
+                        header("Location: index.php?page=login");
+                    }
+                    break;
+                case 'adminModifSupp' :
+                     //Si la variable session User existe            
+                    if($_SESSION["User"])
+                    {
+                        $this->adminGereOeuvres();
+                    }
+                    else
+                    {
+                        //Si non, rediriger vers Login
+                        header("Location: index.php?page=login");
+                    }
+                    break;
+                case 'adminModif' :
+                    //Si la variable session User existe            
+                    if($_SESSION["User"])
+                    {
+                        $this->adminModifOeuvre();
+                    }
+                    else
+                    {
+                        //Si non, rediriger vers Login
+                        header("Location: index.php?page=login");
+                    }
+                    break;                    
+                case 'adminValide' :
+                    //Si la variable session User existe            
+                    if($_SESSION["User"])
+                    {
+                        $this->adminValideOeuvre();
+                    }
+                    else
+                    {
+                        //Si non, rediriger vers Login
+                        header("Location: index.php?page=login");
+                    }
+                    break;
+                case 'adminAjoutCat' :
+                    //Si la variable session User existe            
+                    if($_SESSION["User"])
+                    {
+                        $this->adminAjoutCat();
+                    }
+                    else
+                    {
+                        //Si non, rediriger vers Login
+                        header("Location: index.php?page=login");
+                    }
+                    break;
+                case 'adminSuppCat' :
+                    //Si la variable session User existe            
+                    if($_SESSION["User"])
+                    {
+                        $this->adminSuppCat();
+                    }
+                    else
+                    {
+                        //Si non, rediriger vers Login
+                        header("Location: index.php?page=login");
+                    }
+                    break;                                     
                 case 'adminAjoutImgArt' :
-                    $this->adminAjoutImageArtiste();
+                    //Si la variable session User existe            
+                    if($_SESSION["User"])
+                    {
+                        $this->adminAjoutImageArtiste();
+                    }
+                    else
+                    {
+                        //Si non, rediriger vers Login
+                        header("Location: index.php?page=login");
+                    }
                     break;                  
                 case 'adminAjoutImgCat' :
-                    $this->adminAjoutImgCat();
+                    //Si la variable session User existe            
+                    if($_SESSION["User"])
+                    {
+                        $this->adminAjoutImgCat();
+                    }
+                    else
+                    {
+                        //Si non, rediriger vers Login
+                        header("Location: index.php?page=login");
+                    }
                     break;                             
                 case 'adminAjoutImgOeuvre' :
-                    $this->adminAjoutImgPresentationOeuvre();
+                    if($_SESSION["User"])
+                    {
+                        $this->adminAjoutImgPresentationOeuvre();
+                    }
+                    else
+                    {
+                        //Si non, rediriger vers Login
+                        header("Location: index.php?page=login");
+                    }
                     break; 
                 case 'adminAjoutDescriptionArtiste':
-                    $this->adminAjoutDescriptionArtiste();
+                    if($_SESSION["User"])
+                    {
+                        $this->adminAjoutDescriptionArtiste();
+                    }
+                    else
+                    {
+                        //Si non, rediriger vers Login
+                        header("Location: index.php?page=login");
+                    }
                     break;
                 default:
                     $this->accueil();
@@ -191,8 +288,8 @@ class Controler
     private function soumettre()
     {
 
-            // Boolean pour appeler ou non le script de geo
-            $geolocalisation = false;
+        // Boolean pour appeler ou non le script de geo
+        $geolocalisation = false;
         
         $oVue = new Vue();
         $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","");
@@ -436,9 +533,7 @@ class Controler
      */
         private function admin()
         {
-            //Si la variable session User existe            
-            if($_SESSION["User"])
-            {
+           
                 // connection
                 $log = new Log("", "");
                 $bdInstalle = $log->estBdInstalle();
@@ -447,12 +542,7 @@ class Controler
                 $oVue->adminNavSide();
                 $oVue->adminMain($bdInstalle);
                 $oVue->AdminPiedPage();             
-            }
-            else
-            {
-                //Si non, rediriger vers Login
-                header("Location: index.php?page=login");
-            }
+
         }
     
     /**
@@ -681,9 +771,7 @@ class Controler
             {
                 $tableauInfoOeuvreMateriel=get_object_vars($materiauxOeuvre);   
             }
-
-            
-    
+   
             
             $cat= new Categorie("", "", "", "", "", "");
             $categorieOeuvre=$cat->afficheCategorieUneOeuvre($idOeuvre);
@@ -922,6 +1010,7 @@ class Controler
 
 
                  foreach ($ouvre["Artistes"] as $var) {
+                     
                      $nomArtiste=$var["Nom"];
                  }
 
@@ -1087,11 +1176,9 @@ class Controler
 
             //  Liste des Artistes
             $listeArtistes=$artistes->afficheListeArtisteSansPhoto();
+            
+            $message = NULL;
 
-            $oVue->AdminTopPage();
-            $oVue->adminNavSide();
-            $oVue->adminAjoutImageArtiste($listeArtistes);
-            $oVue->AdminPiedPage();
             
             if(isset($_POST['ajoutPhoto']))
             {
@@ -1113,13 +1200,15 @@ class Controler
                             if(!move_uploaded_file($tmpFilePath, $newFilePath)) 
                             {
 
-                                    echo "Erreur";
+                                    $message = "Erreur lors de l'enregistrement du fichier";
 
                             }
 
                             else
 
                             {
+                                 try
+                                 {
                                         $artistes->ajoutImageArtiste($idArtiste, $newFilePath);
 
 
@@ -1128,6 +1217,15 @@ class Controler
                                         document.location.replace("index.php?page=admin");
                                         // -->
                                         </script>';
+                      
+                                 }
+                                
+                                 catch(Exception $e)
+                                    
+                                 {
+                                         $message = "Problème lors de l'opération, vous avez du oublier de selectionner un artiste ou une photographie";
+                                 }
+                                    
                             }
                         }
                     
@@ -1135,10 +1233,15 @@ class Controler
 
                     else 
                     {
-                        echo "Image trop grande. Elle doit faire maximum 250*250";
+                        $message = "Image trop grande. Elle doit faire maximum 250*250";
                     }
         
-        }
+            }
+            
+            $oVue->AdminTopPage();
+            $oVue->adminNavSide();
+            $oVue->adminAjoutImageArtiste($listeArtistes, $message);
+            $oVue->AdminPiedPage();
 
 
     }  
@@ -1156,57 +1259,73 @@ class Controler
 
             $cat= new Categorie("", "", "", "", "", "");
             $categories=$cat->afficheListeCatSansPhoto();
+            $message = NULL;
         
-
-            $oVue->AdminTopPage();
-            $oVue->adminNavSide();
-            $oVue->adminAjoutImageCat($categories);
-            $oVue->AdminPiedPage();
             
-
             
             if(isset($_POST['ajoutPhoto']))
             {
+                $image = $_FILES['upload']['tmp_name'];
                 
-                  $idCat = intval($_POST['ajoutPhoto']);                
-                    
-                  $y1=$_POST['top'];
-                  $x1=$_POST['left'];
-                  $w=$_POST['right'];
-                  $h=$_POST['bottom'];
-                  $image = $_FILES['upload']['tmp_name'];
-                
-
-                  list( $width,$height ) = getimagesize( $image );
-                  $newwidth = 600;
-                  $newheight = 400;
-
-                  $thumb = imagecreatetruecolor( $newwidth, $newheight );
-                  $source = imagecreatefromjpeg($image);
-
-                  imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-                  imagejpeg($thumb,$image,100); 
+                if ($image !=null) {
+                    try
+                    {
 
 
-                  $im = imagecreatefromjpeg($image);
-                  $dest = imagecreatetruecolor($w,$h);
+                          $idCat = intval($_POST['ajoutPhoto']);                
 
-                  imagecopyresampled($dest,$im,0,0,$x1,$y1,$w,$h,$w,$h);
-                  imagejpeg($dest,"images/categories/". $_FILES['upload']['name'], 100);
-                  $newFilePath = "images/categories/". $_FILES['upload']['name'];
-                
-                  $cat->ajoutImageCat($idCat, $newFilePath);
+                          $y1=$_POST['top'];
+                          $x1=$_POST['left'];
+                          $w=$_POST['right'];
+                          $h=$_POST['bottom'];
 
 
-                     echo '<script language="Javascript">
-                     <!--
-                     document.location.replace("index.php?page=admin");
-                     // -->
-                     </script>';
-        
-        }
+
+                          list( $width,$height ) = getimagesize( $image );
+                          $newwidth = 600;
+                          $newheight = 400;
+
+                          $thumb = imagecreatetruecolor( $newwidth, $newheight );
+                          $source = imagecreatefromjpeg($image);
+
+                          imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+                          imagejpeg($thumb,$image,100); 
 
 
+                          $im = imagecreatefromjpeg($image);
+                          $dest = imagecreatetruecolor($w,$h);
+
+                          imagecopyresampled($dest,$im,0,0,$x1,$y1,$w,$h,$w,$h);
+                          imagejpeg($dest,"images/categories/". $_FILES['upload']['name'], 100);
+                          $newFilePath = "images/categories/". $_FILES['upload']['name'];
+
+                         $cat->ajoutImageCat($idCat, $newFilePath);
+
+
+                         echo '<script language="Javascript">
+                         <!--
+                         document.location.replace("index.php?page=admin");
+                         // -->
+                         </script>';
+
+                    }
+                    catch (Exception $e) 
+                    {
+                        $message = "Erreur lors de l'upload, veuillez ressayer de nouveau."; 
+                    }
+                }
+                else 
+                {
+                    $message = "Vous devez selectionner une image"; 
+                }
+                 
+            }
+            
+            $oVue->AdminTopPage();
+            $oVue->adminNavSide();
+            $oVue->adminAjoutImageCat($categories, $message);
+            $oVue->AdminPiedPage();
+            
     }  
     
          /**
@@ -1221,53 +1340,68 @@ class Controler
             $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","");
             $listeOeuvre=$oeuvre->afficheListeOeuvresSansPhotoPresentation();
             
+            $message = NULL;
+              
+            if(isset($_POST['ajoutPhoto']))
+            {
+                $image = $_FILES['upload']['tmp_name'];
+                
+                if ($image !=null) {
+                    try
+                    {
+                
+                          $idOeuvre = intval($_POST['ajoutPhoto']);
+
+                          $y1=$_POST['top'];
+                          $x1=$_POST['left'];
+                          $w=$_POST['right'];
+                          $h=$_POST['bottom'];
+
+
+                          list( $width,$height ) = getimagesize( $image );
+                          $newwidth = 600;
+                          $newheight = 400;
+
+                          $thumb = imagecreatetruecolor( $newwidth, $newheight );
+                          $source = imagecreatefromjpeg($image);
+
+                          imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+                          imagejpeg($thumb,$image,100); 
+
+
+                          $im = imagecreatefromjpeg($image);
+                          $dest = imagecreatetruecolor($w,$h);
+
+                          imagecopyresampled($dest,$im,0,0,$x1,$y1,$w,$h,$w,$h);
+                          imagejpeg($dest,"images/oeuvres/P_". $_FILES['upload']['name'], 100);
+                          $newFilePath = "images/oeuvres/P_". $_FILES['upload']['name'];
+
+                          $oeuvre->ajoutImagePresentation($idOeuvre, $newFilePath);
+
+
+                             echo '<script language="Javascript">
+                             <!--
+                             document.location.replace("index.php?page=admin");
+                             // -->
+                             </script>';
+                        
+                    }
+                    catch (Exception $e) 
+                    {
+                        $message = "Erreur lors de l'upload, veuillez ressayer de nouveau."; 
+                    }
+                }
+                else 
+                {
+                    $message = "Vous devez selectionner une image"; 
+                }
+                 
+            }
+            
             $oVue->AdminTopPage();
             $oVue->adminNavSide();
-            $oVue->adminAjoutImagePresentationOeuvre($listeOeuvre);
+            $oVue->adminAjoutImagePresentationOeuvre($listeOeuvre, $message);
             $oVue->AdminPiedPage();
-            
-
-            
-            if(isset($_POST['ajoutPhoto']))
-                {
-                
-                  $idOeuvre = intval($_POST['ajoutPhoto']);
-                
-                  $y1=$_POST['top'];
-                  $x1=$_POST['left'];
-                  $w=$_POST['right'];
-                  $h=$_POST['bottom'];
-                  $image = $_FILES['upload']['tmp_name'];
-                
-
-                  list( $width,$height ) = getimagesize( $image );
-                  $newwidth = 600;
-                  $newheight = 400;
-
-                  $thumb = imagecreatetruecolor( $newwidth, $newheight );
-                  $source = imagecreatefromjpeg($image);
-
-                  imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-                  imagejpeg($thumb,$image,100); 
-
-
-                  $im = imagecreatefromjpeg($image);
-                  $dest = imagecreatetruecolor($w,$h);
-
-                  imagecopyresampled($dest,$im,0,0,$x1,$y1,$w,$h,$w,$h);
-                  imagejpeg($dest,"images/oeuvres/P_". $_FILES['upload']['name'], 100);
-                  $newFilePath = "images/oeuvres/P_". $_FILES['upload']['name'];
-                
-                  $oeuvre->ajoutImagePresentation($idOeuvre, $newFilePath);
-
-
-                     echo '<script language="Javascript">
-                     <!--
-                     document.location.replace("index.php?page=admin");
-                     // -->
-                     </script>';
-                
-                }
 
 
     }
@@ -1279,34 +1413,34 @@ class Controler
         
         $artiste=new Artiste("", "", "", "", "","");
         $listeArtistes=$artiste->afficheListeArtiste();
-        
-        $oVue->AdminTopPage();
-        $oVue->adminNavSide();
-        $oVue->adminAjoutDescriptionArtiste($listeArtistes);
-        $oVue->AdminPiedPage();
-        
+                
         if(isset($_POST['ajouteDescription']))
         {
           
-                    try{
+            try
+            {
                         $idArtiste = intval($_POST["ajouteDescription"]);
                        
                         $descriptionArtiste=$_POST['descriptionArtiste'];
                         $artiste->ajoutDescriptionArtiste($idArtiste,$descriptionArtiste);
                       
-                    }
-                catch(Exception $e)
-                {
+            }
+            
+            catch(Exception $e)
+                
+            {
                     $erreur=$e->getMessage();
                     echo $erreur;
-                }
-               
+            }         
             
         }
+        
+        $oVue->AdminTopPage();
+        $oVue->adminNavSide();
+        $oVue->adminAjoutDescriptionArtiste($listeArtistes);
+        $oVue->AdminPiedPage();
        
-        
-            
-        
+           
     }
 
     

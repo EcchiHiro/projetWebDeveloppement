@@ -587,23 +587,23 @@ class Oeuvre {
      */
 
     public function existOuvres()
-        {
+    {
 
 
-            self::$database->query("SELECT Titre FROM oeuvre WHERE Titre= :Titre");
+        self::$database->query("SELECT Titre FROM oeuvre WHERE Titre= :Titre");
 
-            self::$database->bind(':Titre', $this->titre);
+        self::$database->bind(':Titre', $this->titre);
 
-            $lignes = self::$database->resultset();
+        $lignes = self::$database->resultset();
 
-            if (count($lignes) > 0)
+        if (count($lignes) > 0)
 
-                return true;
+            return true;
 
-            else 
+        else 
 
-                return false;
-        }
+            return false;
+    }
 
 
     /**
@@ -656,7 +656,7 @@ class Oeuvre {
      *
      */
 
- public function modifieUneOeuvre($idOeuvre, $titre, $titreVariante,$collection, $collectionEN,$technique,$techniqueEN, $dimensions,$arrondissement,$coordonneeLatitude, $coordonneeLongitude)
+    public function modifieUneOeuvre($idOeuvre, $titre, $titreVariante,$collection, $collectionEN,$technique,$techniqueEN, $dimensions,$arrondissement,$coordonneeLatitude, $coordonneeLongitude)
     {
         self::$database->query("UPDATE oeuvre SET Titre=:titre, TitreVariante=:titreVariante, Collection=:collection, CollectionEN=:collectionEN, Technique=:technique, TechniqueEN=:techniqueEN, Dimensions=:dimensions, Arrondissement=:arrondissement, CoordonneeLatitude=:coordonneeLatitude, CoordonneeLongitude=:coordonneeLongitude WHERE IdOeuvre=:idOeuvre");
 
@@ -757,38 +757,38 @@ class Oeuvre {
         self::$database->execute();
     }
  
- /**
+    /**
      * @brief méthode soummet une nouvelle oeuvre dans la bdd
      */
 
- public function enregistreOuvresAdmin()
- {
-  //On lie les paramètres aux valeurs
+    public function enregistreOuvresAdmin()
+    {
+     //On lie les paramètres aux valeurs
 
-  $db = self::$database->getDatabase();
-  $titre =  $this->titre;
-  $varianteTitre = $this->titreVariante;
-  $collection =$this->collection;
-  $collectionEN =$this->collectionEN;
-  $technique =$this->technique;
-  $techniqueEN =$this->techniqueEN;
-  $dimensions =$this->dimensions;
-  $arrondissement =$this->arrondissement;
-  $latitude =$this->coordonneeLatitute;
-  $longitud =$this->coordonneeLongitude;
-  $validation=1;
-  $idAdresse=$this->idAdresse;
-  $idArtiste =$this->idArtiste;
-  $idCat=$this->idCategorie;
-  $photoPresentation = "";
-
-
-  $requete = $db->prepare("INSERT INTO oeuvre (Titre, TitreVariante, Collection, CollectionEN, Technique, TechniqueEN, Dimensions, Arrondissement, CoordonneeLatitude, CoordonneeLongitude, EstValide, IdAdresse, IdArtiste, IdCat, photoPresentation) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
-
-  $requete->execute(array($titre, $varianteTitre, $collection, $collectionEN, $technique, $techniqueEN, $dimensions, $arrondissement, $latitude, $longitud, $validation, $idAdresse, $idArtiste, $idCat, $photoPresentation));
+     $db = self::$database->getDatabase();
+     $titre =  $this->titre;
+     $varianteTitre = $this->titreVariante;
+     $collection =$this->collection;
+     $collectionEN =$this->collectionEN;
+     $technique =$this->technique;
+     $techniqueEN =$this->techniqueEN;
+     $dimensions =$this->dimensions;
+     $arrondissement =$this->arrondissement;
+     $latitude =$this->coordonneeLatitute;
+     $longitud =$this->coordonneeLongitude;
+     $validation=1;
+     $idAdresse=$this->idAdresse;
+     $idArtiste =$this->idArtiste;
+     $idCat=$this->idCategorie;
+     $photoPresentation = "";
 
 
- }
+     $requete = $db->prepare("INSERT INTO oeuvre (Titre, TitreVariante, Collection, CollectionEN, Technique, TechniqueEN, Dimensions, Arrondissement, CoordonneeLatitude, CoordonneeLongitude, EstValide, IdAdresse, IdArtiste, IdCat, photoPresentation) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
+
+     $requete->execute(array($titre, $varianteTitre, $collection, $collectionEN, $technique, $techniqueEN, $dimensions, $arrondissement, $latitude, $longitud, $validation, $idAdresse, $idArtiste, $idCat, $photoPresentation));
+
+
+    }
     
     
    /**

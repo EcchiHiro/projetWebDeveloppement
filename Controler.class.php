@@ -439,10 +439,13 @@ class Controler
             //Si la variable session User existe            
             if($_SESSION["User"])
             {
+                // connection
+                $log = new Log("", "");
+                $bdInstalle = $log->estBdInstalle();
                 $oVue = new VueAdmin();
                 $oVue->AdminTopPage();
                 $oVue->adminNavSide();
-                $oVue->adminMain();
+                $oVue->adminMain($bdInstalle);
                 $oVue->AdminPiedPage();             
             }
             else
@@ -671,8 +674,9 @@ class Controler
             
             $mat=new Materiaux("", "", "");
             $materiauxOeuvre=$mat->afficherMaterielUneOeuvre($idOeuvre);
-            $listeMat=$mat->afficheListeMateriaux();
-   
+            
+//          $listeMat=$mat->afficheListeMateriaux();
+            $listeMat=$mat->afficheListeMateriauxDuneOeuvre($idOeuvre);
             if($materiauxOeuvre != null) 
             {
                 $tableauInfoOeuvreMateriel=get_object_vars($materiauxOeuvre);   
@@ -702,48 +706,46 @@ class Controler
        
             if((isset($_POST["valide"]))&&($_POST["valide"]=="modification"))
                 
-                {
+            {                
+                $titre=$_POST["titre"];
+                $titreVariante=$_POST["titreVariante"];
+                $collection=$_POST["collection"];
+                $technique=$_POST["technique"];
+                $dimensions=$_POST["dimensions"];
+                $arrondissement=$_POST["arrondissement"];
+                $coordonneeLatitude=floatval($_POST["coordonneeLatitude"]);
+                $coordonneeLongitude=floatval($_POST["coordonneeLongitude"]);
 
-                
-                          $titre=$_POST["titre"];
-                          $titreVariante=$_POST["titreVariante"];
-                          $collection=$_POST["collection"];
-                          $technique=$_POST["technique"];
-                          $dimensions=$_POST["dimensions"];
-                          $arrondissement=$_POST["arrondissement"];
-                          $coordonneeLatitude=floatval($_POST["coordonneeLatitude"]);
-                          $coordonneeLongitude=floatval($_POST["coordonneeLongitude"]);
-                
-                
-                
-                          $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","");
-                          $oeuvre->modifieUneOeuvre($idOeuvre, $titre, $titreVariante,$collection, "",$technique,"", $dimensions,$arrondissement,$coordonneeLatitude, $coordonneeLongitude);
 
-             
-                          $idCat=intval($_POST["cat"]);
 
-                          $cat->metAjourCategorieUneOeuvre($idOeuvre, $idCat);
-                          
+                $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","");
+                $oeuvre->modifieUneOeuvre($idOeuvre, $titre, $titreVariante,$collection, "",$technique,"", $dimensions,$arrondissement,$coordonneeLatitude, $coordonneeLongitude);
 
-                          $idArtiste = intval($_POST["artiste"]);
-                          $artiste->metAjourArtisteUneOeuvre($idOeuvre, $idArtiste);
-                
-                
-                          $idMat = intval($_POST["mat"]);
-                          $mat->metAjourMaterielUneOeuvre($idOeuvre, $idMat);
-                
-                          
-                          $idAdresse = intval($_POST["idAdre"]);
-                          $numRue = $_POST["numRue"];
-                          $nomRue = $_POST["nomRue"];
-                          $adresse->metAjourAdresseUneOeuvre($idAdresse, $numRue, $nomRue);  
 
-                     
-                            echo '<script language="Javascript">
-                            <!--
-                            document.location.replace("index.php?page=adminModifSupp");
-                            // -->
-                            </script>';
+                $idCat=intval($_POST["cat"]);
+
+                $cat->metAjourCategorieUneOeuvre($idOeuvre, $idCat);
+
+
+                $idArtiste = intval($_POST["artiste"]);
+                $artiste->metAjourArtisteUneOeuvre($idOeuvre, $idArtiste);
+
+
+                $idMat = intval($_POST["mat"]);
+                $mat->metAjourMaterielUneOeuvre($idOeuvre, $idMat);
+
+
+                $idAdresse = intval($_POST["idAdre"]);
+                $numRue = $_POST["numRue"];
+                $nomRue = $_POST["nomRue"];
+                $adresse->metAjourAdresseUneOeuvre($idAdresse, $numRue, $nomRue);  
+
+
+                  echo '<script language="Javascript">
+                  <!--
+                  document.location.replace("index.php?page=adminModifSupp");
+                  // -->
+                  </script>';
                     
             }
 
@@ -830,12 +832,7 @@ class Controler
             $cat= new Categorie("", "", "", "", "", "");
             //  Liste des categories
             $categories  = $cat->afficheCategories();
-
-            $oVue->AdminTopPage();
-            $oVue->adminNavSide();
-            $oVue->adminSuppCat($categories);
-            $oVue->AdminPiedPage();
-
+            $erreur = NULL;
             
             if(isset($_POST['supprimeCategorie']))
             {
@@ -855,12 +852,15 @@ class Controler
                 }
                 catch (Exception $e)
                 {
-                    $erreur = $e->getMessage();
-                    echo $erreur;
+                    $erreur = "Vous ne pouvez pas effacer cette categorie, elle est associée a une oeuvre";
                 }
 
             }
-
+            
+            $oVue->AdminTopPage();
+            $oVue->adminNavSide();
+            $oVue->adminSuppCat($categories, $erreur);
+            $oVue->AdminPiedPage();
 
         }
 
@@ -870,7 +870,7 @@ class Controler
          */
 
         private function installBD(){
-
+            
             $artistesNonIdentifie= new Artiste(-1, "non identifie", "", "", "","");
             $artisteNonIdentifie=$artistesNonIdentifie->enregistreArtiste();
 
@@ -882,6 +882,10 @@ class Controler
 
             $adressesNonIdentifie= new Adresse(-1, "non identifie", "", "");
             $adresseNonIdentifie=$adressesNonIdentifie->enregistreAdresse();
+            
+            $log = new Log(1, "");
+            $log->enregistrer();
+            
         }
     
     

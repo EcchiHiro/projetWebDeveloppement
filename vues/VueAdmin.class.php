@@ -299,7 +299,7 @@ public function adminNavSide() {
      * @author Alexandre BOUET 
      */
     
-public function adminMain() {
+public function adminMain($bdInstalle) {
         ?>
 
 
@@ -338,7 +338,9 @@ public function adminMain() {
                         <div class="panel-body">
                             <h4>Dernière mise à jour connue :</h4>
                             <p>20/01/2016</p>                            
-                            <a href="index.php?page=installBD" ><button type="submit" class="btn btn-lg btn-info" name="install">Install BD</button></a>
+                            <?php if (!$bdInstalle){ ?>
+                              <a href="index.php?page=installBD" ><button type="submit" class="btn btn-lg btn-info" name="install">Install BD</button></a>
+                           <?php } ?>          
                             <a href="index.php?page=migration" ><button type="submit" class="btn btn-lg btn-info" name="update">Mettre à jour</button></a>    
                         </div>
                         <!-- /.panel-body -->
@@ -702,52 +704,40 @@ public function adminModifieOeuvre($infoOeuvre,$tableauInfoOeuvreMateriel,$categ
                                             </select>
                                             </div>  
                                         <div class="form-group">
-                                            <label>Matériaux</label>
-
-                                             <select class="form-control" name="mat">
-                                                <?php
-
+                                            <?php
+                                                    $nomMat = array();
                                                     foreach($listeMat as $mat)
                                                     {
-                                                        echo "<option value='";
-                                                        $mat->getIdMat();
-                                                        echo "'";                                                        
-                                                        if($mat->idMat == $tableauInfoOeuvreMateriel["idMat"])
-                                                        {
-                                                            echo " selected";
-                                                        }
-                                                        echo ">";
-                                                        $mat->getNomMateriaux();
-                                                        echo "</option>";
+                                                        $nomMat[] = $mat->nomMateriaux;
                                                     }
-
+                                                    $listMat = implode(' &',$nomMat);
                                                 ?>
-                                            </select>
-                                            </div>                                        
+                                            <label>Matériaux</label>
+                                             <input type="text" class="form-control" placeholder="Enter text" name="matériaux" value="<?php echo $listMat ?>">
+                                        </div>                                        
                                         <div class="form-group">
                                             <label>Artiste</label>
 
-                                             <select class="form-control" name="artiste">
-                                                <?php
+                                            <select class="form-control" name="artiste">
+                                               <?php
 
-                                                    foreach($listeArtiste as $artiste)
-                                                    {
-                                                        echo "<option value='";
-                                                        echo $artiste->idArtiste;
-                                                        echo "'";                                                        
-                                                        if($artiste->idArtiste == $infoOeuvre["IdArtiste"])
-                                                        {
-                                                            echo " selected";
-                                                        }
-                                                        echo ">";
-                                                        echo $artiste->nomArtiste." ".$artiste->prenomArtiste;
-                                                        echo "</option>";
-                                                    }
+                                                   foreach($listeArtiste as $artiste)
+                                                   {
+                                                       echo "<option value='";
+                                                       echo $artiste->idArtiste;
+                                                       echo "'";                                                        
+                                                       if($artiste->idArtiste == $infoOeuvre["IdArtiste"])
+                                                       {
+                                                           echo " selected";
+                                                       }
+                                                       echo ">";
+                                                       echo $artiste->nomArtiste." ".$artiste->prenomArtiste;
+                                                       echo "</option>";
+                                                   }
 
-                                                ?>
-                                            </select>
-                                            </div>  
-
+                                               ?>
+                                               </select>
+                                        </div>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
                                 <div class="col-lg-6">
@@ -1104,7 +1094,7 @@ public function adminAjoutCat() {
      * @author Stéphane LECLERC 
      */
     
-public function adminSuppCat($categories) {
+public function adminSuppCat($categories, $erreur) {
         ?>
 
 
@@ -1151,6 +1141,11 @@ public function adminSuppCat($categories) {
                                         </div>
 
                                         <input type="submit" class="btn btn-lg btn-success"  value="Supprimer">
+                                        <?php
+                                          if (isset($erreur))  {
+                                             echo "<span class='alert alert-danger'>$erreur</span>";   
+                                          }
+                                         ?>
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->

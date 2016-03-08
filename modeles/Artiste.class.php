@@ -234,6 +234,35 @@
             }
 
             return $listeArtiste;
+        } 
+        
+        
+        /**
+         * @brief Méthode qui affiche la liste des artistes
+         * @author Carlos VASQUEZ          
+         */
+
+        public static function afficheListeArtisteChoixLettreAlphabet($choix)
+        {
+
+            self::$database->query("Select * from artiste  where  artiste.Nom  like '$choix' ORDER BY Nom ASC" );
+
+            $lignes = self::$database->resultset();
+
+            //Si c'est pas null faire la recherche
+            if($lignes!=NULL)
+            {
+                foreach ($lignes as $ligne) {
+                 $unArtiste = new Artiste($ligne['IdArtiste'], $ligne['Nom'], $ligne['Prenom'], $ligne['Collectif'], $ligne['photoArtiste'],$ligne['descriptionArtiste']);
+
+                    $listeArtiste[] = $unArtiste;
+                }
+
+                return $listeArtiste;          
+            }
+            //Si non retourne rien
+            else {return "";}
+            
         }
 
         /**

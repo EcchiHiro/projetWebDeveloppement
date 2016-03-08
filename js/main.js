@@ -463,7 +463,8 @@ function handleChange()
         var choixDuSelectMateriaux = document.querySelector('#choixDuSelectMateriaux');
         var choixDuSelectArrondissement = document.querySelector('#choixDuSelectArrondissement');
         var choixOeuvresNonValides = document.querySelector('#choixOeuvreNonValide');
-
+        
+       
 
         //Voici les variable post pour le xhr.send
         //index.php?artistes=artistes&categorie=categorie&materiaux=materiaux&arrondissement=Cote-des-neiges
@@ -711,13 +712,47 @@ function handleChange()
                         }
                 }
             });
-        }//FIN du if
-
-
-
+        }//FIN du if 
+        
     });
 
 })();
+
+
+/**
+ * Fonction Ajax jquery qui appel le Ajax controler
+ * @author Cristian Manrique
+ * @source http://stackoverflow.com/questions/17734059/pass-value-to-a-php-session-when-clicking-on-li-value-xx
+ */
+
+//Lorsque le document a fini de loader
+$(document).ready(function(e){
+    
+
+    //Ajout function click
+    $('#my_ul').on("click", "li", function(e){
+
+        $.ajax({
+        //appel du controler avec url suivant:
+        url : 'ajaxControler.php?requete=choixAlphabets',
+        method : 'POST',
+        //.target selectionne l'objet que nous avons clique
+        //.attr cherche l'attribut
+        data:{val:$(e.target).attr("data-value")},
+        // On reçoit la réponse de ajaxcontroler dans la variable reponse
+        success : function(reponse){
+
+        $("#reponse").html(reponse);
+        }
+
+        });
+
+    });
+    });
+
+ 
+
+
 
         /**
      * Fonction validation de formulaire d'ajoute catégorie par l'admin
@@ -784,6 +819,8 @@ function loadFile(event)
     output.src = URL.createObjectURL(event.target.files[0]);
     document.getElementById('crop_wrapper').style.display="block";
 }
+
+
 
    
 

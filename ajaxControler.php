@@ -32,6 +32,9 @@
             break;        
         case 'choixOeuvresNonValides':
             afficheInfoOeuvreNonValide();
+            break;
+        case 'choixAlphabets':
+            choixAlphabets();
             break;        
 
     }
@@ -159,14 +162,41 @@
         $oVue->chargeInfoOeuvre($infoOeuvre);
 
 
-    }        
+    } 
 
- 
+    /**
+     * @brief Méthode qui affiche les nom d'Artistes selon le choix de la lettre
+     */
+
+    function choixAlphabets()
+    {
+
+        if (isset($_POST["val"])) 
+        {         
+        
+        //Nouvelle connection
+        $oVue = new Vue();
+        $artiste = new Artiste("","","","","","");
+        
+        // On recupere la valeur en post
+        $choix= $_POST["val"];
+            
+        //Recherche les nom d'artistes selon la lettre
+        $artisteListe = $artiste->afficheListeArtisteChoixLettreAlphabet($choix);
+            
+            //Si le resultat de $artisteListe n'est pas null
+            if($artisteListe!=NULL || $artisteListe!="")
+            {
+                //nouvelle vue
+                $oVue->afficheArtistesParPremiereNomLettre($artisteListe);  
+            }
+            else
+            {
+                echo "<p>Il n'y a pas de nom d'artistes qui commence par cette lettre </p>";
+            }
+        }//fin if
 
 
-
-
-
-
-
+        
+    } 
 ?>

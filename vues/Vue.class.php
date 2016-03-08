@@ -30,7 +30,7 @@ public function Vheader($geolocalisation) {
 
                 <head>
             <!-- Favicon -->
-                <link rel="shortcut icon" href="favicon.ico">
+                <link rel="shortcut icon" href="./images/site/favicon.png"/>
 
                 <!-- Web Fonts -->
                 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin">

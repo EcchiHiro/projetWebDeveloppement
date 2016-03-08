@@ -1,20 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.4
+-- version 4.4.10
 -- http://www.phpmyadmin.net
 --
--- Client :  127.0.0.1
--- Généré le :  Jeu 03 Mars 2016 à 04:13
--- Version du serveur :  5.6.15-log
--- Version de PHP :  5.5.8
+-- Client :  localhost:8889
+-- Généré le :  Mar 08 Mars 2016 à 08:39
+-- Version du serveur :  5.5.42
+-- Version de PHP :  7.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Base de données :  `artmontreal`
@@ -26,12 +20,11 @@ SET time_zone = "+00:00";
 -- Structure de la table `admin`
 --
 
-CREATE TABLE IF NOT EXISTS `admin` (
-  `IdAdmin_` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `admin` (
+  `IdAdmin_` int(11) NOT NULL,
   `Login` varchar(32) DEFAULT NULL,
-  `MotPasse` varchar(32) DEFAULT NULL,
-  PRIMARY KEY (`IdAdmin_`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `MotPasse` varchar(32) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `admin`
@@ -46,13 +39,12 @@ INSERT INTO `admin` (`IdAdmin_`, `Login`, `MotPasse`) VALUES
 -- Structure de la table `adresse`
 --
 
-CREATE TABLE IF NOT EXISTS `adresse` (
-  `IdAdresse` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `adresse` (
+  `IdAdresse` int(11) NOT NULL,
   `NumRue` varchar(32) DEFAULT NULL,
   `Rue` varchar(60) DEFAULT NULL,
-  `Ville` varchar(32) DEFAULT NULL,
-  PRIMARY KEY (`IdAdresse`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1315 ;
+  `Ville` varchar(32) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=1315 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `adresse`
@@ -368,221 +360,220 @@ INSERT INTO `adresse` (`IdAdresse`, `NumRue`, `Rue`, `Ville`) VALUES
 -- Structure de la table `artiste`
 --
 
-CREATE TABLE IF NOT EXISTS `artiste` (
-  `IdArtiste` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `artiste` (
+  `IdArtiste` int(11) NOT NULL,
   `Nom` varchar(32) DEFAULT NULL,
   `Prenom` varchar(32) DEFAULT NULL,
   `Collectif` varchar(60) NOT NULL,
   `photoArtiste` varchar(60) DEFAULT NULL,
-  `descriptionArtiste` varchar(1000) NOT NULL,
-  PRIMARY KEY (`IdArtiste`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000 ;
+  `descriptionArtiste` text CHARACTER SET utf8 COLLATE utf8_unicode_ci
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `artiste`
 --
 
 INSERT INTO `artiste` (`IdArtiste`, `Nom`, `Prenom`, `Collectif`, `photoArtiste`, `descriptionArtiste`) VALUES
-(-1, 'non identifie', '', '', '', ''),
-(801, 'Coutu', 'Patrick', '', '', ''),
-(802, 'Alloucherie', 'Jocelyne', '', '', ''),
-(803, 'Angers', 'Pierre Yves', '', '', ''),
-(804, 'Arsenault', 'Denise', '', '', ''),
-(805, '', '', 'Atelier TAG', '', ''),
-(806, 'Adam', 'Henri-Georges', '', '', ''),
-(807, 'Antoci', 'Rosario', '', '', ''),
-(808, 'Aquino', 'Eduardo', '', '', ''),
-(809, 'Streubel', 'Heinrich', '', '', ''),
-(810, 'Inconnu', 'Auteur', '', '', ''),
-(811, 'Pootoogook', 'Elijah Pudlat', '', '', ''),
-(812, 'Saggiak', 'Kumakuluk', '', '', ''),
-(813, 'Baier', 'Nicolas', '', '', ''),
-(814, 'Balboni', 'Carlo', '', '', ''),
-(815, 'Bélanger', 'Octave', '', '', ''),
-(816, 'Benet', 'Eugène-Paul', '', '', ''),
-(817, 'Berezowsky', 'Liliana', '', '', ''),
-(818, 'Bergeron', 'Germain', '', '', ''),
-(819, 'Bérubé', 'Patrick', '', '', ''),
-(820, 'Boisvert', 'Gilles', '', '', ''),
-(821, 'Borduas', 'Paul', '', '', ''),
-(822, 'Borduas', 'Paul-Émile', '', '', ''),
-(823, 'Boudot', 'Lucien', '', '', ''),
-(824, 'Cerceau', 'Fernand', '', '', ''),
-(825, 'Bourassa', 'Guy', '', '', ''),
-(826, 'Bourgault', 'Pierre', '', '', ''),
-(827, 'Bourgeau', 'Annick', '', '', ''),
-(828, 'Lasalle', 'Jules', '', '', ''),
-(829, 'Boyer', 'Gilbert', '', '', ''),
-(830, 'Brière', 'Marie-France', '', '', ''),
-(831, 'Brunet', 'Émile', '', '', ''),
-(832, 'Buren', 'Daniel', '', '', ''),
-(833, 'Burman', 'Irving', '', '', ''),
-(834, 'Cadieux', 'Alain', '', '', ''),
-(835, 'Calder', 'Alexander', '', '', ''),
-(836, 'Cantieni', 'Graham', '', '', ''),
-(837, 'Cardenas', 'Augustin', '', '', ''),
-(838, 'Carpentier', 'Jacques', '', '', ''),
-(839, 'Cartier', 'Jean', '', '', ''),
-(840, 'Casini', 'Guido', '', '', ''),
-(841, 'Cavalli', 'Roger', '', '', ''),
-(842, 'Charland-Favretti', 'Lyse', '', '', ''),
-(843, 'Charney', 'Melvin', '', '', ''),
-(844, 'Chavignier', 'Louis', '', '', ''),
-(845, 'Comtois', 'Ulysse', '', '', ''),
-(846, 'Connolly', 'Reynald', '', '', ''),
-(847, 'Covit', 'Linda', '', '', ''),
-(848, 'Séguin', 'Marie-Claude', '', '', ''),
-(849, 'Hardy et associés', 'Cardinal', '', '', ''),
-(850, 'Daoust', 'Sylvia', '', '', ''),
-(851, 'Dardel', 'René', '', '', ''),
-(852, 'Daudelin', 'Charles', '', '', ''),
-(853, 'De Almeida', 'Charters', '', '', ''),
-(854, 'De Broin', 'Michel', '', '', ''),
-(855, 'De Leon Imao', 'Abdulmari Jr.', '', '', ''),
-(856, 'De Palma', 'Armand', '', '', ''),
-(857, 'De Tonnancour', 'Jacques', '', '', ''),
-(858, 'Debré', 'Olivier', '', '', ''),
-(859, 'Delavalle', 'Jean-Marie', '', '', ''),
-(860, 'Delfosse', 'George', '', '', ''),
-(861, 'Démidoff-Séguin', 'Tatiana', '', '', ''),
-(862, 'Dubois', 'Pierre-Gilles', '', '', ''),
-(863, 'Dubray', 'Vital', '', '', ''),
-(864, 'Dumouchel', 'Agnès', '', '', ''),
-(865, 'Duval', 'Lucie', '', '', ''),
-(866, 'Dyens', 'Georges', '', '', ''),
-(867, 'Edstrom', 'Peter David', '', '', ''),
-(868, 'Eloul', 'Kosso', '', '', ''),
-(869, 'Faniel', 'Alfred', '', '', ''),
-(870, 'Farley', 'Denis', '', '', ''),
-(871, 'Filion', 'Armand', '', '', ''),
-(872, 'Fiorucci', 'Vittorio', '', '', ''),
-(873, 'Fontaine', 'Lorraine', '', '', ''),
-(874, 'Fortin', 'Marc-Aurèle', '', '', ''),
-(875, 'Fournelle', 'André', '', '', ''),
-(876, 'Galipeau', 'Benoit', '', '', ''),
-(877, 'Gavoty', 'Jean-François', '', '', ''),
-(878, 'Péré', 'Guerric', '', '', ''),
-(879, 'Gladstone', 'Gerald', '', '', ''),
-(880, 'Gnass', 'Peter', '', '', ''),
-(881, 'Gokakis', 'Spyros', '', '', ''),
-(882, 'Gorduz', 'Vasile', '', '', ''),
-(883, 'Goulet', 'Michel', '', '', ''),
-(884, 'Goulet', 'Rose-Marie', '', '', ''),
-(885, 'Robert', 'Marie-Claude', '', '', ''),
-(886, 'Granche', 'Pierre', '', '', ''),
-(887, 'Granet', 'Roseline', '', '', ''),
-(888, 'Hayeur', 'Isabelle', '', '', ''),
-(889, 'Hébert', 'Adrien', '', '', ''),
-(890, 'Hébert', 'Henri', '', '', ''),
-(891, 'Hébert', 'Jacques', '', '', ''),
-(892, 'Hébert', 'Louis-Philippe', '', '', ''),
-(893, 'Heyvaert', 'Pierre', '', '', ''),
-(894, 'Hill', 'George William', '', '', ''),
-(895, 'Holgate', 'Edwin H.', '', '', ''),
-(896, 'Hunt', 'Henry', '', '', ''),
-(897, 'Hunt', 'Tony', '', '', ''),
-(898, 'Hunter', 'Raoul', '', '', ''),
-(899, 'Jarnuszkiewicz', 'Jacek', '', '', ''),
-(900, 'Keyt', 'George', '', '', ''),
-(901, 'Lachapelle', 'Guillaume', '', '', ''),
-(902, 'Laliberté', 'Alfred', '', '', ''),
-(903, 'Lamarche', 'Claude', '', '', ''),
-(904, 'Lancz', 'Paul', '', '', ''),
-(905, 'Langevin', 'Roger', '', '', ''),
-(906, 'Lapalme', 'Robert', '', '', ''),
-(907, 'Lapointe', 'Michèle', '', '', ''),
-(908, 'Larivée', 'Francine', '', '', ''),
-(909, 'Larivière', 'Gilles', '', '', ''),
-(910, 'Lawson', 'Georges Anderson', '', '', ''),
-(911, 'Leblanc', 'Pierre', '', '', ''),
-(912, 'Lebourg', 'Charles-Auguste', '', '', ''),
-(913, 'Leclerc', 'Pierre E.', '', '', ''),
-(914, 'Lefébure', 'Jean', '', '', ''),
-(915, 'Lemieux', 'F. Maurice', '', '', ''),
-(916, 'Lemieux', 'Lisette', '', '', ''),
-(917, 'Lui', 'Andrew', '', '', ''),
-(918, 'Maler', 'Miroslav Frederik', '', '', ''),
-(919, 'McCarthy', 'Coeur de lion', '', '', ''),
-(920, 'Hilton-Moore', 'Marlene', '', '', ''),
-(921, 'McEwen', 'John', '', '', ''),
-(922, 'Merola', 'Mario', '', '', ''),
-(923, 'Mihalcean', 'Gilles', '', '', ''),
-(924, 'Millette', 'Claude', '', '', ''),
-(925, 'Mitchell', 'Robert', '', '', ''),
-(926, 'Moore', 'David', '', '', ''),
-(927, 'Moreau', 'Mathurin', '', '', ''),
-(928, 'Morin', 'Jean-Pierre', '', '', ''),
-(929, 'Morin', 'Madeleine', '', '', ''),
-(930, 'Morosoli', 'Joëlle', '', '', ''),
-(931, 'Mott', 'J.L.', '', '', ''),
-(932, 'Nadeau', 'Guy', '', '', ''),
-(933, 'Nadeau', 'Marc-Antoine', '', '', ''),
-(934, 'Narita', 'Takera', '', '', ''),
-(935, 'Nepveu', 'Robert', '', '', ''),
-(936, 'Olariu', 'Octavian', '', '', ''),
-(937, 'O''Shea', 'John Patrick', '', '', ''),
-(938, 'Paiement', 'Alain', '', '', ''),
-(939, 'Pang', 'Tin Neon', '', '', ''),
-(940, 'Pellegrinuzzi', 'Roberto', '', '', ''),
-(941, 'Pellerin', 'Guy', '', '', ''),
-(942, 'Pelletier', 'Robert', '', '', ''),
-(943, 'Pellus', 'Raymond', '', '', ''),
-(944, 'Pelzer', 'Alfonso', '', '', ''),
-(945, 'Pillhofer', 'Josef', '', '', ''),
-(946, 'Pilot', 'Robert', '', '', ''),
-(947, 'Planes', 'José', '', '', ''),
-(948, 'Poliquin', 'Jean-Noël', '', '', ''),
-(949, 'Poulin', 'Roland', '', '', ''),
-(950, 'Prent', 'Mark', '', '', ''),
-(951, 'Reddy', 'Krishna', '', '', ''),
-(952, 'Reusch', 'Astri', '', '', ''),
-(953, 'Rochette', 'Sylvie', '', '', ''),
-(954, 'Rolland', 'Dominique', '', '', ''),
-(955, 'Roussil', 'Robert', '', '', ''),
-(956, 'Sandonato', 'Aurelio', '', '', ''),
-(957, 'Santini', 'Laura', '', '', ''),
-(958, 'Saxe', 'Henry', '', '', ''),
-(959, 'Schleeh', 'Hans', '', '', ''),
-(960, 'Sebastian', '', '', '', ''),
-(961, 'Si Tu', 'Jie', '', '', ''),
-(962, 'Signori', 'Carlos Sergio', '', '', ''),
-(963, 'Sklavos', 'Yérassimo (Gerasimos)', '', '', ''),
-(964, 'Szekely', 'Pierre', '', '', ''),
-(965, 'Taccola', 'U', '', '', ''),
-(966, 'Zaccarella', 'A', '', '', ''),
-(967, 'Taylor', 'William Hughes', '', '', ''),
-(968, 'Tett', 'Alison', '', '', ''),
-(969, 'Yamazaki', 'Katsuhiro', 'Atelier TAG', '', ''),
-(970, 'Théberge', 'Claude', '', '', ''),
-(971, 'Gendreau', 'Marcel', '', '', ''),
-(972, 'Thorvaldsen', 'Berthel', '', '', ''),
-(973, 'Topham', 'William Thurston', '', '', ''),
-(974, 'Toto', 'Carlos Maria', '', '', ''),
-(975, 'Trudeau', 'Yves', '', '', ''),
-(976, 'Vaillancourt', 'Armand', '', '', ''),
-(977, 'Valade', 'Dominique', '', '', ''),
-(978, 'Van Der Heide', 'Herman J.', '', '', ''),
-(979, 'Vazan', 'Bill', '', '', ''),
-(980, 'Végiard', 'Alfonse', '', '', ''),
-(981, 'Vermette', 'Claude', '', '', ''),
-(982, 'Viger', 'Louise', '', '', ''),
-(983, 'Vincent', 'Joseph-Arthur', '', '', ''),
-(984, 'Vivot', 'Léa', '', '', ''),
-(985, 'Wade', 'George Edward', '', '', ''),
-(986, 'Widgery', 'Catherine', '', '', ''),
-(987, 'Winant', 'Alice', '', '', ''),
-(988, 'Witebsky', 'Shirley', '', '', ''),
-(989, 'Wood', 'Marshall', '', '', ''),
-(990, 'Pelletier', 'Luce', '', '', ''),
-(991, 'Hannah', 'Adad', '', '', ''),
-(992, 'Lauda', 'Jiri Georges', '', '', ''),
-(993, 'Pannier', 'Paul', '', '', ''),
-(994, 'Bélanger', 'Gwenaël', '', '', ''),
-(995, 'Besner', 'Jean-Jacques', '', '', ''),
-(996, 'Montillaud', 'Francis', '', '', ''),
-(997, 'Wilson', 'Robert', '', '', ''),
-(998, 'Bisson', 'Yvette', '', '', ''),
-(999, 'Sylvain', 'Catherine', '', '', '');
+(-1, 'non identifie', '', '', '', NULL),
+(801, 'Coutu', 'Patrick', '', '', NULL),
+(802, 'Alloucherie', 'Jocelyne', '', '', NULL),
+(803, 'Angers', 'Pierre Yves', '', '', NULL),
+(804, 'Arsenault', 'Denise', '', '', NULL),
+(805, '', '', 'Atelier TAG', '', NULL),
+(806, 'Adam', 'Henri-Georges', '', '', NULL),
+(807, 'Antoci', 'Rosario', '', '', NULL),
+(808, 'Aquino', 'Eduardo', '', '', NULL),
+(809, 'Streubel', 'Heinrich', '', '', NULL),
+(810, 'Inconnu', 'Auteur', '', '', NULL),
+(811, 'Pootoogook', 'Elijah Pudlat', '', '', NULL),
+(812, 'Saggiak', 'Kumakuluk', '', '', NULL),
+(813, 'Baier', 'Nicolas', '', '', NULL),
+(814, 'Balboni', 'Carlo', '', '', NULL),
+(815, 'Bélanger', 'Octave', '', '', NULL),
+(816, 'Benet', 'Eugène-Paul', '', '', NULL),
+(817, 'Berezowsky', 'Liliana', '', '', NULL),
+(818, 'Bergeron', 'Germain', '', '', NULL),
+(819, 'Bérubé', 'Patrick', '', '', NULL),
+(820, 'Boisvert', 'Gilles', '', '', NULL),
+(821, 'Borduas', 'Paul', '', '', NULL),
+(822, 'Borduas', 'Paul-Émile', '', '', NULL),
+(823, 'Boudot', 'Lucien', '', '', NULL),
+(824, 'Cerceau', 'Fernand', '', '', NULL),
+(825, 'Bourassa', 'Guy', '', '', NULL),
+(826, 'Bourgault', 'Pierre', '', '', NULL),
+(827, 'Bourgeau', 'Annick', '', '', NULL),
+(828, 'Lasalle', 'Jules', '', '', NULL),
+(829, 'Boyer', 'Gilbert', '', '', NULL),
+(830, 'Brière', 'Marie-France', '', '', NULL),
+(831, 'Brunet', 'Émile', '', '', NULL),
+(832, 'Buren', 'Daniel', '', '', NULL),
+(833, 'Burman', 'Irving', '', '', NULL),
+(834, 'Cadieux', 'Alain', '', '', NULL),
+(835, 'Calder', 'Alexander', '', '', NULL),
+(836, 'Cantieni', 'Graham', '', '', NULL),
+(837, 'Cardenas', 'Augustin', '', '', NULL),
+(838, 'Carpentier', 'Jacques', '', '', NULL),
+(839, 'Cartier', 'Jean', '', '', NULL),
+(840, 'Casini', 'Guido', '', '', NULL),
+(841, 'Cavalli', 'Roger', '', '', NULL),
+(842, 'Charland-Favretti', 'Lyse', '', '', NULL),
+(843, 'Charney', 'Melvin', '', '', NULL),
+(844, 'Chavignier', 'Louis', '', '', NULL),
+(845, 'Comtois', 'Ulysse', '', '', NULL),
+(846, 'Connolly', 'Reynald', '', '', NULL),
+(847, 'Covit', 'Linda', '', '', NULL),
+(848, 'Séguin', 'Marie-Claude', '', '', NULL),
+(849, 'Hardy et associés', 'Cardinal', '', '', NULL),
+(850, 'Daoust', 'Sylvia', '', '', NULL),
+(851, 'Dardel', 'René', '', '', NULL),
+(852, 'Daudelin', 'Charles', '', '', NULL),
+(853, 'De Almeida', 'Charters', '', '', NULL),
+(854, 'De Broin', 'Michel', '', '', NULL),
+(855, 'De Leon Imao', 'Abdulmari Jr.', '', '', NULL),
+(856, 'De Palma', 'Armand', '', '', NULL),
+(857, 'De Tonnancour', 'Jacques', '', '', NULL),
+(858, 'Debré', 'Olivier', '', '', NULL),
+(859, 'Delavalle', 'Jean-Marie', '', '', NULL),
+(860, 'Delfosse', 'George', '', '', NULL),
+(861, 'Démidoff-Séguin', 'Tatiana', '', '', NULL),
+(862, 'Dubois', 'Pierre-Gilles', '', '', NULL),
+(863, 'Dubray', 'Vital', '', '', NULL),
+(864, 'Dumouchel', 'Agnès', '', '', NULL),
+(865, 'Duval', 'Lucie', '', '', NULL),
+(866, 'Dyens', 'Georges', '', '', NULL),
+(867, 'Edstrom', 'Peter David', '', '', NULL),
+(868, 'Eloul', 'Kosso', '', '', NULL),
+(869, 'Faniel', 'Alfred', '', '', NULL),
+(870, 'Farley', 'Denis', '', '', NULL),
+(871, 'Filion', 'Armand', '', '', NULL),
+(872, 'Fiorucci', 'Vittorio', '', '', NULL),
+(873, 'Fontaine', 'Lorraine', '', '', NULL),
+(874, 'Fortin', 'Marc-Aurèle', '', '', NULL),
+(875, 'Fournelle', 'André', '', '', NULL),
+(876, 'Galipeau', 'Benoit', '', '', NULL),
+(877, 'Gavoty', 'Jean-François', '', '', NULL),
+(878, 'Péré', 'Guerric', '', '', NULL),
+(879, 'Gladstone', 'Gerald', '', '', NULL),
+(880, 'Gnass', 'Peter', '', '', NULL),
+(881, 'Gokakis', 'Spyros', '', '', NULL),
+(882, 'Gorduz', 'Vasile', '', '', NULL),
+(883, 'Goulet', 'Michel', '', '', NULL),
+(884, 'Goulet', 'Rose-Marie', '', '', NULL),
+(885, 'Robert', 'Marie-Claude', '', '', NULL),
+(886, 'Granche', 'Pierre', '', '', NULL),
+(887, 'Granet', 'Roseline', '', '', NULL),
+(888, 'Hayeur', 'Isabelle', '', '', NULL),
+(889, 'Hébert', 'Adrien', '', '', NULL),
+(890, 'Hébert', 'Henri', '', '', NULL),
+(891, 'Hébert', 'Jacques', '', '', NULL),
+(892, 'Hébert', 'Louis-Philippe', '', '', NULL),
+(893, 'Heyvaert', 'Pierre', '', '', NULL),
+(894, 'Hill', 'George William', '', '', NULL),
+(895, 'Holgate', 'Edwin H.', '', '', NULL),
+(896, 'Hunt', 'Henry', '', '', NULL),
+(897, 'Hunt', 'Tony', '', '', NULL),
+(898, 'Hunter', 'Raoul', '', '', NULL),
+(899, 'Jarnuszkiewicz', 'Jacek', '', '', NULL),
+(900, 'Keyt', 'George', '', '', NULL),
+(901, 'Lachapelle', 'Guillaume', '', '', NULL),
+(902, 'Laliberté', 'Alfred', '', '', NULL),
+(903, 'Lamarche', 'Claude', '', '', NULL),
+(904, 'Lancz', 'Paul', '', '', NULL),
+(905, 'Langevin', 'Roger', '', '', NULL),
+(906, 'Lapalme', 'Robert', '', '', NULL),
+(907, 'Lapointe', 'Michèle', '', '', NULL),
+(908, 'Larivée', 'Francine', '', '', NULL),
+(909, 'Larivière', 'Gilles', '', '', NULL),
+(910, 'Lawson', 'Georges Anderson', '', '', NULL),
+(911, 'Leblanc', 'Pierre', '', '', NULL),
+(912, 'Lebourg', 'Charles-Auguste', '', '', NULL),
+(913, 'Leclerc', 'Pierre E.', '', '', NULL),
+(914, 'Lefébure', 'Jean', '', '', NULL),
+(915, 'Lemieux', 'F. Maurice', '', '', NULL),
+(916, 'Lemieux', 'Lisette', '', '', NULL),
+(917, 'Lui', 'Andrew', '', '', NULL),
+(918, 'Maler', 'Miroslav Frederik', '', '', NULL),
+(919, 'McCarthy', 'Coeur de lion', '', '', NULL),
+(920, 'Hilton-Moore', 'Marlene', '', '', NULL),
+(921, 'McEwen', 'John', '', '', NULL),
+(922, 'Merola', 'Mario', '', '', NULL),
+(923, 'Mihalcean', 'Gilles', '', '', NULL),
+(924, 'Millette', 'Claude', '', '', NULL),
+(925, 'Mitchell', 'Robert', '', '', NULL),
+(926, 'Moore', 'David', '', '', NULL),
+(927, 'Moreau', 'Mathurin', '', '', NULL),
+(928, 'Morin', 'Jean-Pierre', '', '', NULL),
+(929, 'Morin', 'Madeleine', '', '', NULL),
+(930, 'Morosoli', 'Joëlle', '', '', NULL),
+(931, 'Mott', 'J.L.', '', '', NULL),
+(932, 'Nadeau', 'Guy', '', '', NULL),
+(933, 'Nadeau', 'Marc-Antoine', '', '', NULL),
+(934, 'Narita', 'Takera', '', '', NULL),
+(935, 'Nepveu', 'Robert', '', '', NULL),
+(936, 'Olariu', 'Octavian', '', '', NULL),
+(937, 'O''Shea', 'John Patrick', '', '', NULL),
+(938, 'Paiement', 'Alain', '', '', NULL),
+(939, 'Pang', 'Tin Neon', '', '', NULL),
+(940, 'Pellegrinuzzi', 'Roberto', '', '', NULL),
+(941, 'Pellerin', 'Guy', '', '', NULL),
+(942, 'Pelletier', 'Robert', '', '', NULL),
+(943, 'Pellus', 'Raymond', '', '', NULL),
+(944, 'Pelzer', 'Alfonso', '', '', NULL),
+(945, 'Pillhofer', 'Josef', '', '', NULL),
+(946, 'Pilot', 'Robert', '', '', NULL),
+(947, 'Planes', 'José', '', '', NULL),
+(948, 'Poliquin', 'Jean-Noël', '', '', NULL),
+(949, 'Poulin', 'Roland', '', '', NULL),
+(950, 'Prent', 'Mark', '', '', NULL),
+(951, 'Reddy', 'Krishna', '', '', NULL),
+(952, 'Reusch', 'Astri', '', '', NULL),
+(953, 'Rochette', 'Sylvie', '', '', NULL),
+(954, 'Rolland', 'Dominique', '', '', NULL),
+(955, 'Roussil', 'Robert', '', '', NULL),
+(956, 'Sandonato', 'Aurelio', '', '', NULL),
+(957, 'Santini', 'Laura', '', '', NULL),
+(958, 'Saxe', 'Henry', '', '', NULL),
+(959, 'Schleeh', 'Hans', '', '', NULL),
+(960, 'Sebastian', '', '', '', NULL),
+(961, 'Si Tu', 'Jie', '', '', NULL),
+(962, 'Signori', 'Carlos Sergio', '', '', NULL),
+(963, 'Sklavos', 'Yérassimo (Gerasimos)', '', '', NULL),
+(964, 'Szekely', 'Pierre', '', '', NULL),
+(965, 'Taccola', 'U', '', '', NULL),
+(966, 'Zaccarella', 'A', '', '', NULL),
+(967, 'Taylor', 'William Hughes', '', '', NULL),
+(968, 'Tett', 'Alison', '', '', NULL),
+(969, 'Yamazaki', 'Katsuhiro', 'Atelier TAG', '', NULL),
+(970, 'Théberge', 'Claude', '', '', NULL),
+(971, 'Gendreau', 'Marcel', '', '', NULL),
+(972, 'Thorvaldsen', 'Berthel', '', '', NULL),
+(973, 'Topham', 'William Thurston', '', '', NULL),
+(974, 'Toto', 'Carlos Maria', '', '', NULL),
+(975, 'Trudeau', 'Yves', '', '', NULL),
+(976, 'Vaillancourt', 'Armand', '', '', NULL),
+(977, 'Valade', 'Dominique', '', '', NULL),
+(978, 'Van Der Heide', 'Herman J.', '', '', NULL),
+(979, 'Vazan', 'Bill', '', '', NULL),
+(980, 'Végiard', 'Alfonse', '', '', NULL),
+(981, 'Vermette', 'Claude', '', '', NULL),
+(982, 'Viger', 'Louise', '', '', NULL),
+(983, 'Vincent', 'Joseph-Arthur', '', '', NULL),
+(984, 'Vivot', 'Léa', '', '', NULL),
+(985, 'Wade', 'George Edward', '', '', NULL),
+(986, 'Widgery', 'Catherine', '', '', NULL),
+(987, 'Winant', 'Alice', '', '', NULL),
+(988, 'Witebsky', 'Shirley', '', '', NULL),
+(989, 'Wood', 'Marshall', '', '', NULL),
+(990, 'Pelletier', 'Luce', '', '', NULL),
+(991, 'Hannah', 'Adad', '', '', NULL),
+(992, 'Lauda', 'Jiri Georges', '', '', NULL),
+(993, 'Pannier', 'Paul', '', '', NULL),
+(994, 'Bélanger', 'Gwenaël', '', '', NULL),
+(995, 'Besner', 'Jean-Jacques', '', '', NULL),
+(996, 'Montillaud', 'Francis', '', '', NULL),
+(997, 'Wilson', 'Robert', '', '', NULL),
+(998, 'Bisson', 'Yvette', '', '', NULL),
+(999, 'Sylvain', 'Catherine', '', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -590,13 +581,12 @@ INSERT INTO `artiste` (`IdArtiste`, `Nom`, `Prenom`, `Collectif`, `photoArtiste`
 -- Structure de la table `categorie`
 --
 
-CREATE TABLE IF NOT EXISTS `categorie` (
-  `IdCat` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `categorie` (
+  `IdCat` int(11) NOT NULL,
   `NomSousCat` varchar(200) DEFAULT NULL,
   `NomSousCatEN` varchar(200) DEFAULT NULL,
-  `PhotoCat` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`IdCat`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=58 ;
+  `PhotoCat` varchar(60) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `categorie`
@@ -625,12 +615,10 @@ INSERT INTO `categorie` (`IdCat`, `NomSousCat`, `NomSousCatEN`, `PhotoCat`) VALU
 -- Structure de la table `est_composee`
 --
 
-CREATE TABLE IF NOT EXISTS `est_composee` (
-  `IdOeuvre` int(11) NOT NULL AUTO_INCREMENT,
-  `IdMat` int(11) NOT NULL,
-  PRIMARY KEY (`IdOeuvre`,`IdMat`),
-  KEY `FK_est_composée_IdMat` (`IdMat`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=950 ;
+CREATE TABLE `est_composee` (
+  `IdOeuvre` int(11) NOT NULL,
+  `IdMat` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=950 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `est_composee`
@@ -1225,28 +1213,14 @@ INSERT INTO `est_composee` (`IdOeuvre`, `IdMat`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `log`
---
-
-CREATE TABLE IF NOT EXISTS `log` (
-  `id` int(4) NOT NULL AUTO_INCREMENT,
-  `db_installe` bit(1) NOT NULL DEFAULT b'0',
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `materiaux`
 --
 
-CREATE TABLE IF NOT EXISTS `materiaux` (
-  `IdMat` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `materiaux` (
+  `IdMat` int(11) NOT NULL,
   `NomMateriaux` varchar(200) DEFAULT NULL,
-  `NomMateriauxEN` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`IdMat`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=689 ;
+  `NomMateriauxEN` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=689 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `materiaux`
@@ -1394,8 +1368,8 @@ INSERT INTO `materiaux` (`IdMat`, `NomMateriaux`, `NomMateriauxEN`) VALUES
 -- Structure de la table `oeuvre`
 --
 
-CREATE TABLE IF NOT EXISTS `oeuvre` (
-  `IdOeuvre` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `oeuvre` (
+  `IdOeuvre` int(11) NOT NULL,
   `Titre` varchar(60) DEFAULT NULL,
   `TitreVariante` varchar(60) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `Collection` varchar(60) DEFAULT NULL,
@@ -1411,12 +1385,8 @@ CREATE TABLE IF NOT EXISTS `oeuvre` (
   `IdArtiste` int(11) NOT NULL,
   `IdCat` int(11) NOT NULL,
   `photoPresentation` varchar(60) NOT NULL,
-  `description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  PRIMARY KEY (`IdOeuvre`),
-  KEY `FK_Oeuvre_IdAdresse` (`IdAdresse`),
-  KEY `FK_Oeuvre_IdArtiste` (`IdArtiste`),
-  KEY `FK_Oeuvre_IdCat` (`IdCat`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=950 ;
+  `description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci
+) ENGINE=InnoDB AUTO_INCREMENT=950 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `oeuvre`
@@ -1633,12 +1603,12 @@ INSERT INTO `oeuvre` (`IdOeuvre`, `Titre`, `TitreVariante`, `Collection`, `Colle
 (872, 'Force et progrès', NULL, 'Art public', 'Public art', 'Soudé; peint', 'Welded, painted', '255 x 220 x 425 cm', 'Lachine', 45.431031, -73.670124, 1, 1230, 935, 42, '', ''),
 (873, 'Écluses', NULL, 'Art public', 'Public art', 'Soudé', 'Welded', '415 x 111 x 135 cm', 'Lachine', 45.428215, -73.678237, 1, 1231, 936, 42, '', ''),
 (874, 'Vitraux', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.508816, -73.554069, 1, 1232, 937, 44, '', ''),
-(875, 'Jour ou nuit inconnue', 'Motifs et réseaux (titre provisoire)', 'Intégration à l''architecture', 'Integration with architecture', 'Sérigraphie', 'Serigraphy', '254 x 685 x 35 cm', 'Rivière-des-Prairies–Pointe-aux-Trembles', 45.668073, -73.494782, 1, 1233, 938, 48, '', '');
-INSERT INTO `oeuvre` (`IdOeuvre`, `Titre`, `TitreVariante`, `Collection`, `CollectionEN`, `Technique`, `TechniqueEN`, `Dimensions`, `Arrondissement`, `CoordonneeLatitude`, `CoordonneeLongitude`, `EstValide`, `IdAdresse`, `IdArtiste`, `IdCat`, `photoPresentation`, `description`) VALUES
+(875, 'Jour ou nuit inconnue', 'Motifs et réseaux (titre provisoire)', 'Intégration à l''architecture', 'Integration with architecture', 'Sérigraphie', 'Serigraphy', '254 x 685 x 35 cm', 'Rivière-des-Prairies–Pointe-aux-Trembles', 45.668073, -73.494782, 1, 1233, 938, 48, '', ''),
 (876, 'Ce qui reste 1997-2001', 'Ce qui reste; DIA-LOG (titre provisoire)', 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, '400 x 234 x 2 cm', 'Ville-Marie', 45.501079, -73.555515, 1, 1234, 938, 47, '', ''),
 (877, 'Le roi Singe', NULL, 'Art public', 'Public art', 'Coulé; assemblé; moulé', 'Cast; assembled; moulded', '550 x 400 x 21 cm', 'Ville-Marie', 45.506907, -73.56059, 1, 1235, 939, 42, '', ''),
 (878, 'Le spectacle de la curiosité', NULL, 'Intégration à l''architecture', 'Integration with architecture', 'Impression sur papier ilfochrome', 'Print on Ilfochrome paper', '260 x 800 cm', 'Ahuntsic-Cartierville', 45.553357, -73.662743, 1, 1236, 940, 47, '', ''),
-(879, 'Espace vert', NULL, 'Art public', 'Public art', 'Impressions numériques montées à froid sur support de plexig', 'Digital prints cold-mounted on Plexiglas support (acrylic)', '215 x 450 x 36', 'Outremont', 45.519579, -73.619247, 1, 1237, 940, 47, '', ''),
+(879, 'Espace vert', NULL, 'Art public', 'Public art', 'Impressions numériques montées à froid sur support de plexig', 'Digital prints cold-mounted on Plexiglas support (acrylic)', '215 x 450 x 36', 'Outremont', 45.519579, -73.619247, 1, 1237, 940, 47, '', '');
+INSERT INTO `oeuvre` (`IdOeuvre`, `Titre`, `TitreVariante`, `Collection`, `CollectionEN`, `Technique`, `TechniqueEN`, `Dimensions`, `Arrondissement`, `CoordonneeLatitude`, `CoordonneeLongitude`, `EstValide`, `IdAdresse`, `IdArtiste`, `IdCat`, `photoPresentation`, `description`) VALUES
 (880, 'Être +', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Rosemont–La Petite-Patrie', 45.559685, -73.581582, 1, 1238, 941, 43, '', ''),
 (881, 'Monument à Louis Cyr', NULL, 'Art public', 'Public art', 'Bronze coulé; cire perdue', 'Cast bronze; cire perdue', '440  x 183  x 180 cm', 'Le Sud-Ouest', 45.475382, -73.593225, 1, 1239, 942, 42, '', ''),
 (882, 'Le serment de Dollard des Ormeaux et de ses compagnons', NULL, 'Intégration à l''architecture', 'Integration with architecture', NULL, NULL, NULL, 'Ville-Marie', 45.503965, -73.587328, 1, 1240, 943, 45, '', ''),
@@ -1716,11 +1686,10 @@ INSERT INTO `oeuvre` (`IdOeuvre`, `Titre`, `TitreVariante`, `Collection`, `Colle
 -- Structure de la table `photos`
 --
 
-CREATE TABLE IF NOT EXISTS `photos` (
-  `IdPhotographie` int(11) NOT NULL AUTO_INCREMENT,
-  `Photo` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`IdPhotographie`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+CREATE TABLE `photos` (
+  `IdPhotographie` int(11) NOT NULL,
+  `Photo` varchar(60) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `photos`
@@ -1738,12 +1707,10 @@ INSERT INTO `photos` (`IdPhotographie`, `Photo`) VALUES
 -- Structure de la table `possede`
 --
 
-CREATE TABLE IF NOT EXISTS `possede` (
-  `IdOeuvre` int(11) NOT NULL AUTO_INCREMENT,
-  `IdPhotographie` int(11) NOT NULL,
-  PRIMARY KEY (`IdOeuvre`,`IdPhotographie`),
-  KEY `FK_possede_IdPhotographie` (`IdPhotographie`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=950 ;
+CREATE TABLE `possede` (
+  `IdOeuvre` int(11) NOT NULL,
+  `IdPhotographie` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=950 DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `possede`
@@ -1755,6 +1722,118 @@ INSERT INTO `possede` (`IdOeuvre`, `IdPhotographie`) VALUES
 (949, 14),
 (949, 15);
 
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`IdAdmin_`);
+
+--
+-- Index pour la table `adresse`
+--
+ALTER TABLE `adresse`
+  ADD PRIMARY KEY (`IdAdresse`);
+
+--
+-- Index pour la table `artiste`
+--
+ALTER TABLE `artiste`
+  ADD PRIMARY KEY (`IdArtiste`);
+
+--
+-- Index pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`IdCat`);
+
+--
+-- Index pour la table `est_composee`
+--
+ALTER TABLE `est_composee`
+  ADD PRIMARY KEY (`IdOeuvre`,`IdMat`),
+  ADD KEY `FK_est_composée_IdMat` (`IdMat`);
+
+--
+-- Index pour la table `materiaux`
+--
+ALTER TABLE `materiaux`
+  ADD PRIMARY KEY (`IdMat`);
+
+--
+-- Index pour la table `oeuvre`
+--
+ALTER TABLE `oeuvre`
+  ADD PRIMARY KEY (`IdOeuvre`),
+  ADD KEY `FK_Oeuvre_IdAdresse` (`IdAdresse`),
+  ADD KEY `FK_Oeuvre_IdArtiste` (`IdArtiste`),
+  ADD KEY `FK_Oeuvre_IdCat` (`IdCat`);
+
+--
+-- Index pour la table `photos`
+--
+ALTER TABLE `photos`
+  ADD PRIMARY KEY (`IdPhotographie`);
+
+--
+-- Index pour la table `possede`
+--
+ALTER TABLE `possede`
+  ADD PRIMARY KEY (`IdOeuvre`,`IdPhotographie`),
+  ADD KEY `FK_possede_IdPhotographie` (`IdPhotographie`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `IdAdmin_` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `adresse`
+--
+ALTER TABLE `adresse`
+  MODIFY `IdAdresse` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1315;
+--
+-- AUTO_INCREMENT pour la table `artiste`
+--
+ALTER TABLE `artiste`
+  MODIFY `IdArtiste` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1000;
+--
+-- AUTO_INCREMENT pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  MODIFY `IdCat` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=58;
+--
+-- AUTO_INCREMENT pour la table `est_composee`
+--
+ALTER TABLE `est_composee`
+  MODIFY `IdOeuvre` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=950;
+--
+-- AUTO_INCREMENT pour la table `materiaux`
+--
+ALTER TABLE `materiaux`
+  MODIFY `IdMat` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=689;
+--
+-- AUTO_INCREMENT pour la table `oeuvre`
+--
+ALTER TABLE `oeuvre`
+  MODIFY `IdOeuvre` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=950;
+--
+-- AUTO_INCREMENT pour la table `photos`
+--
+ALTER TABLE `photos`
+  MODIFY `IdPhotographie` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT pour la table `possede`
+--
+ALTER TABLE `possede`
+  MODIFY `IdOeuvre` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=950;
 --
 -- Contraintes pour les tables exportées
 --
@@ -1780,7 +1859,3 @@ ALTER TABLE `oeuvre`
 ALTER TABLE `possede`
   ADD CONSTRAINT `FK_possede_IdOeuvre` FOREIGN KEY (`IdOeuvre`) REFERENCES `oeuvre` (`IdOeuvre`),
   ADD CONSTRAINT `FK_possede_IdPhotographie` FOREIGN KEY (`IdPhotographie`) REFERENCES `photos` (`IdPhotographie`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -272,7 +272,9 @@ class Controler
             
             $oVue = new Vue();
             $artiste = new Artiste("","","","","","");
-            $artisteListe = $artiste->afficheListeArtiste();
+//            $artisteListe = $artiste->afficheListeArtiste();
+            $choixA= 'a%';
+            $artisteListe = $artiste->afficheListeArtisteChoixLettreAlphabet($choixA);
             $oVue->Vheader($geolocalisation);
             $oVue->afficheArtistes($artisteListe);
             $oVue->Vfooter();

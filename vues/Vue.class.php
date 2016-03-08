@@ -30,7 +30,7 @@ public function Vheader($geolocalisation) {
 
                 <head>
             <!-- Favicon -->
-                <link rel="shortcut icon" href="favicon.ico">
+                <link rel="shortcut icon" href="./images/site/favicon.png"/>
 
                 <!-- Web Fonts -->
                 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin">
@@ -440,7 +440,8 @@ public function afficheOeuvres($listeOeuvresParCat, $erreur, $titreCat) {
      * Affiche la page de la liste des artistes
      * @access public
      * @param Array $artisteListe
-     * @author Carlos VASQUEZ     
+     * @author Carlos VASQUEZ 
+     * @author Cristian Manrique    
      */
 
 public function afficheArtistes($artisteListe) {
@@ -455,20 +456,86 @@ public function afficheArtistes($artisteListe) {
     <div class="cube-portfolio container margin-bottom-60">
 
                     <h1 class="formHeader">Liste des noms d'artistes</h1>
-                    <ul>
-                        <?php
-                            foreach($artisteListe as $artiste){
-                         ?>
-                            <li>
-                                <a href="index.php?page=infoArtiste&artiste=<?php echo $artiste->idArtiste; ?>"><?php echo $artiste->nomArtiste ." ". $artiste->prenomArtiste;?></a>
-                            </li>
-                        <?php } ?>
-                    </ul>
+                    <!-- Tab v2 -->
+					<div class="tab-v2">
+						<ul id ='my_ul' class="nav nav-tabs">
+							<li class="active"><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="a%">A</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="b%">B</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="c%">C</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="d%">D</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="e%">E</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="f%">F</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="g%">G</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="h%">H</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="i%">I</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="j%">J</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="k%">K</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="l%">L</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="m%">M</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="n%">N</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="o%">O</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="p%">P</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="q%">Q</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="r%">R</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="s%">S</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="t%">T</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="u%">U</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="v%">V</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="w%">W</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="x%">X</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="y%">Y</a></li>
+							<li><a class="choixLettre" href="#home-1" data-toggle="tab" data-value="z%">Z</a></li>
+
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane fade in active" id="home-1">
+                               <div id="reponse">
+                                    <ul>
+                                        <?php
+                                        foreach($artisteListe as $artiste){
+                                        ?>
+                                            <li>
+                                            <a href="index.php?page=infoArtiste&artiste=<?php echo $artiste->idArtiste; ?>"><?php echo $artiste->nomArtiste ." ". $artiste->prenomArtiste;?></a>
+                                            </li>
+                                        <?php } ?>
+                                    </ul>
+                               </div>
+							</div>
+							
+						</div>
+					</div>
+					<!-- End Tab v2 -->
 
         </div>
+        
+                    
 
+        <?php
 
+    }
+    
+    /**
+     * Affiche la page de la liste des artistes selon le choix de la lettre de début
+     * @access public
+     * @param Array $artisteListe
+     * @author Cristian MANRIQUE     
+     */
 
+public function afficheArtistesParPremiereNomLettre($artisteListe) {
+        ?>
+           
+           
+        <ul>
+            <?php
+                foreach($artisteListe as $artiste){
+             ?>
+                <li>
+                    <a href="index.php?page=infoArtiste&artiste=<?php echo $artiste->idArtiste; ?>"><?php echo $artiste->nomArtiste ." ". $artiste->prenomArtiste;?></a>
+                </li>
+            <?php } ?>
+        </ul>
+
+        
         <?php
 
     }

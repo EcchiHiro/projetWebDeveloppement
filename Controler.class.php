@@ -349,14 +349,18 @@ class Controler
         if(isset($_POST['titre']))
         {
 
-            $unAdresse=new Adresse("",$_POST['nbRue'], $_POST['nomRue'], $_POST['ville']);
+            $unAdresse=new Adresse("",$_POST['nbRue'], $_POST['nomRue'],"Montréal");
 
             $unAdresse->enregistreAdresse();
 
             $dernierIdAdresse=$unAdresse->recupererDernierId();
+            
+            $adresseComplete = $_POST['nbRue'] ." ".  $_POST['nomRue'].","." ". "Montréal" ."," ." ". "Canada";
+                        
+            $arrayLatLong = $unAdresse->getXmlCoordsFromAdress($adresseComplete);
 
 
-          $uneOeuvre = new Oeuvre("",$_POST["titre"], "","", "", "","","", $_POST["arrondissement"], $_POST["latitude"], $_POST["longitud"], "", $dernierIdAdresse, $_POST["artisteOeuvre"], $_POST["categorieOeuvre"], "","");
+          $uneOeuvre = new Oeuvre("",$_POST["titre"], "","", "", "","","", $_POST["arrondissement"], $arrayLatLong['lat'], $arrayLatLong['lon'], "", $dernierIdAdresse, $_POST["artisteOeuvre"], $_POST["categorieOeuvre"], "","");
 
             $uneOeuvre->enregistreOuvres();
           
@@ -415,10 +419,10 @@ class Controler
             $oVue = new Vue();
             $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","");
             $oeuvresCoordonnees = $oeuvre->recupLocalisationOeuvres();
-            $docXML=$oeuvre->creationXMLCoordonnesOeuvres($oeuvresCoordonnees);
             $oVue->Vheader($geolocalisation);
             $oVue->afficheGeolocalisation($oeuvresCoordonnees);
             $oVue->Vfooter();
+            $docXML=$oeuvre->creationXMLCoordonnesOeuvres($oeuvresCoordonnees);
         }
     
      /**
@@ -569,8 +573,8 @@ class Controler
         {
             
             $oVue = new VueAdmin();
-            $oVue->adminLogin();
-
+            $message = null;
+            
 
             
                 //valider si l'usager est authentifié. S'il l'est, le rediriger vers la vue admin
@@ -600,11 +604,13 @@ class Controler
                     {
                         
                         //Afficher le message d'erreur
-                         $_SESSION["message"]= "Votre combinaison utilisateur et mot de passe invalide.";
+                         $message = "Votre combinaison utilisateur et mot de passe invalide.";
 
                     }     
 
                 }
+            
+                $oVue->adminLogin($message);
             
         }
 
@@ -664,14 +670,18 @@ class Controler
         if(isset($_POST['titre']))
         {
 
-            $unAdresse=new Adresse("",$_POST['nbRue'], $_POST['nomRue'], $_POST['ville']);
+            $unAdresse=new Adresse("",$_POST['nbRue'], $_POST['nomRue'], "Montréal");
 
             $unAdresse->enregistreAdresse();
 
             $dernierIdAdresse=$unAdresse->recupererDernierId();
+            
+            $adresseComplete = $_POST['nbRue'] ." ".  $_POST['nomRue'].","." ". "Montréal" ."," ." ". "Canada";
+                        
+            $arrayLatLong = $unAdresse->getXmlCoordsFromAdress($adresseComplete);
 
 
-          $uneOeuvre = new Oeuvre("",$_POST["titre"], "","", "", "","","", $_POST["arrondissement"], $_POST["latitude"], $_POST["longitud"], "", $dernierIdAdresse, $_POST["artisteOeuvre"], $_POST["categorieOeuvre"], "","");
+          $uneOeuvre = new Oeuvre("",$_POST["titre"], "","", "", "","","", $_POST["arrondissement"], $arrayLatLong['lat'], $arrayLatLong['lon'], "", $dernierIdAdresse, $_POST["artisteOeuvre"], $_POST["categorieOeuvre"], "","");
 
             $uneOeuvre->enregistreOuvresAdmin();
           
@@ -765,15 +775,12 @@ class Controler
             $infoOeuvre= $oeuvre->afficherUneOeuvre($idOeuvre);
             
             $mat=new Materiaux("", "", "");
-            $materiauxOeuvre=$mat->afficherMaterielUneOeuvre($idOeuvre);
+            //$materiauxOeuvre=$mat->afficherMaterielUneOeuvre($idOeuvre);
             
 //          $listeMat=$mat->afficheListeMateriaux();
             $listeMat=$mat->afficheListeMateriauxDuneOeuvre($idOeuvre);
-            if($materiauxOeuvre != null) 
-            {
-                $tableauInfoOeuvreMateriel=get_object_vars($materiauxOeuvre);   
-            }
-   
+
+
             
             $cat= new Categorie("", "", "", "", "", "");
             $categorieOeuvre=$cat->afficheCategorieUneOeuvre($idOeuvre);
@@ -791,7 +798,7 @@ class Controler
 
             $oVue->AdminTopPage();
             $oVue->adminNavSide();
-            $oVue->adminModifieOeuvre($infoOeuvre,$tableauInfoOeuvreMateriel,$categorieOeuvre,$artisteOeuvre,$addresseOeuvre, $categoriesListe, $listeArtiste, $listeMat);
+            $oVue->adminModifieOeuvre($infoOeuvre,$categorieOeuvre,$artisteOeuvre,$addresseOeuvre, $categoriesListe, $listeArtiste, $listeMat);
             $oVue->AdminPiedPage();
        
             if((isset($_POST["valide"]))&&($_POST["valide"]=="modification"))
@@ -803,13 +810,15 @@ class Controler
                 $technique=$_POST["technique"];
                 $dimensions=$_POST["dimensions"];
                 $arrondissement=$_POST["arrondissement"];
-                $coordonneeLatitude=floatval($_POST["coordonneeLatitude"]);
-                $coordonneeLongitude=floatval($_POST["coordonneeLongitude"]);
-
-
+                $numRue = $_POST["numRue"];
+                $nomRue = $_POST["nomRue"];
+                
+                $adresseComplete = $numRue ." ".  $nomRue.","." ". "Montréal" ."," ." ". "Canada";   
+                
+                $arrayLatLong = $adresse->getXmlCoordsFromAdress($adresseComplete);
 
                 $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","");
-                $oeuvre->modifieUneOeuvre($idOeuvre, $titre, $titreVariante,$collection, "",$technique,"", $dimensions,$arrondissement,$coordonneeLatitude, $coordonneeLongitude);
+                $oeuvre->modifieUneOeuvre($idOeuvre, $titre, $titreVariante,$collection, "",$technique,"", $dimensions,$arrondissement,$arrayLatLong['lat'], $arrayLatLong['lon']);
 
 
                 $idCat=intval($_POST["cat"]);
@@ -826,8 +835,7 @@ class Controler
 
 
                 $idAdresse = intval($_POST["idAdre"]);
-                $numRue = $_POST["numRue"];
-                $nomRue = $_POST["nomRue"];
+
                 $adresse->metAjourAdresseUneOeuvre($idAdresse, $numRue, $nomRue);  
 
 

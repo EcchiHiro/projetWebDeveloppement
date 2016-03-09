@@ -328,20 +328,6 @@ function initMap() {
       $( "#msj9" ).css("display", "none");
     }
 
-    if($("#latitude").val().length < 1){
-      $( "#msj16" ).css("display", "block");
-       valide=false;
-    }else{
-      $( "#msj16" ).css("display", "none");
-    }
-
-    if($("#longitud").val().length < 1){
-      $( "#msj17" ).css("display", "block");
-       valide=false;
-    }else{
-      $( "#msj17" ).css("display", "none");
-    }
-
     if($("#nbRue").val().length < 1){
       $( "#msj1" ).css("display", "block");
       valide=false;
@@ -356,14 +342,8 @@ function initMap() {
       $( "#msj2" ).css("display", "none");
     }
 
-    if($("#ville").val().length < 1){
-      $( "#msj3" ).css("display", "block");
-       valide=false;
-    }else{
-      $( "#msj3" ).css("display", "none");
-    }
 
-    if($("#titre").val().length > 1 && $("#latitude").val().length > 1 && $("#longitud").val().length > 1 && $("#nbRue").val().length > 1 && $("#nomRue").val().length > 1 && $("#ville").val().length > 1){
+    if($("#titre").val().length > 1 && $("#nbRue").val().length > 1 && $("#nomRue").val().length > 1){
 
       valide=true;
     }
@@ -466,20 +446,12 @@ function handleChange()
         
        
 
-        //Voici les variable post pour le xhr.send
-        //index.php?artistes=artistes&categorie=categorie&materiaux=materiaux&arrondissement=Cote-des-neiges
-
-        //console.log(choixDuSelectArtistes.value);
-        //console.log(choixDuSelectCategorie.value);
-        //console.log(choixDuSelectArrondissement.value);
-        //console.log(choixDuSelectArrondissement.value);
 
         if(choixDuSelectArtistes)
         {
 
             choixDuSelectArtistes.addEventListener('change', function(){
-
-                console.log(choixDuSelectArtistes.value);//Check la valeur du select
+                
 
                 //Permet d'envoyer une requet au serveur
                 xhr = new XMLHttpRequest();
@@ -506,22 +478,19 @@ function handleChange()
 
                     if(e.target.readyState == 4 && e.target.status == 200)
                         {
-                            console.log(e.target.responseText);
 
                             //Cibler la div à changer
                             var elementRes = document.querySelector('[name="changementRecherche"]');
-                            console.log(elementRes);
                             //si oui, envoyer les modifications
                             if(elementRes)
                             {
                                 elementRes.innerHTML = e.target.responseText;
                             }
                         }
-
                 }
-
-
+                
             });
+            
         }//FIN du if
 
 
@@ -530,7 +499,6 @@ function handleChange()
 
             choixDuSelectCategorie.addEventListener('change', function(){
 
-                console.log(choixDuSelectCategorie.value);//Check la valeur du select
 
                 //Permet d'envoyer une requet au serveur
                 xhr = new XMLHttpRequest();
@@ -544,24 +512,22 @@ function handleChange()
 
                 //Stocker la valeur du select dans la var champ
                 var champ = document.querySelector('[name="categorie"]');
-                console.log("champ value = "+champ.value);
 
                 //Envoyer la valeur du select à URL de la page
                 xhr.send("page=accueil&categorie="+champ.value);
 
-                //console.log("xhr= "+xhr.send);
+
 
                 //Vérification de la requête xhr
                 xhr.onreadystatechange = function(e){
-                //console.log(e.target);
+
 
                     if(e.target.readyState == 4 && e.target.status == 200)
                         {
-                            console.log(e.target.responseText);
+
 
                             //Cibler la div à changer
                             var elementRes = document.querySelector('[name="changementRecherche"]');
-                            console.log(elementRes);
                             //si oui, envoyer les modifications
                             if(elementRes)
                             {
@@ -577,8 +543,6 @@ function handleChange()
 
             choixDuSelectMateriaux.addEventListener('change', function(){
 
-                console.log(choixDuSelectMateriaux.value);//Check la valeur du select
-
                 //Permet d'envoyer une requet au serveur
                 xhr = new XMLHttpRequest();
 
@@ -591,7 +555,6 @@ function handleChange()
 
                 //Stocker la valeur du select dans la var champ
                 var champ = document.querySelector('[name="materiaux"]');
-                console.log("champ value = "+champ.value);
 
                 //Envoyer la valeur du select à URL de la page
                 xhr.send("page=accueil&materiaux="+champ.value);
@@ -600,11 +563,9 @@ function handleChange()
 
                 //Vérification de la requête xhr
                 xhr.onreadystatechange = function(e){
-                //console.log(e.target);
 
                     if(e.target.readyState == 4 && e.target.status == 200)
                         {
-                            console.log(e.target.responseText);
 
                             //Cibler la div à changer
                             var elementRes = document.querySelector('[name="changementRecherche"]');
@@ -625,7 +586,6 @@ function handleChange()
 
             choixDuSelectArrondissement.addEventListener('change', function(){
 
-                console.log(choixDuSelectArrondissement.value);//Check la valeur du select
 
                 //Permet d'envoyer une requet au serveur
                 xhr = new XMLHttpRequest();
@@ -639,24 +599,18 @@ function handleChange()
 
                 //Stocker la valeur du select dans la var champ
                 var champ = document.querySelector('[name="arrondissement"]');
-                console.log("champ value = "+champ.value);
 
                 //Envoyer la valeur du select à URL de la page
                 xhr.send("page=accueil&arrondissement="+champ.value);
 
-                console.log("xhr= "+xhr.send);
-
                 //Vérification de la requête xhr
                 xhr.onreadystatechange = function(e){
-                console.log(e.target);
 
                     if(e.target.readyState == 4 && e.target.status == 200)
                         {
-                            console.log(e.target.responseText);
 
                             //Cibler la div à changer
                             var elementRes = document.querySelector('[name="changementRecherche"]');
-                            console.log(elementRes);
                             //si oui, envoyer les modifications
                             if(elementRes)
                             {
@@ -672,7 +626,6 @@ function handleChange()
 
             choixOeuvresNonValides.addEventListener('change', function(){
 
-                console.log(choixOeuvresNonValides.value);//Check la valeur du select
 
                 //Permet d'envoyer une requet au serveur
                 xhr = new XMLHttpRequest();
@@ -686,16 +639,13 @@ function handleChange()
 
                 //Stocker la valeur du select dans la var champ
                 var champ = document.querySelector('[name="choixOeuvresNonValides"]');
-                console.log("champ value = "+champ.value);
 
                 //Envoyer la valeur du select à URL de la page
                 xhr.send("page=adminValide&idOeuvre="+champ.value);
 
-                console.log("xhr= "+xhr.send);
 
                 //Vérification de la requête xhr
                 xhr.onreadystatechange = function(e){
-                console.log(e.target);
 
                     if(e.target.readyState == 4 && e.target.status == 200)
                         {
@@ -703,7 +653,6 @@ function handleChange()
 
                             //Cibler la div à changer
                             var elementRes = document.querySelector('[name="chargementInfo"]');
-                            console.log(elementRes);
                             //si oui, envoyer les modifications
                             if(elementRes)
                             {
@@ -748,10 +697,7 @@ $(document).ready(function(e){
         });
 
     });
-    });
-
- 
-
+});
 
 
         /**

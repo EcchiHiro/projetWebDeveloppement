@@ -54,8 +54,8 @@
         //Nouvelle connection
 
         $artiste = new Artiste("","","","","","");
-        $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","");
-        $photoOeuvre = new photoOeuvre("","","","","","","","","","","","","","", "","","","");
+        $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","");
+        $photoOeuvre = new photoOeuvre("","","","","","","","","","","","","","", "","","","","");
 
 
         //Recherche Tous d'un artiste par $idArtiste
@@ -83,7 +83,7 @@
 
         //Nouvelles connections
         $categorie= new Categorie("", "", "", "", "", "");
-        $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","");         
+        $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","","");         
         $photoOeuvre = new photoOeuvre("","","","","","","","","","","","","","", "","","","","");
 
 
@@ -107,7 +107,7 @@
 
         //Nouvelles connections
         $categorie= new Categorie("", "", "", "", "", "");
-        $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","");         
+        $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","","");         
         $photoOeuvre = new photoOeuvre("","","","","","","","","","","","","","", "","","","","");
 
 
@@ -134,7 +134,7 @@
 
         //Nouvelles connections
         $categorie= new Categorie("", "", "", "", "", "");
-        $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","");         
+        $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","","");         
         $photoOeuvre = new photoOeuvre("","","","","","","","","","","","","","", "","","","","");
 
         //Recherche Les photos d'oeuvres par nom d'arrondissement
@@ -153,13 +153,22 @@
     function afficheInfoOeuvreNonValide()
     {
         $oVue = new VueAdmin();
-        $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","");         
+        $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","","");         
 
         // On recupere la valeur du select
         $idOeuvre = intval($_POST['idOeuvre']);
 
         $infoOeuvre= $oeuvre->afficheInfoOeuvreNonValide($idOeuvre);
-        $oVue->chargeInfoOeuvre($infoOeuvre);
+        $artiste = new Artiste("","","","","","");
+        $artisteResultat = $artiste->afficheArtisteDuneOeuvre($idOeuvre);
+        $cat = new Categorie("", "", "", "", "", "");
+        //liste des categories
+        $categorie = $cat->afficheCategorieDuneOeuvre($idOeuvre);
+        $adresse = new Adresse("", "", "", "");
+        //liste des adresse
+        $adresse = $adresse->afficheAdresseDuneOeuvre($idOeuvre);
+        
+        $oVue->chargeInfoOeuvre($infoOeuvre, $artisteResultat, $categorie, $adresse);
 
 
     } 

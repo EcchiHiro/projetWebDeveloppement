@@ -28,8 +28,8 @@
     /**
      * @brief UTILISATEUR constante qui définit le mopt de passe
      */
-     // define("PASS", "");//PC
-   define("PASS", "root");//MAC
+      define("PASS", "");//PC
+     // define("PASS", "root");//MAC
     /**
      * @brief BD constante qui définit la BD
      */

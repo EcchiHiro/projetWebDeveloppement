@@ -26,8 +26,11 @@ public function Vheader($geolocalisation) {
         ?>
             <!DOCTYPE html>
             <html>
-
-
+                 <meta charset="utf-8"/>
+                 <meta name="keywords" lang="fr" content="Art Montreal public">
+                 <meta name="description" content="Site de référencement des oeuvres d'art public de montreal">
+                 <meta name="copyright" content="Stephane LECLER, Alexandre BOUET, Carlos VASQUEZ, Cristian MANRIQUE">
+    
                 <head>
             <!-- Favicon -->
                 <link rel="shortcut icon" href="./images/site/favicon.png"/>
@@ -60,8 +63,8 @@ public function Vheader($geolocalisation) {
                 <script src="js/vendor/jquery-1.12.0.min.js"></script>
                 <script src="js/main.js"></script>
 
-                <title>Art public montreal</title>
-                 <meta charset="UTF-8">
+                <title>Art Montreal</title>
+                 
                 </head>
 
                 <body <?php if ($geolocalisation == true ){echo "onload='initialize()'";}?> class="header-fixed" >
@@ -78,17 +81,6 @@ public function Vheader($geolocalisation) {
                             <!-- Topbar -->
                             <div class="topbar">
                                 <ul class="loginbar pull-right">
-                                    <li class="hoverSelector">
-                                        <i class="fa fa-globe"></i>
-                                        <a>Languages</a>
-                                        <ul class="languages hoverSelectorBlock">
-                                            <li class="active">
-                                                <a href="#">English <i class="fa fa-check"></i></a>
-                                            </li>
-                                            <li><a href="#">French</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="topbar-devider"></li>
                                     <li><a href="index.php?page=login">Login</a></li>
                                 </ul>
                             </div>
@@ -249,6 +241,7 @@ public function Vfooter() {
                 StyleSwitcher.initStyleSwitcher();
             });
         </script>
+                         
                           <!-- Piwik Analyse des visites -->
                         <script type="text/javascript">
                           var _paq = _paq || [];
@@ -693,12 +686,7 @@ public function afficheSoumettre($listeArrondissement, $categories, $artistes,  
                             <label>Titre</label>
                                 <input type="text" name="titre"class="form-control" id="titre">
                                 <div id="msj9" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                            <label>Coordonnées latitude</label>
-                                <input type="number" name="latitude" placeholder="EX:45.466405" class="form-control" id="latitude">
-                                <div id="msj16" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                            <label>Coordonnées longitude</label>
-                                <input type="number" name="longitud" placeholder="EX:-73.631648" class="form-control" id="longitud">
-                                <div id="msj17" class="erreurs" style="display:none">Il faut remplir ce champ</div><br> <br>
+                            
                                 
                             <div class="select">
                                 <label>Catégorie</label>
@@ -750,9 +738,6 @@ public function afficheSoumettre($listeArrondissement, $categories, $artistes,  
                                 <label>Nom de la rue</label>
                                     <input type="text" name="nomRue" class="form-control" id="nomRue">
                                     <div id="msj2" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                                <label>Ville</label>
-                                    <input type="text" name="ville" class="form-control" id="ville"><br><br>
-                                    <div id="msj3" class="erreurs" style="display:none">Il faut remplir ce champ</div>
                                <div class="select">
                                  <label>Arrondissement</label>
                                 <select name="arrondissement" class="form-control">
@@ -1113,7 +1098,7 @@ public function afficheRecherche($resultatPhotoOeuvresEtTitre, $categories, $art
               
 <div class="changementRecherche" name="changementRecherche">    
          <!--=== Cube-Portfdlio ===-->
-    <div class="cube-portfolio container margin-bottom-60">
+    <div class="cube-portfolio container margin-bottom-60" id="test">
         <div id="grid-container" class="cbp-l-grid-agency">
                
                      <?php
@@ -1187,7 +1172,7 @@ public function afficheOeuvresParIdArtistes($ResultatArtiste, $ResultatTitresPho
 ?>
 
 <!--=== Cube-Portfdlio ===-->
-    <div class="cube-portfolio container margin-bottom-60">
+    <div class="cube-portfolio container margin-bottom-60" id="test">
         <div id="grid-container" class="cbp-l-grid-agency">
                
         <?php

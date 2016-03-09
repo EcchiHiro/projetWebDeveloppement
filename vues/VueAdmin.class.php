@@ -31,12 +31,13 @@ public function AdminTopPage() {
             <head>
 
                 <meta charset="utf-8">
+                <meta name="keywords" lang="fr" content="Art Montreal public">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <meta name="description" content="">
-                <meta name="author" content="">
+                <meta name="description" content="Site de référencement des oeuvres d'art public de montreal">
+                <meta name="copyright" content="Stephane LECLER, Alexandre BOUET, Carlos VASQUEZ, Cristian MANRIQUE">
 
-                <title>Panneau d'adminstration</title>
+                <title>Panneau d'adminstration Art Montreal</title>
                    
 
                 <!-- Bootstrap Core CSS -->
@@ -93,8 +94,6 @@ public function AdminTopPage() {
 public function AdminPiedPage() {
         ?>
 
-            <!-- jQuery -->
-<!--            <script src="./bootStrap/bower_components/jquery/dist/jquery.min.js"></script>-->
   
             <!-- Bootstrap Core JavaScript -->
             <script src="./bootStrap/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -381,7 +380,7 @@ public function adminMain($bdInstalle) {
      * @author Cristian MANRIQUE 
      */
     
-public function adminLogin() {
+public function adminLogin($message) {
         ?>
         <?php
         //:: Débuter variable session dans index.php
@@ -440,7 +439,7 @@ public function adminLogin() {
                                <form method="POST" name="formEncrypte">
                                         <input type="hidden" name="username"/><br/>
                                         <input type="hidden" name="password"/><br/>
-                                <span name="message"><?php if (isset($_SESSION["message"])){echo $_SESSION["message"];} ?></span>
+                                <span name="message"><?php if (isset($message)){echo $message;} ?></span>
 		
                                 </form>
                                 
@@ -516,12 +515,6 @@ public function adminLogin() {
                             <label>Titre</label>
                                 <input type="text" name="titre"class="form-control" id="titre">
                                 <div id="msj9" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                            <label>Coordonnées latitude</label>
-                                <input type="number" name="latitude" placeholder="EX:45.466405" class="form-control" id="latitude">
-                                <div id="msj16" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                            <label>Coordonnées longitude</label>
-                                <input type="number" name="longitud" placeholder="EX:-73.631648" class="form-control" id="longitud">
-                                <div id="msj17" class="erreurs" style="display:none">Il faut remplir ce champ</div><br> <br>
                                 
                             <div class="select">
                                 <label>Catégorie</label>
@@ -573,9 +566,7 @@ public function adminLogin() {
                                 <label>Nom de la rue</label>
                                     <input type="text" name="nomRue" class="form-control" id="nomRue">
                                     <div id="msj2" class="erreurs" style="display:none">Il faut remplir ce champ</div>
-                                <label>Ville</label>
-                                    <input type="text" name="ville" class="form-control" id="ville"><br><br>
-                                    <div id="msj3" class="erreurs" style="display:none">Il faut remplir ce champ</div>
+
                                <div class="select">
                                  <label>Arrondissement</label>
                                 <select name="arrondissement" class="form-control">
@@ -593,8 +584,7 @@ public function adminLogin() {
                                     ?>
                                 </select>
                             </div>
-
-                            
+                   
                             <input type="button" onclick="validationForm4()" value="Ajouter Oeuvre"  class="btn-u btn-u-blue" id="bntOeuvre">
 
                     </form>
@@ -615,7 +605,7 @@ public function adminLogin() {
      * @author Stéphane LECLERC 
      */
     
-public function adminModifieOeuvre($infoOeuvre,$tableauInfoOeuvreMateriel,$categorieOeuvre,$artisteOeuvre,$addresseOeuvre, $categoriesListe, $listeArtiste, $listeMat) {
+public function adminModifieOeuvre($infoOeuvre,$categorieOeuvre,$artisteOeuvre,$addresseOeuvre, $categoriesListe, $listeArtiste, $listeMat) {
         ?>
 
         <div id="page-wrapper">
@@ -673,14 +663,6 @@ public function adminModifieOeuvre($infoOeuvre,$tableauInfoOeuvreMateriel,$categ
                                             <input class="form-control" placeholder="Enter text"  name="dimensions" value="<?php echo $infoOeuvre["Dimensions"];?>">
                                         </div>
                                         <div class="form-group">
-                                            <label>Coordonnées latitude</label>
-                                            <input class="form-control" placeholder="Enter text" name="coordonneeLatitude" value="<?php echo $infoOeuvre["CoordonneeLatitude"];?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Coordonnées longitude</label>
-                                            <input class="form-control" placeholder="Enter text" name="coordonneeLongitude" value="<?php echo $infoOeuvre["CoordonneeLongitude"];?>">
-                                        </div>
-                                        <div class="form-group">
                                             <label>Categorie</label>
 
                                              <select class="form-control" name="cat">
@@ -705,15 +687,18 @@ public function adminModifieOeuvre($infoOeuvre,$tableauInfoOeuvreMateriel,$categ
                                             </div>  
                                         <div class="form-group">
                                             <?php
-                                                    $nomMat = array();
-                                                    foreach($listeMat as $mat)
+                                                    if ($listeMat != null) 
                                                     {
-                                                        $nomMat[] = $mat->nomMateriaux;
-                                                    }
-                                                    $listMat = implode('&',$nomMat);
+                                                        $nomMat = array();
+                                                        foreach($listeMat as $mat)
+                                                        {
+                                                            $nomMat[] = $mat->nomMateriaux;
+                                                        }
+                                                        $listMat = implode('&',$nomMat);
+                                                    }    
                                                 ?>
                                             <label>Matériaux</label>
-                                             <input type="text" class="form-control" placeholder="Enter text" name="matériaux" value="<?php echo $listMat?>">
+                                             <input type="text" class="form-control" placeholder="Enter text" name="matériaux" value="<?php if(isset($listMat)){echo $listMat;}?>">
                                         </div>                                        
                                         <div class="form-group">
                                             <label>Artiste</label>
@@ -963,6 +948,7 @@ public function adminValideOeuvre($listeOeuvres) {
                                                 Dimensions :</br>
                                                 Catégorie : </br>
                                                 Artiste : </br>
+                                                Adresse  : </br>
                                             </div>
                                             <!-- /.panel-body -->
                                         </div>
@@ -1000,7 +986,7 @@ public function adminValideOeuvre($listeOeuvres) {
      * @author Alexandre BOUET        
      */
     
-public function chargeInfoOeuvre($infoOeuvre) {
+public function chargeInfoOeuvre($infoOeuvre, $artisteResultat, $categorie, $adresse) {
         ?>
                         <div class="panel-body" name="chargementInfo">
                             Titre :   <?php echo $infoOeuvre["Titre"]; ?></br>
@@ -1008,8 +994,9 @@ public function chargeInfoOeuvre($infoOeuvre) {
                             Technique : <?php echo $infoOeuvre["Technique"]; ?> </br>
                             Collection :<?php echo $infoOeuvre["Collection"]; ?> </br>
                             Dimensions :<?php echo $infoOeuvre["Dimensions"]; ?> </br>
-                            Catégorie :<?php echo $infoOeuvre["IdCat"]; ?> </br>
-                            Artiste : <?php echo $infoOeuvre["IdArtiste"]; ?></br>
+                            Catégorie :<?php echo $categorie['NomSousCat']; ?> </br>
+                            Artiste : <?php echo $artisteResultat['Nom'] .' '.  $artisteResultat['Prenom']; ?></br>
+                            Adresse : <?php echo $adresse['NumRue'] . ' ' . $adresse['Rue']?></br>
                         </div>
 
         <?php

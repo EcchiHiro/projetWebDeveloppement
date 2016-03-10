@@ -813,6 +813,23 @@ class Controler
                 $numRue = $_POST["numRue"];
                 $nomRue = $_POST["nomRue"];
                 
+                 if(isset($_POST['materiaux']))
+                {
+                    $materiauxParties = preg_split("/[&]+/", $_POST['materiaux']);                    
+
+                    if(count($materiauxParties)){
+
+                        for($i=0; $i<count($materiauxParties); $i++){
+
+                            $unMateriaux=new Materiaux("",$materiauxParties[$i], "");                   
+                            
+                            if (!$unMateriaux->existMateriaux()){
+                                $unMateriaux->enregistreMateriaux();   
+                            } 
+                        }
+                    }
+                }    
+                
                 $adresseComplete = $numRue ." ".  $nomRue.","." ". "Montréal" ."," ." ". "Canada";   
                 
                 $arrayLatLong = $adresse->getXmlCoordsFromAdress($adresseComplete);
@@ -871,14 +888,36 @@ class Controler
           
                 if(isset($_POST['choixOeuvresNonValides']))
                 {
-                    $idOeuvre = intval($_POST['choixOeuvresNonValides']);    
-                    $oeuvre->valideOeuvre($idOeuvre);
+                    if(isset($_POST['valider'])){
+                       $idOeuvre = intval($_POST['choixOeuvresNonValides']);    
+                        $oeuvre->valideOeuvre($idOeuvre); 
+                        echo '<script language="Javascript">
+                        <!--
+                        document.location.replace("index.php?page=admin");
+                        // -->
+                        </script>';
+                    }  
                     
-                 echo '<script language="Javascript">
-                 <!--
-                 document.location.replace("index.php?page=admin");
-                 // -->
-                 </script>';
+                    if(isset($_POST['modifier'])){
+                       $idOeuvre = intval($_POST['choixOeuvresNonValides']);                        
+                        echo '<script language="Javascript">
+                        document.location.replace("index.php?page=adminModif&idOeuvre='.$_POST["choixOeuvresNonValides"].'");
+                        </script>';  
+                
+                    }   
+                    
+                    if(isset($_POST['supprimer'])){
+                       $idOeuvre = intval($_POST['choixOeuvresNonValides']); 
+                       $oeuvre->supprimerLienOeuvrePhoto($idOeuvre);
+                       $oeuvre->supprimerLienOeuvreMat($idOeuvre);
+                       $oeuvre->supprimerUneOeuvre($idOeuvre); 
+                       echo '<script language="Javascript">
+                        <!--
+                        document.location.replace("index.php?page=admin");
+                        // -->
+                        </script>';
+                    } 
+                 
                     
                 }
 

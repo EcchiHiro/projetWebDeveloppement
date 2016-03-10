@@ -698,7 +698,7 @@ public function adminModifieOeuvre($infoOeuvre,$categorieOeuvre,$artisteOeuvre,$
                                                     }    
                                                 ?>
                                             <label>Matériaux</label>
-                                             <input type="text" class="form-control" placeholder="Enter text" name="matériaux" value="<?php if(isset($listMat)){echo $listMat;}?>">
+                                             <input type="text" class="form-control" placeholder="Enter text" name="materiaux" value="<?php if(isset($listMat)){echo $listMat;}?>">
                                         </div>                                        
                                         <div class="form-group">
                                             <label>Artiste</label>
@@ -953,7 +953,9 @@ public function adminValideOeuvre($listeOeuvres) {
                                             <!-- /.panel-body -->
                                         </div>
                                     </div>
-                                         <input type="submit" class="btn btn-lg btn-success"  value="Valider l'oeuvre">
+                                         <input name="valider" type="submit" class="btn btn-lg btn-success"  value="Valider l'oeuvre"><br><br>
+                                         <input name="modifier" type="submit" class="btn btn-lg btn-success"  value="Modifier Oeuvre"><br><br>
+                                        <input name="supprimer" type="submit" class="btn btn-lg btn-danger"  value="Supprimer Oeuvre">  
                                     </form>
 
                                 </div>

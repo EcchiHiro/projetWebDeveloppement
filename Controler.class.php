@@ -775,13 +775,9 @@ class Controler
             $infoOeuvre= $oeuvre->afficherUneOeuvre($idOeuvre);
             
             $mat=new Materiaux("", "", "");
-            //$materiauxOeuvre=$mat->afficherMaterielUneOeuvre($idOeuvre);
-            
-//          $listeMat=$mat->afficheListeMateriaux();
+  
             $listeMat=$mat->afficheListeMateriauxDuneOeuvre($idOeuvre);
 
-
-            
             $cat= new Categorie("", "", "", "", "", "");
             $categorieOeuvre=$cat->afficheCategorieUneOeuvre($idOeuvre);
             $categoriesListe  = $cat->afficheCategories();
@@ -806,6 +802,7 @@ class Controler
             {                
                 $titre=$_POST["titre"];
                 $titreVariante=$_POST["titreVariante"];
+                $description=$_POST["description"];
                 $collection=$_POST["collection"];
                 $technique=$_POST["technique"];
                 $dimensions=$_POST["dimensions"];
@@ -835,7 +832,7 @@ class Controler
                 $arrayLatLong = $adresse->getXmlCoordsFromAdress($adresseComplete);
 
                 $oeuvre = new Oeuvre("", "", "", "" ,"" ,"", "", "", "", "", "", "", "","","","","");
-                $oeuvre->modifieUneOeuvre($idOeuvre, $titre, $titreVariante,$collection, "",$technique,"", $dimensions,$arrondissement,$arrayLatLong['lat'], $arrayLatLong['lon']);
+                $oeuvre->modifieUneOeuvre($idOeuvre, $titre, $titreVariante,$collection, "",$technique,"", $dimensions,$arrondissement,$arrayLatLong['lat'], $arrayLatLong['lon'],$description);
 
 
                 $idCat=intval($_POST["cat"]);

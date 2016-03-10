@@ -274,7 +274,7 @@
         public static function afficheArtisteParId($idArtiste)
         {
 
-            self::$database->query("SELECT Nom, Prenom, Collectif, photoArtiste FROM artiste WHERE IdArtiste = :idArtiste");
+            self::$database->query("SELECT Nom, Prenom, Collectif, photoArtiste, descriptionArtiste FROM artiste WHERE IdArtiste = :idArtiste");
 
             //On lie les paramètres auxvaleurs
             self::$database->bind(':idArtiste', $idArtiste);

@@ -656,22 +656,23 @@ class Oeuvre {
      *
      */
 
-    public function modifieUneOeuvre($idOeuvre, $titre, $titreVariante,$collection, $collectionEN,$technique,$techniqueEN, $dimensions,$arrondissement,$coordonneeLatitude, $coordonneeLongitude)
+    public function modifieUneOeuvre($idOeuvre, $titre, $titreVariante,$collection, $collectionEN,$technique,$techniqueEN, $dimensions,$arrondissement,$coordonneeLatitude, $coordonneeLongitude, $description)
     {
-        self::$database->query("UPDATE oeuvre SET Titre=:titre, TitreVariante=:titreVariante, Collection=:collection, CollectionEN=:collectionEN, Technique=:technique, TechniqueEN=:techniqueEN, Dimensions=:dimensions, Arrondissement=:arrondissement, CoordonneeLatitude=:coordonneeLatitude, CoordonneeLongitude=:coordonneeLongitude WHERE IdOeuvre=:idOeuvre");
+        self::$database->query("UPDATE oeuvre SET Titre=:titre, TitreVariante=:titreVariante, Collection=:collection, CollectionEN=:collectionEN, Technique=:technique, TechniqueEN=:techniqueEN, Dimensions=:dimensions, Arrondissement=:arrondissement, CoordonneeLatitude=:coordonneeLatitude, CoordonneeLongitude=:coordonneeLongitude, description=:description WHERE IdOeuvre=:idOeuvre");
 
    
-     self::$database->bind("idOeuvre",$idOeuvre);
-     self::$database->bind('titre', $titre);
-     self::$database->bind('titreVariante', $titreVariante);
-     self::$database->bind('collection', $collection);
-     self::$database->bind('collectionEN', $collectionEN);
-     self::$database->bind('technique', $technique);
-     self::$database->bind('techniqueEN',$techniqueEN);
-     self::$database->bind('dimensions', $dimensions);
-     self::$database->bind('arrondissement', $arrondissement);
-     self::$database->bind('coordonneeLatitude', $coordonneeLatitude);
-     self::$database->bind('coordonneeLongitude', $coordonneeLongitude);
+        self::$database->bind("idOeuvre",$idOeuvre);
+        self::$database->bind('titre', $titre);
+        self::$database->bind('titreVariante', $titreVariante);
+        self::$database->bind('collection', $collection);
+        self::$database->bind('collectionEN', $collectionEN);
+        self::$database->bind('technique', $technique);
+        self::$database->bind('techniqueEN',$techniqueEN);
+        self::$database->bind('dimensions', $dimensions);
+        self::$database->bind('arrondissement', $arrondissement);
+        self::$database->bind('coordonneeLatitude', $coordonneeLatitude);
+        self::$database->bind('coordonneeLongitude', $coordonneeLongitude);
+        self::$database->bind('description', $description);
  
         self::$database->execute();
     
@@ -781,11 +782,12 @@ class Oeuvre {
      $idArtiste =$this->idArtiste;
      $idCat=$this->idCategorie;
      $photoPresentation = "";
+     $description=$this->description;
 
 
-     $requete = $db->prepare("INSERT INTO oeuvre (Titre, TitreVariante, Collection, CollectionEN, Technique, TechniqueEN, Dimensions, Arrondissement, CoordonneeLatitude, CoordonneeLongitude, EstValide, IdAdresse, IdArtiste, IdCat, photoPresentation) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
+     $requete = $db->prepare("INSERT INTO oeuvre (Titre, TitreVariante, Collection, CollectionEN, Technique, TechniqueEN, Dimensions, Arrondissement, CoordonneeLatitude, CoordonneeLongitude, EstValide, IdAdresse, IdArtiste, IdCat, photoPresentation,description) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)");
 
-     $requete->execute(array($titre, $varianteTitre, $collection, $collectionEN, $technique, $techniqueEN, $dimensions, $arrondissement, $latitude, $longitud, $validation, $idAdresse, $idArtiste, $idCat, $photoPresentation));
+     $requete->execute(array($titre, $varianteTitre, $collection, $collectionEN, $technique, $techniqueEN, $dimensions, $arrondissement, $latitude, $longitud, $validation, $idAdresse, $idArtiste, $idCat, $photoPresentation,$description));
 
 
     }

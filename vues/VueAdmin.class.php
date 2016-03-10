@@ -112,7 +112,6 @@ public function AdminPiedPage() {
             <!-- Custom Theme JavaScript -->
             <script src="./bootStrap/dist/js/sb-admin-2.js"></script>
             
-            <script src="js/component.js"></script>
 
             <script>
                 $(document).ready(function() {
@@ -510,12 +509,16 @@ public function adminLogin($message) {
                             <input type="button" onclick="validationForm2()" value="Ajouter Artiste" id="bntArtistes">
                         </form>
 
-                        <form action="index.php?page=adminAjout" method="post" name="form4" class="margin-bottom-40" enctype="multipart/form-data">
+                        <form action="index.php?page=adminAjout" method="post" name="form7" class="margin-bottom-40" enctype="multipart/form-data">
                            <h3>Informations de l'oeuvre</h3>
                             <label>Titre</label>
                                 <input type="text" name="titre"class="form-control" id="titre">
                                 <div id="msj9" class="erreurs" style="display:none">Il faut remplir ce champ</div>
                                 
+                            <label>Description de l'oeuvre</label>
+                                <textarea class="form-control" placeholder="entrer texte" value="" name="description" id="description" cols="30" rows="10"></textarea>
+                            <div id="msj20" class="erreurs" style="display:none">Il faut remplir ce champ</div><br> 
+                             
                             <div class="select">
                                 <label>Catégorie</label>
                                 <select name="categorieOeuvre"class="form-control">
@@ -585,7 +588,7 @@ public function adminLogin($message) {
                                 </select>
                             </div>
                    
-                            <input type="button" onclick="validationForm4()" value="Ajouter Oeuvre"  class="btn-u btn-u-blue" id="bntOeuvre">
+                            <input type="button" onclick="validationForm7()" value="Ajouter Oeuvre"  class="btn-u btn-u-blue" id="bntOeuvre">
 
                     </form>
         </div>
@@ -652,7 +655,10 @@ public function adminModifieOeuvre($infoOeuvre,$categorieOeuvre,$artisteOeuvre,$
                                             <label>Collection</label>
                                             <input class="form-control" placeholder="Enter text" name="collection" value="<?php echo $infoOeuvre["Collection"];?>">
                                         </div>
-                                       
+                                        <div class="form-group">
+                                            <label>Description de l'oeuvre</label>
+                                            <textarea class="form-control" placeholder="Enter text" name="description" id="description" cols="30" rows="10"><?php echo $infoOeuvre["description"];?></textarea>
+                                        </div>  
                                         <div class="form-group">
                                             <label>Technique</label>
                                             <input class="form-control" placeholder="Enter text" name="technique" value="<?php echo $infoOeuvre["Technique"];?>">
@@ -1052,7 +1058,7 @@ public function adminAjoutCat() {
                                         </div>
 
 
-                                        <input type="submit" onclick="validationForm5()" class="btn btn-lg btn-success"  value="Ajouter Catégorie">
+                                        <input type="button" onclick="validationForm5()" class="btn btn-lg btn-success"  value="Ajouter Catégorie">
                                         <button type="reset" class="btn btn-lg btn-warning">Reset</button>
 
                                     </form>
@@ -1489,7 +1495,7 @@ public function adminAjoutImagePresentationOeuvre($listeOeuvre, $message) {
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <form action="index.php?page=adminAjoutDescriptionArtiste" method="post" name="form4" id="form4">
+                            <form action="index.php?page=adminAjoutDescriptionArtiste" method="post" name="form6" id="form6">
 
                                    <h3>Formulaire d'ajout un descripton d'un artiste</h3>
                                 <div class="form-group">
@@ -1513,13 +1519,15 @@ public function adminAjoutImagePresentationOeuvre($listeOeuvre, $message) {
                                     </select>
                                 </div>
                                 <h2>Biographie</h2>
-                                <input type="text" class="form-control" placeholder="Enter text" value="" name="descriptionArtiste" id="descriptionArtiste">
+                                
+
+                            <textarea class="form-control" placeholder="Enter text"name="descriptionArtiste" id="descriptionArtiste" cols="30" rows="10"></textarea>
                                 <div id="msj12" class="erreurs" style="display:none">Il faut remplir ce champ</div> 
                               
-                                <input type="submit" onclick="validationForm5()" class="btn btn-lg btn-success"  value="ajoute Description" >
+                                <input type="button" onclick="validationForm6()" class="btn btn-lg btn-success"  value="ajoute Description" >
                             </form>
                             
-                            
+
                         </div>
                         <!-- /.col-lg-6 (nested) -->
                     </div>
@@ -1536,6 +1544,7 @@ public function adminAjoutImagePresentationOeuvre($listeOeuvre, $message) {
 </div>
       <?php  
     }
+
 
 
 

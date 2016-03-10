@@ -357,6 +357,128 @@ function initMap() {
 
 
 
+        /**
+     * Fonction validation de formulaire d'ajoute catégorie par l'admin
+     * @author Carlos VASQUEZ 
+     * @author Stéphane Leclerc
+     */
+
+
+function validationForm5()
+{
+
+      if($("#nomCat").val().length < 1){
+        $( "#msj12" ).css("display", "block");
+        valide=false;
+      }else{
+        $( "#msj12" ).css("display", "none");
+      }
+
+      if($("#nomCatEN").val().length < 1){
+        $( "#msj13" ).css("display", "block");
+        valide=false;
+      }else{
+        $( "#msj13" ).css("display", "none");
+      }
+
+      if(($("#nomCat").val().length > 1 && $("#nomCatEN").val().length > 1)){
+
+        valide=true;
+      }
+
+      if(valide==true){
+
+        document.form5.submit();
+      }
+
+}
+
+
+
+     /**
+     * Fonction validation de formulaire d'ajoute description d'un artiste
+     * @author Carlos VASQUEZ 
+     * @author Stéphane Leclerc
+     */
+
+
+function validationForm6()
+{
+  var valide=true;
+  if($("#descriptionArtiste").val().length < 1){
+    $("#msj12" ).css("display", "block");
+    valide=false;
+   
+  }else{
+    $("#msj12" ).css("display", "none");
+  }
+
+  if($("#descriptionArtiste").val().length > 1){
+
+    valide=true;
+   
+  }
+
+  if(valide==true){
+
+    document.form6.submit();
+  }
+
+}
+
+
+    /**
+     * Fonction validation de formulaire
+     * @author Carlos VASQUEZ 
+     */
+
+ function validationForm7(){
+
+    var valide=true;
+    var conceptName = $('#aioConceptName :selected').text();
+
+    if($("#titre").val().length < 1){
+      $( "#msj9" ).css("display", "block");
+      valide=false;
+    }else{
+      $( "#msj9" ).css("display", "none");
+    }
+
+    if($("#nbRue").val().length < 1){
+      $( "#msj1" ).css("display", "block");
+      valide=false;
+    }else{
+      $( "#msj1" ).css("display", "none");
+    }
+
+    if($("#nomRue").val().length < 1){
+      $( "#msj2" ).css("display", "block");
+      valide=false;
+    }else{
+      $( "#msj2" ).css("display", "none");
+    }
+
+   if($("#description").val().length < 1){
+     $( "#msj20" ).css("display", "block");
+     valide=false;
+   }else{
+     $( "#msj20" ).css("display", "none");
+   }
+
+   if($("#titre").val().length > 1 && $("#nbRue").val().length > 1 && $("#nomRue").val().length > 1 &&  $("#description").val().length > 1){
+
+      valide=true;
+    }
+
+    if(valide==true){
+
+      document.form7.submit();
+    }
+
+ }
+
+
+
     /**
      * Fonction validation de formulaire
      * @author Carlos VASQUEZ 
@@ -699,42 +821,6 @@ $(document).ready(function(e){
     });
 });
 
-
-        /**
-     * Fonction validation de formulaire d'ajoute catégorie par l'admin
-     * @author Carlos VASQUEZ 
-     * @author Stéphane Leclerc
-     */
-
-
-function validationForm5()
-{
-
-  if($("#nomCat").val().length < 1){
-    $( "#msj12" ).css("display", "block");
-    valide=false;
-  }else{
-    $( "#msj12" ).css("display", "none");
-  }
-
-  if($("#nomCatEN").val().length < 1){
-    $( "#msj13" ).css("display", "block");
-    valide=false;
-  }else{
-    $( "#msj13" ).css("display", "none");
-  }
-
-  if(($("#nomCat").val().length > 1 && $("#nomCatEN").val().length > 1)){
-
-    valide=true;
-  }
-
-  if(valide==true){
-
-    document.form5.submit();
-  }
-
-}
 
         /**
      * Fonction qui recupére les informations de l'image croppée (panneau d'administration)

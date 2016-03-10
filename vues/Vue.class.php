@@ -572,7 +572,10 @@ public function afficheInfoArtiste($artisteResultat, $oeuvresListe) {
                            echo "<img class='imgArtiste' src='./images/artistes/default.png' alt='imgArtiste'>";
                         }
                         ?>
-
+                        <h3>Biographie de l'artiste</h3>
+                        <?php
+                            echo $artisteResultat['descriptionArtiste'];
+                        ?>
                     </ul>
                 </div>
                   <!--=== Cube-Portfdlio ===-->
